@@ -27,11 +27,11 @@ sql;
   public static function getAllColaboradoresByName($search){
     $mysqli = Database::getInstance();
     $query =<<<sql
-    SELECT ra.id_registro_acceso, ua.utilerias_asistentes_id, ua.status, ra.telefono, ua.usuario, ra.ticket_virtual, ra.nombre, ra.segundo_nombre, ra.apellido_paterno, ra.apellido_materno, ra.img, ra.genero, ra.alergia, ra.alergia_cual, ra.especialidad, ra.clave, lp.nombre as nombre_linea
-    FROM utilerias_asistentes ua
-    INNER JOIN registros_acceso ra ON (ra.id_registro_acceso = ua.id_registro_acceso)
-    INNER JOIN linea_principal lp ON (ra.especialidad = lp.id_linea_principal)
-    AND CONCAT_WS(ra.email,ra.nombre,ra.segundo_nombre,ra.apellido_materno,ra.apellido_paterno,ra.ticket_virtual) LIKE '%$search%';
+    SELECT re.id_registrado, re.nombre, re.apellidom, re.apellidop, re.email, re.activo,re.especialidad,re.prefijo,re.telefono,re.id_estado, re.id_pais,pa.pais, est.estado
+    FROM registrados re
+    INNER JOIN paises pa ON (re.id_pais = pa.id_pais)
+    INNER JOIN estados est ON (est.id_estado = re.id_estado)
+    WHERE CONCAT_WS(re.email,re.nombre,re.apellidop,re.apellidop) LIKE '%$search%';
 sql;
     return $mysqli->queryAll($query);
   }

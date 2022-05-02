@@ -76,12 +76,13 @@ html;
 
 
     View::set('tabla', $this->getAllCursos());
-    View::set('tablaUsersCursos',$this->getUsersCourse());
+    // View::set('tablaUsersCursos',$this->getUsersCourse());
+    View::set('tablaUsers', $this->getUsers());
     View::set('asideMenu', $this->_contenedor->asideMenu());
     View::set('optionModalidad', $optionModalidad);
     View::set('optionUsers', $optionUsers);
     View::set('optionCursos', $optionCursos);
-    View::set('modalEdit',$modalEdit);
+    View::set('modalEdit', $modalEdit);
     View::render("cursos_all");
   }
 
@@ -138,17 +139,17 @@ html;
     $data->_id_registrado = $id_registrado;
 
     $id = CursosDao::insertAsignaCurso($data);
-      if ($id) {
-        echo 'success';
-      } else {
-        echo 'fail';
-      }
-   
+    if ($id) {
+      echo 'success';
+    } else {
+      echo 'fail';
+    }
   }
 
-  public function deleteCourseUser(){
+  public function deleteCourseUser()
+  {
     $id_ac = $_POST['id_ac'];
-    $data = new \stdClass();    
+    $data = new \stdClass();
     $data->id_asigna_curso = $id_ac;
 
     $id = CursosDao::UpdateStatusAsignaCurso($data);
@@ -157,6 +158,16 @@ html;
       echo 'success';
     } else {
       echo 'fail';
+    }
+  }
+
+  public function getCursosNotInUser()
+  {
+    $id_user = $_POST['id_registrado'];
+    if (isset($id_user)) {
+      $Cursos = CursosDao::getCoursesNotSelectByUser($id_user);
+
+      echo json_encode($Cursos);
     }
   }
 
@@ -241,7 +252,7 @@ html;
     $data->_url_curso = MasterDom::getData('url_curso');
     $data->_duracion = MasterDom::getData('duracion');
     $data->_descripcion = MasterDom::getData('descripcion');
- 
+
     // $data->_utilerias_administrador_id = $_SESSION['utilerias_administradores_id'];
 
     $id = CursosDao::update($data);
@@ -568,6 +579,55 @@ html;
     return $html;
   }
 
+  public function getUsers()
+  {
+
+    $html = "";
+    foreach (CursosDao::getAllUsers() as $key => $value) {
+
+
+      $html .= <<<html
+            <tr>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        
+                        <div class="d-flex flex-column justify-content-center text-black">
+                    
+                                <a href='/Usuarios/Detalles/{$value['clave']}'> 
+                                <h6 class="mb-0 text-sm text-move text-black">
+                                    <span class="fas fa-user" style="font-size: 13px"></span> {$value['nombre']} - {$value['apellidop']} - {$value['apellidom']}                                    
+                                </h6>
+                                </a>
+                        </div>
+                    </div>
+                </td>
+         
+                <td style="text-align:left; vertical-align:middle;"> 
+                    
+                <div class="d-flex flex-column justify-content-center text-black">                    
+                                    
+                        <h6 class="mb-0 text-sm  text-black">
+                           {$value['fecha_registro']}                               
+                        </h6>
+                </div>
+                
+                </td>
+
+                <td>
+                <div class="d-flex  justify-content-center text-black">
+                  <h6 class="mb-0 text-sm  text-black">
+                      {$value['nombre_modalidad']}                               
+                  </h6>
+                </td>
+        </tr>
+html;
+    }
+
+    return $html;
+  }
+
+
+
   public function updateStatusCurso()
   {
     $documento = new \stdClass();
@@ -628,13 +688,13 @@ html;
                         <select class="multisteps-form__select form-control all_input_select" name="id_modalidad" id="id_modalidad" required>
 html;
 
-                        foreach(CursosDao::getAllModalidad() as $key => $value){
-                          $selectedModalidad = ($value['id_modalidad'] == $datos['id_modalidad']) ? 'selected' : '';  
-                          $modal .= <<<html
+    foreach (CursosDao::getAllModalidad() as $key => $value) {
+      $selectedModalidad = ($value['id_modalidad'] == $datos['id_modalidad']) ? 'selected' : '';
+      $modal .= <<<html
                                   <option value="{$value['id_modalidad']}" $selectedModalidad>{$value['nombre']}</option>
                         html;
-                        }
-                        $modal .= <<<html
+    }
+    $modal .= <<<html
                         </select>
                     </div>
 

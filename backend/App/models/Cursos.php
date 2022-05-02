@@ -31,6 +31,32 @@ sql;
       
     }
 
+    public static function getAllUsersCourseByClave($clave){       
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT re.codigo_beca,re.nombre, re.apellidop, re.apellidom, ac.id_asigna_curso, ac.id_curso, ac.id_registrado, cu.nombre as nombre_curso, cu.horario_transmision, cu.fecha_curso, cu.duracion, pc.*
+      FROM registrados re 
+      INNER JOIN asigna_curso ac ON (re.id_registrado = ac.id_registrado)
+      INNER JOIN cursos cu ON (cu.id_curso = ac.id_curso)
+      LEFT JOIN progresos_cursos pc ON (pc.id_curso = ac.id_curso)
+      WHERE re.clave = '$clave'
+sql;
+      return $mysqli->queryAll($query);
+      
+    }
+
+
+    public static function getAllUsers(){       
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT re.nombre, re.apellidop, re.apellidom, re.fecha_registro, re.clave, md.nombre as nombre_modalidad
+      FROM registrados re
+      INNER JOIN modalidad md ON(re.modalidad = md.id_modalidad)
+sql;
+      return $mysqli->queryAll($query);
+      
+    }
+
     public static function UpdateStatusAsignaCurso($data){
       $mysqli = Database::getInstance(true);
 //       $query=<<<sql
@@ -53,6 +79,19 @@ sql;
         // $accion->_parametros = $parametros;
         // $accion->_id = $hotel->_id_hotel;
         return $mysqli->update($query, $parametros);
+
+    }
+
+    public static function getCoursesNotSelectByUser($id_user){
+      $mysqli = Database::getInstance(true);
+      $query =<<<sql
+      SELECT *  FROM cursos 
+      WHERE id_curso NOT IN (SELECT cu.id_curso 
+      FROM cursos cu
+      INNER JOIN asigna_curso ac ON(cu.id_curso = ac.id_curso) WHERE ac.id_registrado = $id_user)
+sql;
+    
+      return $mysqli->queryAll($query);
 
     }
 

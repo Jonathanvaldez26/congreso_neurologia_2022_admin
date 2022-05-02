@@ -19,14 +19,14 @@ use \App\models\ComprobantesVacunacion as ComprobantesVacunacionDao;
 use \App\models\Asistentes as AsistentesDao;
 use \App\models\Especialidades as EspecialidadesDao;
 use \App\models\Usuarios as UsuariosDao;
-
+use \App\models\Cursos as CursosDao;
 use Generator;
 
 class Usuarios extends Controller
 {
 
     private $_contenedor;
-
+    
     function __construct()
     {
         parent::__construct();
@@ -127,6 +127,7 @@ html;
         $data->_telefono = MasterDom::getData('telefono');
         $data->_pais = MasterDom::getData('pais');
         $data->_estado = MasterDom::getData('estado');
+        $data->_identificador = MasterDom::getData('estado');
         // $data->_utilerias_administrador_id = $_SESSION['utilerias_administradores_id'];
 
         $id = UsuariosDao::insert($data);
@@ -218,6 +219,22 @@ html;
         //     height: 38px!important;
         //     border-radius: 8px!important;
         // }
+
+        #barra_progreso{
+            width: -webkit-fill-available;
+            height: 1rem;
+            -webkit-appearance: none;
+          }
+          
+          #barra_progreso::-webkit-progress-bar {
+             background-color: #eee;
+             border-radius: 50px;
+          }
+          
+          #barra_progreso::-webkit-progress-value {
+            background-color: rgba(23, 193, 232, 0.6);
+            border-radius: 50px;
+          }
         </style>
 
         
@@ -336,284 +353,80 @@ html;
             <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
             <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
 html;
-        $detalles = AsistentesDao::getByClaveRA($id);
-        $detalles_registro = AsistentesDao::getTotalByClaveRA($id);
 
-        if ($detalles_registro[0]['img'] == '') {
-            $img_asistente = <<<html
-            <img src="/img/user.png" class="avatar avatar-xxl me-3" title="{$detalles_registro[0]['usuario']}" alt="{$detalles_registro[0]['usuario']}">
-html;
-        } else {
-            $img_asistente = <<<html
-            <img src="https://registro.foromusa.com/img/users_musa/{$detalles_registro[0]['img']}" class="avatar avatar-xxl me-3" title="{$detalles_registro[0]['usuario']}" alt="{$detalles_registro[0]['usuario']}">
-html;
-        }
+// echo $id;
+// var_dump($this->getUsersCourse($id));
 
-        // var_dump($detalles_registro[0]['alergia']);
-        if ($detalles_registro[0]['alergia'] == '') {
-            $res_alimenticias = <<<html
-            <div class="col-md-4 col-sm-12">
-                <label class="form-label mt-4">Restricciones Alimentarias *</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_1" value="vegetariano">
-                    <label class="form-check-label" for="res_ali_1">
-                        Vegetariano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_2" value="vegano">
-                    <label class="form-check-label" for="res_ali_2">
-                        Vegano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_4" value="ninguna" checked>
-                    <label class="form-check-label" for="res_ali_4">
-                        Ninguna
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_5" value="otro">
-                    <label class="form-check-label" for="res_ali_5">
-                        Otro
-                    </label>
-                </div>
-                <div class="col-md-12 col-sm-12 restricciones_alimenticias" style="display: none!important;">
-                    <label class="form-label mt-4">¿Cual?</label>
-                    <input id="restricciones_alimenticias_cual" name="restricciones_alimenticias_cual" maxlength="45" class="form-control" type="text" placeholder="Escriba su restricción" value="">
-                </div>
-            </div>
-html;
-        } else {
-            if ($detalles_registro[0]['alergia'] == 'otro') {
-                $res_alimenticias = <<<html
-            <div class="col-md-4 col-sm-12">
-                <label class="form-label mt-4">Restricciones Alimentarias *</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_1" value="vegetariano">
-                    <label class="form-check-label" for="res_ali_1">
-                        Vegetariano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_2" value="vegano">
-                    <label class="form-check-label" for="res_ali_2">
-                        Vegano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_4" value="ninguna" >
-                    <label class="form-check-label" for="res_ali_4">
-                        Ninguna
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_5" value="otro" checked>
-                    <label class="form-check-label" for="res_ali_5">
-                        Otro
-                    </label>
-                </div>
-                <div class="col-md-12 col-sm-12 restricciones_alimenticias" >
-                    <label class="form-label mt-4">¿Cual?</label>
-                    <input id="restricciones_alimenticias_cual" name="restricciones_alimenticias_cual" maxlength="45" class="form-control" type="text" placeholder="Escriba su restricción" value="{$detalles_registro[0]['alergia_cual']}">
-                </div>
-            </div>
-html;
-            }
+// exit;
 
-            if ($detalles_registro[0]['alergia'] == 'ninguna') {
-                $res_alimenticias = <<<html
-            <div class="col-md-4 col-sm-12">
-                <label class="form-label mt-4">Restricciones Alimentarias *</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_1" value="vegetariano">
-                    <label class="form-check-label" for="res_ali_1">
-                        Vegetariano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_2" value="vegano">
-                    <label class="form-check-label" for="res_ali_2">
-                        Vegano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_4" value="ninguna" checked>
-                    <label class="form-check-label" for="res_ali_4">
-                        Ninguna
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_5" value="otro" >
-                    <label class="form-check-label" for="res_ali_5">
-                        Otro
-                    </label>
-                </div>
-                <div class="col-md-12 col-sm-12 restricciones_alimenticias" style="display: none!important;">
-                    <label class="form-label mt-4">¿Cual?</label>
-                    <input id="restricciones_alimenticias_cual" name="restricciones_alimenticias_cual" maxlength="45" class="form-control" type="text" placeholder="Escriba su restricción" value="{$detalles_registro[0]['restricciones_alimenticias_cual']}">
-                </div>
-            </div>
-html;
-            }
-
-            if ($detalles_registro[0]['alergia'] == 'vegano') {
-                $res_alimenticias = <<<html
-            <div class="col-md-4 col-sm-12">
-                <label class="form-label mt-4">Restricciones Alimentarias *</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_1" value="vegetariano">
-                    <label class="form-check-label" for="res_ali_1">
-                        Vegetariano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_2" value="vegano" checked>
-                    <label class="form-check-label" for="res_ali_2">
-                        Vegano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_4" value="ninguna" >
-                    <label class="form-check-label" for="res_ali_4">
-                        Ninguna
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_5" value="otro" >
-                    <label class="form-check-label" for="res_ali_5">
-                        Otro
-                    </label>
-                </div>
-                <div class="col-md-12 col-sm-12 restricciones_alimenticias" style="display: none!important;">
-                    <label class="form-label mt-4">¿Cual?</label>
-                    <input id="restricciones_alimenticias_cual" name="restricciones_alimenticias_cual" maxlength="45" class="form-control" type="text" placeholder="Escriba su restricción" value="{$detalles_registro[0]['restricciones_alimenticias_cual']}">
-                </div>
-            </div>
-html;
-            }
-
-            if ($detalles_registro[0]['alergia'] == 'vegetariano') {
-                $res_alimenticias = <<<html
-            <div class="col-md-4 col-sm-12">
-                <label class="form-label mt-4">Restricciones Alimentarias *</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_1" value="vegetariano" checked>
-                    <label class="form-check-label" for="res_ali_1">
-                        Vegetariano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_2" value="vegano">
-                    <label class="form-check-label" for="res_ali_2">
-                        Vegano
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_4" value="ninguna" >
-                    <label class="form-check-label" for="res_ali_4">
-                        Ninguna
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="restricciones_alimenticias" id="res_ali_5" value="otro" >
-                    <label class="form-check-label" for="res_ali_5">
-                        Otro
-                    </label>
-                </div>
-                <div class="col-md-12 col-sm-12 restricciones_alimenticias" style="display: none!important;">
-                    <label class="form-label mt-4">¿Cual?</label>
-                    <input id="restricciones_alimenticias_cual" name="restricciones_alimenticias_cual" maxlength="45" class="form-control" type="text" placeholder="Escriba su restricción" value="{$detalles_registro[0]['restricciones_alimenticias_cual']}">
-                </div>
-            </div>
-html;
-            }
-        }
-
-        $all_ra = AsistentesDao::getAllRegistrosAcceso();
-
-        foreach ($all_ra as $key => $value) {
-            if ($value['clave'] == '' || $value['clave'] == NULL || $value['clave'] == 'NULL') {
-                $clave_10 = $this->generateRandomString(10);
-                AsistentesDao::updateClaveRA($value['id_registro_acceso'], $clave_10);
-            }
-        }
-
-        foreach ($all_ra as $key => $value) {
-            if ($value['ticket_virtual'] == '' || $value['ticket_virtual'] == NULL || $value['ticket_virtual'] == 'NULL') {
-                $clave_6 = $this->generateRandomString(6);
-                $this->generaterQr($all_ra['ticket_virtual']);
-                AsistentesDao::updateTicketVirtualRA($value['id_registro_acceso'], $clave_6);
-            }
-        }
-
-        $email = AsistentesDao::getByClaveRA($id)[0]['usuario'];
-        $clave_user = AsistentesDao::getRegistroAccesoByClaveRA($id)[0];
-        $tv = AsistentesDao::getRegistroAccesoByClaveRA($id)[0]['ticket_virtual'];
-        $nombre = AsistentesDao::getRegistroAccesoByClaveRA($id)[0]['nombre'].' '.AsistentesDao::getRegistroAccesoByClaveRA($id)[0]['segundo_nombre'];
-        $apellidos = AsistentesDao::getRegistroAccesoByClaveRA($id)[0]['apellido_paterno'].' '.AsistentesDao::getRegistroAccesoByClaveRA($id)[0]['apellido_materno'];
-        if ($clave_user['ticket_virtual'] == '' || $clave_user['ticket_virtual'] == NULL || $clave_user['ticket_virtual'] == 'NULL') {
-            $msg_clave = 'No posee ningún código';
-            $btn_clave = '';
-            var_dump($clave_user['ticket_virtual']);
-            $btn_genQr = <<<html
-            <!--button type="button" id="generar_clave" title="Generar Ticket Virtual" class="btn bg-gradient-dark mb-0"><i class="fas fa-qrcode"></i></button-->
-html;
-        }
-
-        $btn_gafete = "<a href='/RegistroAsistencia/abrirpdfGafete/{$clave_user['clave']}/{$clave_user['clave_ticket']}' target='_blank' id='a_abrir_gafete' class='btn btn-info' data-bs-toggle='tooltip' data-bs-placement='top' data-bs-original-title='Imprimir Gafetes'><i class='fa fal fa-address-card' style='font-size: 18px;'> </i> Presione esté botón para descargar el gafete</a>";
-        // $btn_etiquetas = "<a href='/RegistroAsistencia/abrirpdf/{$clave_user['clave']}' target='_blank' id='a_abrir_etiqueta' class='btn btn-info'>Imprimir etiquetas</a>";
-        $this->generaterQr($tv);
-
-
-        $permisoGlobalHidden = (Controller::getPermisoGlobalUsuario($this->__usuario)[0]['permisos_globales']) != 1 ? "style=\"display:none;\"" : "";
-        $asistentesHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_asistentes", 1) == 0) ? "style=\"display:none;\"" : "";
-        $vuelosHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_vuelos", 1) == 0) ? "style=\"display:none;\"" : "";
-        $pickUpHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_pickup", 1) == 0) ? "style=\"display:none;\"" : "";
-        $habitacionesHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_habitaciones", 1) == 0) ? "style=\"display:none;\"" : "";
-        $cenasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_cenas", 1) == 0) ? "style=\"display:none;\"" : "";
-        $cenasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_cenas", 1) == 0) ? "style=\"display:none;\"" : "";
-        $aistenciasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_asistencias", 1) == 0) ? "style=\"display:none;\"" : "";
-        $vacunacionHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_vacunacion", 1) == 0) ? "style=\"display:none;\"" : "";
-        $pruebasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_pruebas_covid", 1) == 0) ? "style=\"display:none;\"" : "";
-        $configuracionHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_configuracion", 1) == 0) ? "style=\"display:none;\"" : "";
-        $utileriasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_utilerias", 1) == 0) ? "style=\"display:none;\"" : "";
-
-        View::set('permisoGlobalHidden', $permisoGlobalHidden);
-        View::set('asistentesHidden', $asistentesHidden);
-        View::set('vuelosHidden', $vuelosHidden);
-        View::set('pickUpHidden', $pickUpHidden);
-        View::set('habitacionesHidden', $habitacionesHidden);
-        View::set('cenasHidden', $cenasHidden);
-        View::set('aistenciasHidden', $aistenciasHidden);
-        View::set('vacunacionHidden', $vacunacionHidden);
-        View::set('pruebasHidden', $pruebasHidden);
-        View::set('configuracionHidden', $configuracionHidden);
-        View::set('utileriasHidden', $utileriasHidden);
-
-        View::set('id_asistente', $id);
-        View::set('detalles', $detalles[0]);
-        View::set('img_asistente', $img_asistente);
-        View::set('email', $email);
-        View::set('nombre', $nombre);
-        View::set('apellidos', $apellidos);
-        View::set('clave_user', $clave_user['clave_ticket']);
-        View::set('msg_clave', $msg_clave);
-        View::set('btn_gafete', $btn_gafete);
-        View::set('clave_ra', $id);
-        View::set('asideMenu',$this->_contenedor->asideMenu());
-        View::set('btn_clave', $btn_clave);
-        View::set('btn_genQr', $btn_genQr);
-        // View::set('alergias_a', $alergias_a);
-        View::set('res_alimenticias', $res_alimenticias);
-        // View::set('alergia_medicamento_cual', $alergia_medicamento_cual);
-        View::set('detalles_registro', $detalles_registro[0]);
-        View::set('header', $this->_contenedor->header($extraHeader));
-        View::set('footer', $this->_contenedor->footer($extraFooter));
-        View::set('tabla_vacunacion', $this->getComprobanteVacunacionById($id));
-        View::set('tabla_prueba_covid', $this->getPruebasCovidById($id));
-        View::render("asistentes_detalles");
+        
+            View::set('asideMenu',$this->_contenedor->asideMenu());        
+            View::set('header', $this->_contenedor->header($extraHeader));
+            View::set('footer', $this->_contenedor->footer($extraFooter));
+            // View::set('tabla', $this->getComprobanteVacunacionById($id));
+            // View::set('tabla_prueba_covid', $this->getPruebasCovidById($id));
+            View::set('tablaUsersCursos',$this->getUsersCourseByClave($id));
+            View::render("usuarios_detalles");
     }
+
+    public function getUsersCourseByClave($clave)
+  {
+
+    $html = "";
+    foreach (CursosDao::getAllUsersCourseByClave($clave) as $key => $value) {
+        $duracion = $value['duracion'];
+    
+        $duracion_sec = substr($duracion,strlen($duracion)-2,2);
+        $duracion_min = substr($duracion,strlen($duracion)-5,2);
+        $secs_totales = (intval($duracion_min)*60)+intval($duracion_sec);
+
+
+       $porcentaje_num = ($value['segundos']*100)/($secs_totales);
+       $porcentaje = number_format($porcentaje_num, 0);
+
+
+
+      $html .= <<<html
+            <tr>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        
+                        <div class="d-flex flex-column justify-content-center text-black">
+                    
+                            
+                                <h6 class="mb-0 text-sm text-move text-black">
+                                    <span class="fas fa-user" style="font-size: 13px"></span> {$value['nombre']} - {$value['apellidop']} - {$value['apellidom']}                                    
+                                </h6>
+                        </div>
+                    </div>
+                </td>
+         
+                <td style="text-align:left; vertical-align:middle;"> 
+                    
+                <div class="d-flex flex-column justify-content-center text-black">                    
+                                    
+                        <h6 class="mb-0 text-sm  text-black">
+                            <p>Nombre : {$value['nombre_curso']} </p>                            
+                            <p>Fecha : {$value['horario_transmision']}</p>
+                            <p>Hora : {$value['fecha_curso']} </p> 
+                            <p>Progreso : {$porcentaje} %</p> 
+                            <progress id="barra_progreso" max="{$secs_totales}" value="{$value['segundos']}"></progress>                                    
+                        </h6>
+                </div>
+                <hr>
+                </td>
+
+                <td>
+                <div class="d-flex  justify-content-center text-black">
+                     <button class="btn bg-gradient-danger mb-0 btn-icon-only btn_quitar_user_curso" data-id="{$value['id_asigna_curso']}" data-nombre-user="{$value['nombre']} {$value['apellidop']} {$value['apellidom']}" data-nombre-curso="{$value['nombre_curso']}" data-porcentaje="{$porcentaje}" type="button" title="Quitar Curso"><i class="fa fa-trash" aria-hidden="true"></i></button>                     
+                     </div>
+                </td>
+        </tr>
+html;
+    }
+
+    return $html;
+  }
 
     public function generaterQr($clave_ticket)
     {

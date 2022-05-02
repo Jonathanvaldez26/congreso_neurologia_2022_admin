@@ -109,7 +109,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link mb-0 px-0 py-1 " href="#asigna_curso" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">                                        
+                                        <a class="nav-link mb-0 px-0 py-1" href="#asigna_curso" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
                                             <span class="fas fa-play"></span>
                                             <span class="ms-1">Asignar Curso</span>
                                         </a>
@@ -321,19 +321,18 @@
                                     <div class="tab-content" id="v-pills-tabContent">
                                         <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
                                             <div class="table-responsive p-0">
-                                                <table class="align-items-center mb-0 table table-borderless" id="user_cursos">
-                                                    <thead class="thead-light">
+                                                <table class="table align-items-center mb-0 table table-striped table-bordered" id="user_cursos">
+                                                    <thead>
                                                         <tr>
-
-                                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Usuario</th>
-                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Otros datos</th>
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th>
-                                                            <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Imprimir</th> -->
+                                                            <!-- <th><input type="checkbox" name="checkAll" id="checkAll" value=""/></th> -->
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre </th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Alta</th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Modalidad</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php echo $tablaUsersCursos;
-                                                        ?>
+                                                        
+                                                     <?php echo $tablaUsers ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -483,9 +482,9 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_curso">Curso <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="id_curso" id="id_curso" required>
+                                <select class="multisteps-form__select form-control all_input_select" name="id_curso" id="id_curso_u" disabled required>
                                     <option value="" selected>Selecciona una Opción</option>
-                                    <?= $optionCursos ?>
+
                                 </select>
                             </div>
 
@@ -625,7 +624,7 @@
             }
         });
 
-        
+
 
         $('#user_list_table_faltante').DataTable({
             "drawCallback": function(settings) {
@@ -740,6 +739,7 @@
                         Swal.fire("¡Curso asignado correctamente!", "", "success").
                         then((value) => {
                             window.location.reload();
+
                         });
                     } else {
                         Swal.fire("¡Hubo un error al asignar el curso!", "", "warning").
@@ -759,7 +759,7 @@
             });
         });
 
-        
+
 
         $(".change_status").on("change", function() {
             var status = $(this).val();
@@ -808,6 +808,8 @@
             // alert(id_curso);
         });
 
+        
+
         $(".form_datos_edit").on("submit", function(event) {
             event.preventDefault();
             // var formData = new FormData(document.getElementById("form_datos_edit"));
@@ -855,7 +857,7 @@
             });
         });
 
-        $(".btn_quitar_user_curso").on("click", function(){
+        $(".btn_quitar_user_curso").on("click", function() {
             var id_ac = $(this).attr('data-id');
             var nombre_user = $(this).attr('data-nombre-user');
             var nombre_curso = $(this).attr('data-nombre-curso');
@@ -876,39 +878,40 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonText: 'Cancelar',
                 confirmButtonText: 'Si'
-                }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                   
+
                     //borrar aqui
                     $.ajax({
                         url: "/Cursos/deleteCourseUser",
                         type: "POST",
-                        data: {id_ac},
+                        data: {
+                            id_ac
+                        },
                         beforeSend: function() {
                             console.log("Procesando....");
                         },
                         success: function(respuesta) {
                             console.log(respuesta);
                             if (respuesta == 'success') {
-                                
+
                                 Swal.fire(
-                                '¡Se ha eliminado el curso '+nombre_curso+' al usuario '+nombre_user+'!',
-                                '',
-                                'success'
-                                ).then((data) =>{
+                                    '¡Se ha eliminado el curso ' + nombre_curso + ' al usuario ' + nombre_user + '!',
+                                    '',
+                                    'success'
+                                ).then((data) => {
                                     // console.log();               
-                                   window.location.reload();
+                                    window.location.reload();
                                 })
 
-                            }
-                            else{
+                            } else {
                                 Swal.fire(
-                                '!Falló!',
-                                'Hubo un error al borrar el curso',
-                                'error'
+                                    '!Falló!',
+                                    'Hubo un error al borrar el curso',
+                                    'error'
                                 )
                             }
-                            
+
                         },
                         error: function(respuesta) {
                             console.log(respuesta);
@@ -916,7 +919,7 @@
                     });
                 }
             })
-           
+
         });
 
         // $("#email").on("keyup", function() {

@@ -36988,6 +36988,7 @@ table.dataTable.no-footer {
   transform: translateY(-5px);
   text-shadow: 0px 0px 10px turquoise;
   color: rgb(98 56 246) !important;
+  cursor: pointer;
 }
 
 .text-morado-musa{

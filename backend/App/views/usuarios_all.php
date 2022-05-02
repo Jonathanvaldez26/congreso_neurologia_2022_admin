@@ -269,6 +269,14 @@
                             </div>
 
                             <div class="form-group col-md-4">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="prefijo">Tipo <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="identificador" id="identificador" readonly>
+                                    <option value="2" selected>Compra</option>
+                                                                        
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="prefijo">Prefijo <span class="required">*</span></label>
                                 <select class="multisteps-form__select form-control all_input_select" name="prefijo" id="prefijo" required>
                                     <option value="" selected>Selecciona una Opción</option>

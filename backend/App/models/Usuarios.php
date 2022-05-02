@@ -9,8 +9,22 @@ use \App\controllers\UtileriasLog;
 class Usuarios implements Crud{
 
     public static function getAll(){       
-     
+      $mysqli = Database::getInstance(true);
+      $query =<<<sql
+      SELECT * FROM registrados
+sql;
+    
+      return $mysqli->queryAll($query);
       
+    }
+
+    public static function getUserNotInCourse(){
+      $mysqli = Database::getInstance(true);
+      $query =<<<sql
+      SELECT * FROM registrados re WHERE id_registrado NOT IN (SELECT ac.id_registrado FROM asigna_curso ac)
+sql;    
+      return $mysqli->queryAll($query);
+
     }
 
     public static function getPais(){       

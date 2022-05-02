@@ -70,7 +70,7 @@ class Contenedor extends Controller{
                 <li id="cursos" class="nav-item">
                     <a href="/Cursos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-users morado-musa-text"></span>
+                            <span class="fas fa-play morado-musa-text"></span>
                         </div>
                         <span class="nav-link-text ms-1">Cursos</span>
                     </a>

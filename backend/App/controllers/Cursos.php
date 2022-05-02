@@ -54,9 +54,33 @@ class Cursos extends Controller
                 <option value="{$value['id_modalidad']}">{$value['nombre']}</option>
 html;
     }
+
+    $users = UsuariosDao::getAll();
+    $optionUsers = '';
+
+    foreach ($users as $key => $value) {
+      $optionUsers .= <<<html
+                <option value="{$value['id_registrado']}">{$value['nombre']} {$value['apellidop']} {$value['apellidom']}</option>
+html;
+    }
+
+
+    $cursosAll = CursosDao::getAllCursos();
+    $optionCursos = '';
+
+    foreach ($cursosAll as $key => $value) {
+      $optionCursos .= <<<html
+                <option value="{$value['id_curso']}">{$value['nombre']} </option>
+html;
+    }
+
+
     View::set('tabla', $this->getAllCursos());
+    View::set('tablaUsersCursos',$this->getUsersCourse());
     View::set('asideMenu', $this->_contenedor->asideMenu());
     View::set('optionModalidad', $optionModalidad);
+    View::set('optionUsers', $optionUsers);
+    View::set('optionCursos', $optionCursos);
     View::set('modalEdit',$modalEdit);
     View::render("cursos_all");
   }
@@ -69,7 +93,7 @@ html;
     $nombre = MasterDom::getData('nombre');
     $fecha_curso = MasterDom::getData('fecha_curso');
     $horario_transmision = MasterDom::getData('horario_transmision');
-    $pdf_constancia = MasterDom::getData('pdf_constancia');
+    // $pdf_constancia = MasterDom::getData('pdf_constancia');
     $id_modalidad = MasterDom::getData('id_modalidad');
     $caratula = MasterDom::getData('caratula');
     $url = MasterDom::getData('url_curso');
@@ -81,7 +105,7 @@ html;
     $data->_clave = $name_files;
     $data->_fecha_curso = $fecha_curso;
     $data->_horario_transmision = $horario_transmision;
-    $data->_pdf_constancia = $name_files . ".pdf";
+    // $data->_pdf_constancia = $name_files . ".pdf";
     $data->_id_modalidad = $id_modalidad;
     $data->_caratula = $name_files . ".png";
     $data->_url = $url;
@@ -91,13 +115,48 @@ html;
     // $tipo_archivo_constancia = $pdf_constancia['type'];
     // $tipo_archivo_caratula = $caratula['type'];
 
-    if (move_uploaded_file($pdf_constancia["tmp_name"], "cursos_files/" . $name_files . '.pdf') && move_uploaded_file($caratula["tmp_name"], "cursos_files/" . $name_files . '.png')) {
+    // if (move_uploaded_file($pdf_constancia["tmp_name"], "cursos_files/" . $name_files . '.pdf') && move_uploaded_file($caratula["tmp_name"], "cursos_files/" . $name_files . '.png')) {
+
+    if (move_uploaded_file($caratula["tmp_name"], "cursos_files/" . $name_files . '.png')) {
       $id = CursosDao::insert($data);
       if ($id) {
         echo 'success';
       } else {
         echo 'fail';
       }
+    }
+  }
+
+  public function saveAsignaCurso()
+  {
+    $data = new \stdClass();
+
+    $id_curso = MasterDom::getData('id_curso');
+    $id_registrado = MasterDom::getData('id_registrado');
+
+    $data->_id_curso = $id_curso;
+    $data->_id_registrado = $id_registrado;
+
+    $id = CursosDao::insertAsignaCurso($data);
+      if ($id) {
+        echo 'success';
+      } else {
+        echo 'fail';
+      }
+   
+  }
+
+  public function deleteCourseUser(){
+    $id_ac = $_POST['id_ac'];
+    $data = new \stdClass();    
+    $data->id_asigna_curso = $id_ac;
+
+    $id = CursosDao::UpdateStatusAsignaCurso($data);
+
+    if ($id) {
+      echo 'success';
+    } else {
+      echo 'fail';
     }
   }
 
@@ -442,11 +501,64 @@ html;
                 </td>
 
                 <td>
-                <div class="d-flex  justify-content-center text-black">
+                    <div class="d-flex  justify-content-center text-black">
                      <button class="btn bg-gradient-primary mb-0 btn-icon-only" type="button" title="Editar Usuario" data-toggle="modal" data-target="#editar-curso{$value['id_curso']}"><i class="fa fa-edit" aria-hidden="true"></i></button>
-                     <select class="form-control change_status" style="width: 150px;" data-id-curso="{$value['id_curso']}">
-                      {$optionsStatus}
-                     </select>
+                     
+                     </div>
+                </td>
+
+                <td>
+                    <div class="d-flex  justify-content-center text-black">
+                      <select class="form-control change_status" style="width: 150px;" data-id-curso="{$value['id_curso']}">
+                        {$optionsStatus}
+                      </select>
+                     </div> 
+                </td>
+        </tr>
+html;
+    }
+
+    return $html;
+  }
+
+  public function getUsersCourse()
+  {
+
+    $html = "";
+    foreach (CursosDao::getAllUsersCourse() as $key => $value) {
+
+
+      $html .= <<<html
+            <tr>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        
+                        <div class="d-flex flex-column justify-content-center text-black">
+                    
+                            
+                                <h6 class="mb-0 text-sm text-move text-black">
+                                    <span class="fas fa-user" style="font-size: 13px"></span> {$value['nombre']} - {$value['apellidop']} - {$value['apellidom']}                                    
+                                </h6>
+                        </div>
+                    </div>
+                </td>
+         
+                <td style="text-align:left; vertical-align:middle;"> 
+                    
+                <div class="d-flex flex-column justify-content-center text-black">                    
+                                    
+                        <h6 class="mb-0 text-sm  text-black">
+                            <p>Nombre : {$value['nombre_curso']} </p>                            
+                            <p>Fecha : {$value['horario_transmision']}</p>
+                            <p>Hora : {$value['fecha_curso']} </p>                                      
+                        </h6>
+                </div>
+                <hr>
+                </td>
+
+                <td>
+                <div class="d-flex  justify-content-center text-black">
+                     <button class="btn bg-gradient-danger mb-0 btn-icon-only btn_quitar_user_curso" data-id="{$value['id_asigna_curso']}" data-nombre-user="{$value['nombre']} {$value['apellidop']} {$value['apellidom']}" data-nombre-curso="{$value['nombre_curso']}" type="button" title="Quitar Curso"><i class="fa fa-trash" aria-hidden="true"></i></button>                     
                      </div>
                 </td>
         </tr>
@@ -493,7 +605,7 @@ html;
                     <p style="font-size: 12px">A continuación ingrese los datos del curso.</p>
                     <hr>
                     <form method="POST" enctype="multipart/form-data" class="form_datos_edit">
-                    <input type="text" id="id_curso" name="id_curso" value="{$datos['id_curso']}">
+                    <input type="hidden" id="id_curso" name="id_curso" value="{$datos['id_curso']}">
                     <div class="form-group row">
                     <div class="form-group col-md-4">
                         <label class="control-label col-md-12 col-sm-1 col-xs-12" for="nombre">Nombre <span class="required">*</span></label>

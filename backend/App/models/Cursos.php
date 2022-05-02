@@ -19,6 +19,43 @@ sql;
       
     }
 
+    public static function getAllUsersCourse(){       
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT re.codigo_beca,re.nombre, re.apellidop, re.apellidom, ac.id_asigna_curso, ac.id_curso, ac.id_registrado, cu.nombre as nombre_curso, cu.horario_transmision, cu.fecha_curso
+      FROM registrados re 
+      INNER JOIN asigna_curso ac ON (re.id_registrado = ac.id_registrado)
+      INNER JOIN cursos cu ON (cu.id_curso = ac.id_curso) WHERE ac.status = 1
+sql;
+      return $mysqli->queryAll($query);
+      
+    }
+
+    public static function UpdateStatusAsignaCurso($data){
+      $mysqli = Database::getInstance(true);
+//       $query=<<<sql
+//       UPDATE asigna_curso SET status = 0 WHERE id_asigna_curso  = :id_asigna_curso 
+// sql;
+
+      $query=<<<sql
+      DELETE FROM asigna_curso WHERE id_asigna_curso  = :id_asigna_curso 
+sql;
+
+      $parametros = array(
+        ':id_asigna_curso'=>$data->id_asigna_curso
+      );
+
+      // var_dump($parametros);
+      // var_dump($query);
+      // exit;
+        // $accion = new \stdClass();
+        // $accion->_sql= $query;
+        // $accion->_parametros = $parametros;
+        // $accion->_id = $hotel->_id_hotel;
+        return $mysqli->update($query, $parametros);
+
+    }
+
     public static function getAllModalidad(){       
       $mysqli = Database::getInstance();
       $query=<<<sql
@@ -52,8 +89,8 @@ sql;
     public static function insert($data){
       $mysqli = Database::getInstance(1);
       $query=<<<sql
-      INSERT INTO cursos(clave,nombre, fecha_curso,horario_transmision, descripcion, pdf_constancia, id_modalidad, caratula, url, duracion)
-      VALUES(:clave,:nombre, :fecha_curso,:horario_transmision, :descripcion, :pdf_constancia, :id_modalidad, :caratula, :url, :duracion);
+      INSERT INTO cursos(clave,nombre, fecha_curso,horario_transmision, descripcion, id_modalidad, caratula, url, duracion)
+      VALUES(:clave,:nombre, :fecha_curso,:horario_transmision, :descripcion, :id_modalidad, :caratula, :url, :duracion);
 sql;
 
           $parametros = array(
@@ -62,12 +99,27 @@ sql;
           ':fecha_curso'=>$data->_fecha_curso,
           ':horario_transmision'=>$data->_horario_transmision,
           ':descripcion'=>$data->_descripcion,
-          ':pdf_constancia'=>$data->_pdf_constancia,
           ':id_modalidad'=>$data->_id_modalidad,
           ':caratula'=>$data->_caratula,
           ':url'=>$data->_url,
           ':duracion'=>$data->_duracion,
 
+          );
+          $id = $mysqli->insert($query,$parametros);
+          return $id;
+        
+    }
+
+    public static function insertAsignaCurso($data){
+      $mysqli = Database::getInstance(1);
+      $query=<<<sql
+      INSERT INTO asigna_curso(id_registrado,id_curso, fecha_asignacion,status)
+      VALUES(:id_registrado,:id_curso, NOW(),1);
+sql;
+
+          $parametros = array(
+          ':id_registrado' => $data->_id_registrado,
+          ':id_curso'=>$data->_id_curso
           );
           $id = $mysqli->insert($query,$parametros);
           return $id;

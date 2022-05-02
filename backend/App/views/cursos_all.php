@@ -85,7 +85,7 @@
                         <div class="col-auto">
                             <div class="bg-gradient-musa avatar avatar-xl position-relative">
                                 <span class="fas fa-play" style="font-size: xx-large;"></span>
-                                                              
+
                             </div>
                         </div>
                         <div class="col-auto my-auto">
@@ -98,115 +98,254 @@
                             </div>
                         </div>
 
+                        <div class="col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                            <div class="nav-wrapper position-relative end-0">
+                                <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link mb-0 px-0 py-1 active" href="#cursos_all" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
+                                            <span class="fas fa-play"></span>
+                                            <span class="ms-1">Cursos</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link mb-0 px-0 py-1 " href="#asigna_curso" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">                                        
+                                            <span class="fas fa-play"></span>
+                                            <span class="ms-1">Asignar Curso</span>
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
 
-            <div class="d-flex m-1">
-                <div class="ms-auto d-flex">
-                    <div class="pe-4 mt-1 position-relative">
-                        <hr class="vertical dark mt-0">
+
+
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="cursos_all" role="tabpanel" aria-labelledby="cursos_all">
+                    <div class="d-flex m-1">
+                        <div class="ms-auto d-flex">
+                            <div class="pe-4 mt-1 position-relative">
+                                <hr class="vertical dark mt-0">
+                            </div>
+                            <div class="ps-4">
+                                <div class="panel-body" <?php echo $visible; ?>></div>
+                                <button type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-toggle="modal" data-target="#Modal_Add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                <a style="background: #1C6C42; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
+                                <a style="background: #9A1622; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
+                                <button type="button" class="btn bg-gradient-secondary btn-icon-only mb-0 mt-3" data-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Todo cambio que usted realice en el sistema será guardado con fecha, usuario y transacción.">
+                                    <span class="fa fa-info"></span>
+                                </button>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="ps-4">
-                        <div class="panel-body" <?php echo $visible; ?>></div>
-                        <button type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-toggle="modal" data-target="#Modal_Add"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                        <a style="background: #1C6C42; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
-                        <a style="background: #9A1622; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
-                        <button type="button" class="btn bg-gradient-secondary btn-icon-only mb-0 mt-3" data-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Todo cambio que usted realice en el sistema será guardado con fecha, usuario y transacción.">
-                            <span class="fa fa-info"></span>
-                        </button>
 
-                    </div>
-                </div>
-            </div>
+                    <div class="row  mt-3">
+                        <div class="col-12">
+                            <div class="card">
+
+                                <div class="card-header pb-0">
+                                    <div class="d-lg-flex">
 
 
-            <div class="row  mt-3">
-                <div class="col-12">
-                    <div class="card">
+                                        <div class="ms-auto my-auto mt-lg-0 mt-4">
+                                            <div class="ms-auto my-auto">
 
-                        <div class="card-header pb-0">
-                            <div class="d-lg-flex">
-
-
-                                <div class="ms-auto my-auto mt-lg-0 mt-4">
-                                    <div class="ms-auto my-auto">
-
-                                        <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog mt-lg-10">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
-                                                        <i class="fas fa-upload ms-3"></i>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>You can browse your computer for a file.</p>
-                                                        <input type="text" placeholder="Browse file..." class="form-control mb-3">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="importCheck" checked="">
-                                                            <label class="custom-control-label" for="importCheck">I accept the terms and conditions</label>
+                                                <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog mt-lg-10">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
+                                                                <i class="fas fa-upload ms-3"></i>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>You can browse your computer for a file.</p>
+                                                                <input type="text" placeholder="Browse file..." class="form-control mb-3">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="" id="importCheck" checked="">
+                                                                    <label class="custom-control-label" for="importCheck">I accept the terms and conditions</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn bg-gradient-primary btn-sm">Upload</button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn bg-gradient-primary btn-sm">Upload</button>
-                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div>
+                                                    <form class="form-inline my-2 my-lg-0" action="/Usuarios/Usuario" method="post">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-12">
+                                                                <input class="form-control mr-sm-2" style="font-size: 35px;" autofocus type="search" id="search" name="search" placeholder="Ej. Adrian Segura Becerra - XaS6cr" aria-label="Search">
+                                                            </div>
+                                                            <div class="col-12 col-md-12 mt-md-2">
+                                                                <button class="btn max-btn-lg bg-gradient-pink-white text-gray my-2 my-sm-0" type="submit">Buscar</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
 
-                                    </div>
-                                </div>
-                            </div>
+                                        <hr> -->
 
-                            <!-- <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <div>
-                                        <form class="form-inline my-2 my-lg-0" action="/Usuarios/Usuario" method="post">
-                                            <div class="row">
-                                                <div class="col-12 col-md-12">
-                                                    <input class="form-control mr-sm-2" style="font-size: 35px;" autofocus type="search" id="search" name="search" placeholder="Ej. Adrian Segura Becerra - XaS6cr" aria-label="Search">
-                                                </div>
-                                                <div class="col-12 col-md-12 mt-md-2">
-                                                    <button class="btn max-btn-lg bg-gradient-pink-white text-gray my-2 my-sm-0" type="submit">Buscar</button>
-                                                </div>
+                                </div>
+                                <div class="card-body px-0 pb-0">
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
+                                            <div class="table-responsive p-0">
+                                                <table class="align-items-center mb-0 table table-borderless" id="user_list_table">
+                                                    <thead class="thead-light">
+                                                        <tr>
+
+                                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Curso</th>
+                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Otros datos</th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cambiar status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php echo $tabla;
+                                                        ?>
+                                                    </tbody>
+                                                </table>
                                             </div>
+                                        </div>
 
-                                        </form>
                                     </div>
+
                                 </div>
                             </div>
-
-                            <hr> -->
-
-                        </div>
-                        <div class="card-body px-0 pb-0">
-                            <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
-                                    <div class="table-responsive p-0">
-                                        <table class="align-items-center mb-0 table table-borderless" id="user_list_table">
-                                            <thead class="thead-light">
-                                                <tr>
-
-                                                    <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Curso</th>
-                                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Otros datos</th>
-                                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th>
-                                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Imprimir</th> -->
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php echo $tabla;
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                            </div>
-
                         </div>
                     </div>
+
+                </div>
+
+                <div class="tab-pane fade show position-relative height-350 border-radius-lg" id="asigna_curso" role="tabpanel" aria-labelledby="asigna_curso">
+
+                    <div class="d-flex m-1">
+                        <div class="ms-auto d-flex">
+                            <div class="pe-4 mt-1 position-relative">
+                                <hr class="vertical dark mt-0">
+                            </div>
+                            <div class="ps-4">
+                                <div class="panel-body" <?php echo $visible; ?>></div>
+                                <button type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-toggle="modal" data-target="#Modal_Add_Asigna"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                <a style="background: #1C6C42; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
+                                <a style="background: #9A1622; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
+                                <button type="button" class="btn bg-gradient-secondary btn-icon-only mb-0 mt-3" data-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Todo cambio que usted realice en el sistema será guardado con fecha, usuario y transacción.">
+                                    <span class="fa fa-info"></span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row  mt-3">
+                        <div class="col-12">
+                            <div class="card">
+
+                                <div class="card-header pb-0">
+                                    <div class="d-lg-flex">
+
+
+                                        <div class="ms-auto my-auto mt-lg-0 mt-4">
+                                            <div class="ms-auto my-auto">
+
+                                                <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog mt-lg-10">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
+                                                                <i class="fas fa-upload ms-3"></i>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>You can browse your computer for a file.</p>
+                                                                <input type="text" placeholder="Browse file..." class="form-control mb-3">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" value="" id="importCheck" checked="">
+                                                                    <label class="custom-control-label" for="importCheck">I accept the terms and conditions</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn bg-gradient-primary btn-sm">Upload</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div>
+                                                    <form class="form-inline my-2 my-lg-0" action="/Usuarios/Usuario" method="post">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-12">
+                                                                <input class="form-control mr-sm-2" style="font-size: 35px;" autofocus type="search" id="search" name="search" placeholder="Ej. Adrian Segura Becerra - XaS6cr" aria-label="Search">
+                                                            </div>
+                                                            <div class="col-12 col-md-12 mt-md-2">
+                                                                <button class="btn max-btn-lg bg-gradient-pink-white text-gray my-2 my-sm-0" type="submit">Buscar</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr> -->
+
+                                </div>
+                                <div class="card-body px-0 pb-0">
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
+                                            <div class="table-responsive p-0">
+                                                <table class="align-items-center mb-0 table table-borderless" id="user_cursos">
+                                                    <thead class="thead-light">
+                                                        <tr>
+
+                                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Usuario</th>
+                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Otros datos</th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th>
+                                                            <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Imprimir</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php echo $tablaUsersCursos;
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -262,10 +401,10 @@
                                 <input type="time" class="form-control" id="horario_transmision" name="horario_transmision" placeholder="Horario transmisión" require>
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <!-- <div class="form-group col-md-4">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="pdf_constancia">Constacia <span class="required">*</span></label>
-                                <input type="file" class="form-control" id="pdf_constancia" name="pdf_constancia" accept="application/pdf"  require>
-                            </div>
+                                <input type="file" class="form-control" id="pdf_constancia" name="pdf_constancia" accept="application/pdf" require>
+                            </div> -->
 
                             <!-- <div class="form-group col-md-4" style="display: none;">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="free">Gratis <span class="required">*</span></label>
@@ -278,14 +417,14 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_modalidad">Modalidad <span class="required">*</span></label>
                                 <select class="multisteps-form__select form-control all_input_select" name="id_modalidad" id="id_modalidad" required>
-                                <option value="" selected>Selecciona una Opción</option>
-                                <?= $optionModalidad ?>
+                                    <option value="" selected>Selecciona una Opción</option>
+                                    <?= $optionModalidad ?>
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="caratula">Caratula <span class="required">*</span></label>
-                                <input type="file" class="form-control" id="caratula" name="caratula" accept="image/png, image/jpeg, image/jpg"  require>
+                                <input type="file" class="form-control" id="caratula" name="caratula" accept="image/png, image/jpeg, image/jpg" require>
                             </div>
 
                             <div class="form-group col-md-4">
@@ -296,17 +435,63 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="duracion">Duración <span class="required">*</span></label>
                                 <input type="text" class="form-control" id="duracion" name="duracion" placeholder="Duracion" require>
-                            </div>                           
+                            </div>
 
-                           
+
 
                             <div class="form-group col-md-12">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="descripcion">Descripción <span class="required">*</span></label>
-                                <textarea name="descripcion" id="descripcion" class="form-control"></textarea>                              
+                                <textarea name="descripcion" id="descripcion" class="form-control"></textarea>
                             </div>
 
                             <div class="modal-footer">
                                 <button type="submit" class="btn bg-gradient-success" id="btn_upload" name="btn_upload">Aceptar</button>
+                                <button type="button" class="btn bg-gradient-secondary" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="Modal_Add_Asigna" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Asistente para Asignar Cursos
+                    </h5>
+
+                    <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
+                        X
+                    </span>
+                </div>
+                <div class="modal-body">
+                    <p style="font-size: 12px">A continuación ingrese los datos del usuario.</p>
+                    <hr>
+                    <form method="POST" enctype="multipart/form-data" id="form_asigna_curso">
+                        <div class="form-group row">
+
+                            <div class="form-group col-md-12">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_registrado">Usuario <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="id_registrado" id="id_registrado" required>
+                                    <option value="" selected>Selecciona una Opción</option>
+                                    <?= $optionUsers ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_curso">Curso <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="id_curso" id="id_curso" required>
+                                    <option value="" selected>Selecciona una Opción</option>
+                                    <?= $optionCursos ?>
+                                </select>
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn bg-gradient-success" id="btn_save_asigna_curso" name="btn_save_asigna_curso">Aceptar</button>
                                 <button type="button" class="btn bg-gradient-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
@@ -350,8 +535,8 @@
 
         });
 
-        $('#usuarios a').addClass('active');
-        $('#usuarios .fa-users').addClass('text-white');
+        $('#cursos a').addClass('active');
+        $('#cursos .fa-users').addClass('text-white');
 
 
         $('#user_list_table').DataTable({
@@ -397,6 +582,51 @@
             }
         });
 
+        $('#user_cursos').DataTable({
+            "drawCallback": function(settings) {
+                $('.current').addClass("btn bg-gradient-musa morado-musa-text btn-rounded").removeClass("paginate_button");
+                $('.paginate_button').addClass("btn").removeClass("paginate_button");
+                $('.dataTables_length').addClass("m-4");
+                $('.dataTables_info').addClass("mx-4");
+                $('.dataTables_filter').addClass("m-4");
+                $('input').addClass("form-control");
+                $('select').addClass("form-control");
+                $('.previous.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
+                $('.next.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
+                $('.previous').addClass("btn-outline-info btn-rounded mx-2");
+                $('.next').addClass("btn-outline-info btn-rounded mx-2");
+                $('a.bg-gradiente-musa').addClass("btn-rounded");
+            },
+            "language": {
+
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+
+            }
+        });
+
+        
+
         $('#user_list_table_faltante').DataTable({
             "drawCallback": function(settings) {
                 $('.current').addClass("btn bg-gradient-musa morado-musa-text btn-rounded").removeClass("paginate_button");
@@ -441,7 +671,7 @@
         });
 
 
-        $("#form_cursos").on("submit",function(event){
+        $("#form_cursos").on("submit", function(event) {
             event.preventDefault();
             var formData = new FormData(document.getElementById("form_cursos"));
 
@@ -457,20 +687,20 @@
                 beforeSend: function() {
                     console.log("Procesando....");
                     // alert('Se está borrando');
-                    
+
                 },
                 success: function(respuesta) {
                     console.log(respuesta);
 
-                    if(respuesta == 'success'){
+                    if (respuesta == 'success') {
                         Swal.fire("¡Curso guardado correctamente!", "", "success").
-                            then((value) => {
-                                window.location.reload();
+                        then((value) => {
+                            window.location.reload();
                         });
-                    }else{
+                    } else {
                         Swal.fire("¡Hubo un error guardar el curso!", "", "warning").
-                            then((value) => {
-                                window.location.reload();
+                        then((value) => {
+                            window.location.reload();
                         });
                     }
                 },
@@ -485,33 +715,82 @@
             });
         });
 
-        $(".change_status").on("change", function(){
+        $("#form_asigna_curso").on("submit", function(event) {
+            event.preventDefault();
+            var formData = new FormData(document.getElementById("form_asigna_curso"));
+
+            for (var value of formData.values()) {
+                console.log(value);
+            }
+            $.ajax({
+                url: "/Cursos/saveAsignaCurso",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    console.log("Procesando....");
+                    // alert('Se está borrando');
+
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+
+                    if (respuesta == 'success') {
+                        Swal.fire("¡Curso asignado correctamente!", "", "success").
+                        then((value) => {
+                            window.location.reload();
+                        });
+                    } else {
+                        Swal.fire("¡Hubo un error al asignar el curso!", "", "warning").
+                        then((value) => {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                    // alert('Error');
+                    Swal.fire("¡Hubo un error al asignar el curso!", "", "warning").
+                    then((value) => {
+                        window.location.reload();
+                    });
+                }
+            });
+        });
+
+        
+
+        $(".change_status").on("change", function() {
             var status = $(this).val();
             var id_curso = $(this).attr('data-id-curso');
 
             $.ajax({
                 url: "/Cursos/updateStatusCurso",
                 type: "POST",
-                data:{status,id_curso},
+                data: {
+                    status,
+                    id_curso
+                },
                 // contentType: false,
                 // processData: false,
                 beforeSend: function() {
                     console.log("Procesando....");
                     // alert('Se está borrando');
-                    
+
                 },
                 success: function(respuesta) {
                     console.log(respuesta);
 
-                    if(respuesta == 'success'){
+                    if (respuesta == 'success') {
                         Swal.fire("¡Se cambio el estatus correctamente!", "", "success").
-                            then((value) => {
-                                window.location.reload();
+                        then((value) => {
+                            window.location.reload();
                         });
-                    }else{
+                    } else {
                         Swal.fire("¡Hubo un error al cambiar el estatus!", "", "warning").
-                            then((value) => {
-                                window.location.reload();
+                        then((value) => {
+                            window.location.reload();
                         });
                     }
                 },
@@ -529,7 +808,7 @@
             // alert(id_curso);
         });
 
-        $(".form_datos_edit").on("submit",function(event){
+        $(".form_datos_edit").on("submit", function(event) {
             event.preventDefault();
             // var formData = new FormData(document.getElementById("form_datos_edit"));
             var formData = $(this).serialize();
@@ -548,20 +827,20 @@
                 beforeSend: function() {
                     console.log("Procesando....");
                     // alert('Se está borrando');
-                    
+
                 },
                 success: function(respuesta) {
                     console.log(respuesta);
 
-                    if(respuesta == 'success'){
+                    if (respuesta == 'success') {
                         Swal.fire("¡Se actualizo el curso correctamente!", "", "success").
-                            then((value) => {
-                                window.location.reload();
+                        then((value) => {
+                            window.location.reload();
                         });
-                    }else{
+                    } else {
                         Swal.fire("¡Hubo un error al actualizar el curso!", "", "warning").
-                            then((value) => {
-                                window.location.reload();
+                        then((value) => {
+                            window.location.reload();
                         });
                     }
                 },
@@ -574,6 +853,70 @@
                     });
                 }
             });
+        });
+
+        $(".btn_quitar_user_curso").on("click", function(){
+            var id_ac = $(this).attr('data-id');
+            var nombre_user = $(this).attr('data-nombre-user');
+            var nombre_curso = $(this).attr('data-nombre-curso');
+
+            const SwalBootstrapMail = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn bg-gradient-info mx-2',
+                    cancelButton: 'btn bg-gradient-danger mx-2'
+                },
+                buttonsStyling: false
+            })
+
+            SwalBootstrapMail.fire({
+                title: '¿Estas seguro de eliminar el curso al usuario?',
+                text: "Vas a quitarle el curso al usuario",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Si'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    //borrar aqui
+                    $.ajax({
+                        url: "/Cursos/deleteCourseUser",
+                        type: "POST",
+                        data: {id_ac},
+                        beforeSend: function() {
+                            console.log("Procesando....");
+                        },
+                        success: function(respuesta) {
+                            console.log(respuesta);
+                            if (respuesta == 'success') {
+                                
+                                Swal.fire(
+                                '¡Se ha eliminado el curso '+nombre_curso+' al usuario '+nombre_user+'!',
+                                '',
+                                'success'
+                                ).then((data) =>{
+                                    // console.log();               
+                                   window.location.reload();
+                                })
+
+                            }
+                            else{
+                                Swal.fire(
+                                '!Falló!',
+                                'Hubo un error al borrar el curso',
+                                'error'
+                                )
+                            }
+                            
+                        },
+                        error: function(respuesta) {
+                            console.log(respuesta);
+                        }
+                    });
+                }
+            })
+           
         });
 
         // $("#email").on("keyup", function() {

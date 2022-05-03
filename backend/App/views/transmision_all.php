@@ -91,14 +91,14 @@
                         <div class="col-auto my-auto">
                             <div class="h-100">
                                 <h5 class="mb-1">
-                                    Cursos
+                                    Transmisiones
                                 </h5>
                                 <p class="mb-0 font-weight-bold text-sm">
                                 </p>
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                        <!-- <div class="col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                             <div class="nav-wrapper position-relative end-0">
                                 <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
 
@@ -118,7 +118,7 @@
 
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -126,177 +126,66 @@
 
 
 
-            <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="cursos_all" role="tabpanel" aria-labelledby="cursos_all">
-                    <div class="d-flex m-1">
-                        <div class="ms-auto d-flex">
-                            <div class="pe-4 mt-1 position-relative">
-                                <hr class="vertical dark mt-0">
-                            </div>
-                            <div class="ps-4">
-                                <div class="panel-body" <?php echo $visible; ?>></div>
-                                <button type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-toggle="modal" data-target="#Modal_Add"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                <a style="background: #1C6C42; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
-                                <a style="background: #9A1622; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
-                                <button type="button" class="btn bg-gradient-secondary btn-icon-only mb-0 mt-3" data-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Todo cambio que usted realice en el sistema será guardado con fecha, usuario y transacción.">
-                                    <span class="fa fa-info"></span>
-                                </button>
 
-                            </div>
-                        </div>
+
+            <div class="d-flex m-1">
+                <div class="ms-auto d-flex">
+                    <div class="pe-4 mt-1 position-relative">
+                        <hr class="vertical dark mt-0">
                     </div>
+                    <div class="ps-4">
+                        <div class="panel-body" <?php echo $visible; ?>></div>
+                        <button type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-toggle="modal" data-target="#Modal_Add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <a style="background: #1C6C42; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
+                        <a style="background: #9A1622; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
+                        <button type="button" class="btn bg-gradient-secondary btn-icon-only mb-0 mt-3" data-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Todo cambio que usted realice en el sistema será guardado con fecha, usuario y transacción.">
+                            <span class="fa fa-info"></span>
+                        </button>
 
-                    <div class="row  mt-3">
-                        <div class="col-12">
-                            <div class="card">
-
-                                <div class="card-header pb-0">
-                                    <div class="d-lg-flex">
-
-
-                                        <div class="ms-auto my-auto mt-lg-0 mt-4">
-                                            <div class="ms-auto my-auto">
-
-                                                <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
-                                                    <div class="modal-dialog mt-lg-10">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
-                                                                <i class="fas fa-upload ms-3"></i>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>You can browse your computer for a file.</p>
-                                                                <input type="text" placeholder="Browse file..." class="form-control mb-3">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value="" id="importCheck" checked="">
-                                                                    <label class="custom-control-label" for="importCheck">I accept the terms and conditions</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn bg-gradient-primary btn-sm">Upload</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div>
-                                                    <form class="form-inline my-2 my-lg-0" action="/Usuarios/Usuario" method="post">
-                                                        <div class="row">
-                                                            <div class="col-12 col-md-12">
-                                                                <input class="form-control mr-sm-2" style="font-size: 35px;" autofocus type="search" id="search" name="search" placeholder="Ej. Adrian Segura Becerra - XaS6cr" aria-label="Search">
-                                                            </div>
-                                                            <div class="col-12 col-md-12 mt-md-2">
-                                                                <button class="btn max-btn-lg bg-gradient-pink-white text-gray my-2 my-sm-0" type="submit">Buscar</button>
-                                                            </div>
-                                                        </div>
-
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <hr> -->
-
-                                </div>
-                                <div class="card-body px-0 pb-0">
-                                    <div class="tab-content" id="v-pills-tabContent">
-                                        <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
-                                            <div class="table-responsive p-0">
-                                                <table class="align-items-center mb-0 table table-borderless" id="user_list_table">
-                                                    <thead class="thead-light">
-                                                        <tr>
-
-                                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Curso</th>
-                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Otros datos</th>
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cambiar status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php echo $tabla;
-                                                        ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
                 </div>
+            </div>
 
-                <div class="tab-pane fade show position-relative height-350 border-radius-lg" id="asigna_curso" role="tabpanel" aria-labelledby="asigna_curso">
+            <div class="row  mt-3">
+                <div class="col-12">
+                    <div class="card">
 
-                    <div class="d-flex m-1">
-                        <div class="ms-auto d-flex">
-                            <div class="pe-4 mt-1 position-relative">
-                                <hr class="vertical dark mt-0">
-                            </div>
-                            <div class="ps-4">
-                                <div class="panel-body" <?php echo $visible; ?>></div>
-                                <button type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-toggle="modal" data-target="#Modal_Add_Asigna"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                <a style="background: #1C6C42; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
-                                <a style="background: #9A1622; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
-                                <button type="button" class="btn bg-gradient-secondary btn-icon-only mb-0 mt-3" data-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Todo cambio que usted realice en el sistema será guardado con fecha, usuario y transacción.">
-                                    <span class="fa fa-info"></span>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row  mt-3">
-                        <div class="col-12">
-                            <div class="card">
-
-                                <div class="card-header pb-0">
-                                    <div class="d-lg-flex">
+                        <div class="card-header pb-0">
+                            <div class="d-lg-flex">
 
 
-                                        <div class="ms-auto my-auto mt-lg-0 mt-4">
-                                            <div class="ms-auto my-auto">
+                                <div class="ms-auto my-auto mt-lg-0 mt-4">
+                                    <div class="ms-auto my-auto">
 
-                                                <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
-                                                    <div class="modal-dialog mt-lg-10">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
-                                                                <i class="fas fa-upload ms-3"></i>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>You can browse your computer for a file.</p>
-                                                                <input type="text" placeholder="Browse file..." class="form-control mb-3">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value="" id="importCheck" checked="">
-                                                                    <label class="custom-control-label" for="importCheck">I accept the terms and conditions</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn bg-gradient-primary btn-sm">Upload</button>
-                                                            </div>
+                                        <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog mt-lg-10">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
+                                                        <i class="fas fa-upload ms-3"></i>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>You can browse your computer for a file.</p>
+                                                        <input type="text" placeholder="Browse file..." class="form-control mb-3">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="importCheck" checked="">
+                                                            <label class="custom-control-label" for="importCheck">I accept the terms and conditions</label>
                                                         </div>
                                                     </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn bg-gradient-primary btn-sm">Upload</button>
+                                                    </div>
                                                 </div>
-
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <!-- <div class="row">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row">
                                             <div class="col-md-12 col-sm-12">
                                                 <div>
                                                     <form class="form-inline my-2 my-lg-0" action="/Usuarios/Usuario" method="post">
@@ -316,35 +205,33 @@
 
                                         <hr> -->
 
-                                </div>
-                                <div class="card-body px-0 pb-0">
-                                    <div class="tab-content" id="v-pills-tabContent">
-                                        <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
-                                            <div class="table-responsive p-0">
-                                                <table class="table align-items-center mb-0 table table-striped table-bordered" id="user_cursos">
-                                                    <thead>
-                                                        <tr>
-                                                            <!-- <th><input type="checkbox" name="checkAll" id="checkAll" value=""/></th> -->
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre </th>
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Alta</th>
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Modalidad</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        
-                                                     <?php echo $tablaUsers ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                        </div>
+                        <div class="card-body px-0 pb-0">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
+                                    <div class="table-responsive p-0">
+                                        <table class="align-items-center mb-0 table table-borderless" id="user_list_table">
+                                            <thead class="thead-light">
+                                                <tr>
 
+                                                    <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Transmisión</th>
+                                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Otros datos</th>
+                                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
+                                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cambiar status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php echo $tabla;
+                                                ?>
+                                            </tbody>
+                                        </table>
                                     </div>
-
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -373,7 +260,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Asistente para Crear Cursos
+                        Asistente para Crear Transmisiones
                     </h5>
 
                     <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
@@ -381,16 +268,16 @@
                     </span>
                 </div>
                 <div class="modal-body">
-                    <p style="font-size: 12px">A continuación ingrese los datos del usuario.</p>
+                    <p style="font-size: 12px">A continuación ingrese los datos de la transmisión.</p>
                     <hr>
-                    <form method="POST" enctype="multipart/form-data" id="form_cursos">
+                    <form method="POST" enctype="multipart/form-data" id="form_trasmision">
                         <div class="form-group row">
                             <div class="form-group col-md-4">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="nombre">Nombre <span class="required">*</span></label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" require>
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <!-- <div class="form-group col-md-4">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="fecha_curso">Fecha Curso <span class="required">*</span></label>
                                 <input type="date" class="form-control" id="fecha_curso" name="fecha_curso" placeholder="Fecha Curso" require>
                             </div>
@@ -399,32 +286,9 @@
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="horario_transmision">Horario Transmisión <span class="required">*</span></label>
                                 <input type="time" class="form-control" id="horario_transmision" name="horario_transmision" placeholder="Horario transmisión" require>
                             </div>
+ -->
 
-                            <!-- <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="pdf_constancia">Constacia <span class="required">*</span></label>
-                                <input type="file" class="form-control" id="pdf_constancia" name="pdf_constancia" accept="application/pdf" require>
-                            </div> -->
-
-                            <!-- <div class="form-group col-md-4" style="display: none;">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="free">Gratis <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="free" id="free" required>
-                                    <option value="" selected>Selecciona una Opción</option>
-                                    <option value="1">Si</option>
-                                    <option value="2">No</option>                                </select>
-                            </div> -->
-
-                            <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_modalidad">Modalidad <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="id_modalidad" id="id_modalidad" required>
-                                    <option value="" selected>Selecciona una Opción</option>
-                                    <?= $optionModalidad ?>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="caratula">Caratula <span class="required">*</span></label>
-                                <input type="file" class="form-control" id="caratula" name="caratula" accept="image/png, image/jpeg, image/jpg" require>
-                            </div>
+                            
 
                             <div class="form-group col-md-4">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="url_curso">URL <span class="required">*</span></label>
@@ -438,10 +302,10 @@
 
 
 
-                            <div class="form-group col-md-12">
+                            <!-- <div class="form-group col-md-12">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="descripcion">Descripción <span class="required">*</span></label>
                                 <textarea name="descripcion" id="descripcion" class="form-control"></textarea>
-                            </div>
+                            </div> -->
 
                             <div class="modal-footer">
                                 <button type="submit" class="btn bg-gradient-success" id="btn_upload" name="btn_upload">Aceptar</button>
@@ -455,51 +319,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="Modal_Add_Asigna" role="dialog" aria-labelledby="" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Asistente para Asignar Cursos
-                    </h5>
-
-                    <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
-                        X
-                    </span>
-                </div>
-                <div class="modal-body">
-                    <p style="font-size: 12px">A continuación ingrese los datos del usuario.</p>
-                    <hr>
-                    <form method="POST" enctype="multipart/form-data" id="form_asigna_curso">
-                        <div class="form-group row">
-
-                            <div class="form-group col-md-12">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_registrado">Usuario <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="id_registrado" id="id_registrado" required>
-                                    <option value="" selected>Selecciona una Opción</option>
-                                    <?= $optionUsers ?>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_curso">Curso <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="id_curso" id="id_curso_u" disabled required>
-                                    <option value="" selected>Selecciona una Opción</option>
-
-                                </select>
-                            </div>
-
-
-                            <div class="modal-footer">
-                                <button type="submit" class="btn bg-gradient-success" id="btn_save_asigna_curso" name="btn_save_asigna_curso">Aceptar</button>
-                                <button type="button" class="btn bg-gradient-secondary" data-dismiss="modal">Cancelar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
 </body>
 
 <?php echo $footer; ?>
@@ -534,8 +353,8 @@
 
         });
 
-        $('#cursos a').addClass('active');
-        $('#cursos .fa-users').addClass('text-white');
+        $('#transmision a').addClass('active');
+        $('#transmision .fa-users').addClass('text-white');
 
 
         $('#user_list_table').DataTable({
@@ -670,15 +489,15 @@
         });
 
 
-        $("#form_cursos").on("submit", function(event) {
+        $("#form_trasmision").on("submit", function(event) {
             event.preventDefault();
-            var formData = new FormData(document.getElementById("form_cursos"));
+            var formData = new FormData(document.getElementById("form_trasmision"));
 
             for (var value of formData.values()) {
                 console.log(value);
             }
             $.ajax({
-                url: "/Cursos/saveCurso",
+                url: "/Transmision/saveTransmision",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -692,12 +511,12 @@
                     console.log(respuesta);
 
                     if (respuesta == 'success') {
-                        Swal.fire("¡Curso guardado correctamente!", "", "success").
+                        Swal.fire("Transmision guardada correctamente!", "", "success").
                         then((value) => {
                             window.location.reload();
                         });
                     } else {
-                        Swal.fire("¡Hubo un error guardar el curso!", "", "warning").
+                        Swal.fire("¡Hubo un error guardar la transmision!", "", "warning").
                         then((value) => {
                             window.location.reload();
                         });
@@ -706,7 +525,7 @@
                 error: function(respuesta) {
                     console.log(respuesta);
                     // alert('Error');
-                    Swal.fire("¡Hubo un error guardar el curso!", "", "warning").
+                    Swal.fire("¡Hubo un error guardar la transmision!", "", "warning").
                     then((value) => {
                         window.location.reload();
                     });
@@ -808,7 +627,7 @@
             // alert(id_curso);
         });
 
-        
+
 
         $(".form_datos_edit").on("submit", function(event) {
             event.preventDefault();

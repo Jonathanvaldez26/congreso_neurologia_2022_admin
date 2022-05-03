@@ -75,6 +75,15 @@ class Contenedor extends Controller{
                         <span class="nav-link-text ms-1">Cursos</span>
                     </a>
                 </li>
+
+                <li id="transmision" class="nav-item">
+                    <a href="/Transmision/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fas fa-play morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Transmision</span>
+                    </a>
+                </li>
                 
 
                 <li id="asistentes" class="nav-item" {$asistentesHidden};>

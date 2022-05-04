@@ -61,6 +61,21 @@ class Profesores extends Controller
     View::render("profesores_all");
   }
 
+  public function Coordinador()
+  {
+    $search = $_POST['search'];
+
+    $modalEditCoordinador = '';
+    foreach (ProfesoresDao::getAllCoordinadoresByName($search) as $key => $value) {
+      $modalEditCoordinador .= $this->generarModalEditUserCoordinador($value);
+    }
+
+    View::set('asideMenu', $this->_contenedor->asideMenu());
+    View::set('tablaCoordinadores', $this->getAllCoordinadoresByName($search));
+    View::set('modalEditCoordinador', $modalEditCoordinador);
+    View::render("profesores_all");
+  }
+
   public function saveData()
   {
     $data = new \stdClass();
@@ -84,6 +99,23 @@ class Profesores extends Controller
         echo 'fail';
       }
     }
+  }
+
+  public function saveDataCoordinador()
+  {
+    $data = new \stdClass();
+    
+    $data->_nombre = MasterDom::getData('nombre');
+    $data->_prefijo = MasterDom::getData('prefijo');
+   
+
+    $id = ProfesoresDao::insertCoordinador($data);
+    if ($id) {
+      echo 'success';
+    } else {
+      echo 'fail';
+    }
+ 
   }
 
   public function updateData()
@@ -559,6 +591,50 @@ html;
     return $html;
   }
 
+  public function getAllCoordinadoresByName($name)
+  {
+
+    $html = "";
+    // foreach (ProfesoresDao::getAllProfesoresByName($name) as $key => $value) {
+    foreach (ProfesoresDao::getAllCoordinadoresByName($name) as $key => $value) {
+
+      $value['nombre'] = utf8_encode($value['nombre']);
+
+      // if (empty($value['img']) || $value['img'] == null) {
+      //     $img_user = "/img/user.png";
+      // } else {
+      //     $img_user = "https://registro.foromusa.com/img/users_musa/{$value['img']}";
+      // }
+
+
+      $html .= <<<html
+            <tr>
+                <td>
+                    <div class="d-flex px-3 py-1">
+                        
+                        <div class="d-flex flex-column justify-content-center text-black">
+                    
+                            
+                                <h6 class="mb-0 text-sm text-move text-black">
+                                    <span class="fa fa-user-md" style="font-size: 13px"></span> {$value['nombre']} 
+
+                                </h6>
+                        </div>
+                    </div>
+                </td>
+         
+                
+                <td>
+                     <button class="btn bg-gradient-primary mb-0 btn-icon-only" type="button" title="Editar Usuario" data-toggle="modal" data-target="#editar-usuario-coordinador{$value['id_coordinador']}"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                     <button class="btn bg-gradient-danger mb-0 btn-icon-only" id="btn-borrar-{$value['id_coordinador']}" onclick="borrarProfesor({$value['id_coordinador']})" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Eliminar Profesor"><span class="fas fa-trash"></span></button>
+                </td>
+        </tr>
+html;
+    }
+
+    return $html;
+  }
+
   public function generarModalEditUser($datos)
   {
 
@@ -626,6 +702,60 @@ html;
                         </div>
                     </div>
                 </form>
+                </div>
+
+            </div>
+                </div>
+            </div>
+html;
+
+    return $modal;
+  }
+
+  public function generarModalEditUserCoordinador($datos)
+  {
+
+  
+    $modal = <<<html
+            <div class="modal fade" id="editar-usuario-coordinador{$datos['id_coordinador']}" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Editar Usuario
+                    </h5>
+
+                    <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
+                        X
+                    </span>
+                </div>
+                <div class="modal-body">
+                    <p style="font-size: 12px">A continuación ingrese los datos del usuario.</p>
+                    <hr>
+                    <form method="POST" enctype="multipart/form-data" id="form_datos_coordinador">
+                        <div class="form-group row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="prefijo">Prefijo <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="prefijo" id="prefijo" required>
+                                    <option value="" selected>Selecciona una Opción</option>
+                                    <option value="Dr.">Dr.</option>
+                                    <option value="Dra.">Dra.</option>
+                                    <option value="Sr.">Sr.</option>
+                                    <option value="Sra.">Sra.</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="nombre">Nombre <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="{$datos['nombre']}" require>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn bg-gradient-success" id="btn_upload_1" name="btn_upload_1">Aceptar</button>
+                                <button type="button" class="btn bg-gradient-secondary" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
             </div>

@@ -68,6 +68,22 @@ sql;
         
     }
 
+    public static function insertCoordinador($data){
+      $mysqli = Database::getInstance(1);
+      $query=<<<sql
+      INSERT INTO coordinadores(prefijo, nombre)
+      VALUES(:prefijo, :nombre);
+sql;
+
+          $parametros = array(
+          ':prefijo'=>$data->_prefijo,
+          ':nombre'=>$data->_nombre
+          );
+          $id = $mysqli->insert($query,$parametros);
+          return $id;
+        
+    }
+
     public static function getUserRegister($email){
       $mysqli = Database::getInstance(true);
       $query =<<<sql
@@ -118,7 +134,15 @@ sql;
       $mysqli = Database::getInstance();
       $query =<<<sql
       SELECT * FROM profesores WHERE CONCAT_WS(nombre,descripcion) LIKE '%$search%';
-  sql;
+sql;
+      return $mysqli->queryAll($query);
+    }
+
+    public static function getAllCoordinadoresByName($search){
+      $mysqli = Database::getInstance();
+      $query =<<<sql
+      SELECT * FROM coordinadores WHERE nombre LIKE '%$search%';
+sql;
       return $mysqli->queryAll($query);
     }
 }

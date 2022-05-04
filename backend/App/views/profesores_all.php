@@ -309,6 +309,59 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
 
 <script>
+     function borrarProfesor(dato){
+        const SwalBootstrapEliminar = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn bg-gradient-info mx-2',
+                cancelButton: 'btn bg-gradient-danger mx-2'
+            },
+            buttonsStyling: false
+        })
+        SwalBootstrapEliminar.fire({
+            title: '¿Está Seguro de Eliminar al Profesor?',
+            showCancelButton: true,
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No',
+            }).
+        then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: "/Profesores/borrarProfesor/",
+                    type: "POST",
+                    dataType: 'json',
+                    data: {dato},
+                    beforeSend: function() {
+                        console.log("Procesando....");
+                        // alert('Se está borrando');
+                        
+                    },
+                    success: function(respuesta) {
+                        console.log(respuesta);
+                        console.log('despues de borrar');
+                        // alert('Bien borrado');
+                        Swal.fire("¡Se borró correctamente!", "", "success").
+                        then((value) => {
+                            
+                            window.location.reload();
+                        });
+                    },
+                    error: function(respuesta) {
+                        console.log(respuesta);
+                        // alert('Error');
+                        Swal.fire("¡Ha ocurrido un error al intentar borrar el profesor!", "", "error").
+                        then((value) => {
+                            
+                        });
+                    }
+                })
+            } else if (result.isDenied) {
+                // Swal.fire('Changes are not saved', '', 'info')
+            }
+        })
+        
+    }
     $(document).ready(function() {
 
         $("#form_etiquetas").on("click", function(event) {

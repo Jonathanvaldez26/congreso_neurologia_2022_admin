@@ -99,6 +99,18 @@ sql;
         
     }
     public static function delete($id){
+      $mysqli = Database::getInstance(true);
+        $query=<<<sql
+        DELETE FROM profesores WHERE id_profesor = $id 
+sql;
+
+        // $log = new \stdClass();
+        // $log->_sql= $query;
+        // $log->_parametros = $id;
+        // $log->_id = $id;
+        // UtileriasLog::addAccion($log);
+        
+        return $mysqli->delete($query);
         
     }
 

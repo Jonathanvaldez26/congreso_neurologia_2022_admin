@@ -16,7 +16,7 @@ class Principal extends Controller{
     function __construct(){
         parent::__construct();
         $this->_contenedor = new Contenedor;
-       // View::set('header',$this->_contenedor->header());
+        //View::set('header',$this->_contenedor->header());
         View::set('footer',$this->_contenedor->footer());
     }
 
@@ -60,6 +60,8 @@ html;
     //   View::set('utileriasHidden',$utileriasHidden);
 
       View::set('asideMenu',$this->_contenedor->asideMenu());
+      View::set('header',$this->_contenedor->header($extraHeader));
+
       View::render("principal_all");
     }
 

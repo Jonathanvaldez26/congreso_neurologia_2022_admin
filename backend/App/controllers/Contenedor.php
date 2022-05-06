@@ -365,7 +365,7 @@ html;
 
 
 
-    return $header.$extra;
+    return $header;
     }
 
     public function footer($extra = ''){

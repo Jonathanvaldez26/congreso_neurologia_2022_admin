@@ -20,7 +20,7 @@ class Contenedor extends Controller{
 
     public function asideMenu(){
 
-      $permisos = (Controller::getPermisoUser($this->__usuario)['perfil_id']) != 1 ? "style=\"display:none;\"" : "";
+      // $permisos = (Controller::getPermisoUser($this->__usuario)['perfil_id']) != 1 ? "style=\"display:none;\"" : "";
 
       $menu = <<<html
       <aside class="bg-white-aside sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
@@ -49,7 +49,7 @@ class Contenedor extends Controller{
                     </a>
                 </li-->
 
-                <li id="principal" class="nav-item" {$asistentesHidden};>
+                <li id="principal" class="nav-item" >
                     <a href="/Principal/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-home morado-musa-text"></span>
@@ -114,7 +114,7 @@ class Contenedor extends Controller{
                 
                 
 
-                <li id="asistentes" class="nav-item" {$asistentesHidden};>
+                <li id="asistentes" class="nav-item" >
                     <a href="/Asistentes/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-users morado-musa-text"></span>
@@ -122,7 +122,7 @@ class Contenedor extends Controller{
                         <span class="nav-link-text ms-1">Asistentes</span>
                     </a>
                 </li>
-                <li id="vuelos" class="nav-item" {$vuelosHidden};>
+                <li id="vuelos" class="nav-item" >
                     <a href="/Vuelos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-plane morado-musa-text"></span>
@@ -130,7 +130,7 @@ class Contenedor extends Controller{
                         <span class="nav-link-text ms-1">Vuelos</span>
                     </a>
                 </li>
-                <!--<li id="pickup" class="nav-item" {$pickUpHidden};>
+                <!--<li id="pickup" class="nav-item" >
                     <a href="/PickUp/" class="nav-link " aria-controls="ecommerceExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-bus morado-musa-text"></span>
@@ -138,7 +138,7 @@ class Contenedor extends Controller{
                         <span class="nav-link-text ms-1">PickUp</span>
                     </a>
                 </li>-->
-               <!-- <li id="habitaciones" class="nav-item" {$habitacionesHidden};>
+               <!-- <li id="habitaciones" class="nav-item" >
                     <a href="/Habitaciones/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-hotel morado-musa-text"></span>
@@ -147,7 +147,7 @@ class Contenedor extends Controller{
                     </a>
                 </li>-->
                 
-                <li id="asistencias" class="nav-item" {$aistenciasHidden};>
+                <li id="asistencias" class="nav-item" >
                     <a href="/Asistencias/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-bell morado-musa-text"></span>
@@ -155,11 +155,11 @@ class Contenedor extends Controller{
                         <span class="nav-link-text ms-1">Asistencias</span>
                     </a>
                 </li>
-                <li id="salud" class="nav-item" {$vacunacionHidden};>
+                <li id="salud" class="nav-item" >
                     <hr class="horizontal dark" />
                     <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGOS EN SITIO</h6>
                 </li>
-                <li id="pagos" class="nav-item" {$vacunacionHidden};>
+                <li id="pagos" class="nav-item" >
                     <a href="/CobroEnSitio/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-money morado-musa-text"></span>
@@ -167,7 +167,7 @@ class Contenedor extends Controller{
                         <span class="nav-link-text ms-1">Cobrar en Sitio</span>
                     </a>
                 </li>
-                <li id="pruebas_usuario" class="nav-item" {$pruebasHidden};>
+                <li id="pruebas_usuario" class="nav-item" >
                     <a href="/PruebasCovidUsuarios/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-virus-slash morado-musa-text"></span>
@@ -176,7 +176,7 @@ class Contenedor extends Controller{
                     </a>
                 </li>
 
-                <!-- <li id="pruebas_sitio" class="nav-item" {$pruebasHidden};>
+                <!-- <li id="pruebas_sitio" class="nav-item" >
                     <a href="/PruebasCovidEnSitio/" class="nav-link" aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-virus morado-musa-text" ></span>
@@ -185,11 +185,11 @@ class Contenedor extends Controller{
                     </a>
                 </li>-->
 
-                <li id="config" class="nav-item" {$permisos}>
+                <li id="config" class="nav-item" >
                     <hr class="horizontal dark" />
                     <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OTROS</h6>
                 </li>
-                <li id="configuracion" class="nav-item" {$permisos}>
+                <li id="configuracion" class="nav-item" >
                     <a href="/Configuracion/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-tools morado-musa-text"></span>
@@ -197,7 +197,7 @@ class Contenedor extends Controller{
                         <span class="nav-link-text ms-1">Configuración</span>
                     </a>
                 </li>
-                <li id="util" class="nav-item" {$permisos}>
+                <li id="util" class="nav-item" >
                     <a data-bs-toggle="collapse" onclick="utilerias()" href="#utilerias" class="nav-link " aria-controls="utilerias" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <span class="fa fa-user-circle-o morado-musa-text"></span>

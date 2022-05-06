@@ -20,7 +20,7 @@ class Contenedor extends Controller{
 
     public function asideMenu(){
 
-      // $permisos = (Controller::getPermisoUser($this->__usuario)['perfil_id']) != 1 ? "style=\"display:none;\"" : "";
+      $permisos = (Controller::getPermisoUser($this->__usuario)['perfil_id']) != 1 ? "style=\"display:none;\"" : "";
 
       $menu = <<<html
       <aside class="bg-white-aside sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
@@ -365,7 +365,7 @@ html;
 
 
 
-    return $header;
+    return $header.$extra;
     }
 
     public function footer($extra = ''){

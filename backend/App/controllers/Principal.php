@@ -16,7 +16,7 @@ class Principal extends Controller{
     function __construct(){
         parent::__construct();
         $this->_contenedor = new Contenedor;
-        View::set('header',$this->_contenedor->header());
+       // View::set('header',$this->_contenedor->header());
         View::set('footer',$this->_contenedor->footer());
     }
 

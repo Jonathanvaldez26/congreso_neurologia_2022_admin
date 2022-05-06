@@ -78,55 +78,55 @@
         </nav>
         <!-- End Navbar -->
 
-        <div class="row">
-            <div class="col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                <div class="nav-wrapper position-relative end-0">
-                    <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
-
-                        <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 active" href="#profesores_1" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
-                                <span class="fa fa-plane-arrival"></span>
-                                <span class="ms-1">Profesores</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 " href="#coordinadores" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
-                                <span class="fa fa-plane-departure"></span>
-                                <span class="ms-1">Coordinadores</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-
         <div class="container-fluid">
-            <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="profesores_1" role="tabpanel" aria-labelledby="profesores_1">
-                    <div class=" mt-7 mb-4">
-                        <div class="card card-body mt-n6 overflow-hidden">
-                            <div class="row gx-4">
-                                <div class="col-auto">
-                                    <div class="bg-gradient-musa avatar avatar-xl position-relative">
-                                        <!-- <img src="../../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm"> -->
-                                        <span class="fa fa-users" style="font-size: xx-large;"></span>
-                                    </div>
-                                </div>
-                                <div class="col-auto my-auto">
-                                    <div class="h-100">
-                                        <h5 class="mb-1">
-                                            Profesores
-                                        </h5>
-                                        <p class="mb-0 font-weight-bold text-sm">
-                                        </p>
-                                    </div>
-                                </div>
-
+            <div class=" mt-7 mb-4">
+                <div class="card card-body mt-n6 overflow-hidden">
+                    <div class="row gx-4">
+                        <div class="col-auto">
+                            <div class="bg-gradient-musa avatar avatar-xl position-relative">
+                                <span class="fas fa-play" style="font-size: xx-large;"></span>
+                             </div>
+                        </div>
+                        <div class="col-auto my-auto">
+                            <div class="h-100">
+                                <h5 class="mb-1">
+                                    Encuestas
+                                </h5>
+                                <p class="mb-0 font-weight-bold text-sm">
+                                </p>
                             </div>
                         </div>
-                    </div>
 
+                        <div class="col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                            <div class="nav-wrapper position-relative end-0">
+                                <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link mb-0 px-0 py-1 active" href="#cursos_all" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
+                                            <span class="fas fa-play"></span>
+                                            <span class="ms-1">Encuestas</span>
+                                        </a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link mb-0 px-0 py-1" href="#asigna_curso" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                                            <span class="fas fa-play"></span>
+                                            <span class="ms-1">Asignar Curso</span>
+                                        </a>
+                                    </li> -->
+
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="cursos_all" role="tabpanel" aria-labelledby="cursos_all">
                     <div class="d-flex m-1">
                         <div class="ms-auto d-flex">
                             <div class="pe-4 mt-1 position-relative">
@@ -144,7 +144,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="row  mt-3">
                         <div class="col-12">
@@ -185,25 +184,25 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div>
-                                                <form class="form-inline my-2 my-lg-0" action="/Profesores/Profesor" method="post">
-                                                    <div class="row">
-                                                        <div class="col-12 col-md-12">
-                                                            <input class="form-control mr-sm-2" style="font-size: 35px;" autofocus type="search" id="search" name="search" placeholder="Ej. Adrian Segura Becerra - XaS6cr" aria-label="Search">
+                                    <!-- <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div>
+                                                    <form class="form-inline my-2 my-lg-0" action="/Usuarios/Usuario" method="post">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-12">
+                                                                <input class="form-control mr-sm-2" style="font-size: 35px;" autofocus type="search" id="search" name="search" placeholder="Ej. Adrian Segura Becerra - XaS6cr" aria-label="Search">
+                                                            </div>
+                                                            <div class="col-12 col-md-12 mt-md-2">
+                                                                <button class="btn max-btn-lg bg-gradient-pink-white text-gray my-2 my-sm-0" type="submit">Buscar</button>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-12 col-md-12 mt-md-2">
-                                                            <button class="btn max-btn-lg bg-gradient-pink-white text-gray my-2 my-sm-0" type="submit">Buscar</button>
-                                                        </div>
-                                                    </div>
 
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <hr>
+                                        <hr> -->
 
                                 </div>
                                 <div class="card-body px-0 pb-0">
@@ -214,10 +213,10 @@
                                                     <thead class="thead-light">
                                                         <tr>
 
-                                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Usuario</th>
-                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descripcion</th>
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th>
-                                                            <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Imprimir</th> -->
+                                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Preguntas</th>
+                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Respuestas</th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
+                                                           
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -237,29 +236,7 @@
 
                 </div>
 
-                <div class="tab-pane fade show position-relative height-350 border-radius-lg" id="coordinadores" role="tabpanel" aria-labelledby="coordinadores">
-                    <div class=" mt-7 mb-4">
-                        <div class="card card-body mt-n6 overflow-hidden">
-                            <div class="row gx-4">
-                                <div class="col-auto">
-                                    <div class="bg-gradient-musa avatar avatar-xl position-relative">
-                                        <!-- <img src="../../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm"> -->
-                                        <span class="fa fa-users" style="font-size: xx-large;"></span>
-                                    </div>
-                                </div>
-                                <div class="col-auto my-auto">
-                                    <div class="h-100">
-                                        <h5 class="mb-1">
-                                            Coordinadores
-                                        </h5>
-                                        <p class="mb-0 font-weight-bold text-sm">
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                <div class="tab-pane fade show position-relative height-350 border-radius-lg" id="asigna_curso" role="tabpanel" aria-labelledby="asigna_curso">
 
                     <div class="d-flex m-1">
                         <div class="ms-auto d-flex">
@@ -268,7 +245,7 @@
                             </div>
                             <div class="ps-4">
                                 <div class="panel-body" <?php echo $visible; ?>></div>
-                                <button type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-toggle="modal" data-target="#Modal_Add_Coordinador"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                <button type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-toggle="modal" data-target="#Modal_Add_Asigna"><i class="fa fa-plus" aria-hidden="true"></i></button>
                                 <a style="background: #1C6C42; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
                                 <a style="background: #9A1622; color: #ffffff;" href="#" type="button" class="btn bg-gradient-info btn-icon-only mb-0 mt-3"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
                                 <button type="button" class="btn bg-gradient-secondary btn-icon-only mb-0 mt-3" data-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Todo cambio que usted realice en el sistema será guardado con fecha, usuario y transacción.">
@@ -278,7 +255,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="row  mt-3">
                         <div class="col-12">
@@ -319,42 +295,43 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div>
-                                                <form class="form-inline my-2 my-lg-0" action="/Profesores/Coordinador" method="post">
-                                                    <div class="row">
-                                                        <div class="col-12 col-md-12">
-                                                            <input class="form-control mr-sm-2" style="font-size: 35px;" autofocus type="search" id="search" name="search" placeholder="Ej. Adrian Segura Becerra - XaS6cr" aria-label="Search">
+                                    <!-- <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div>
+                                                    <form class="form-inline my-2 my-lg-0" action="/Usuarios/Usuario" method="post">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-12">
+                                                                <input class="form-control mr-sm-2" style="font-size: 35px;" autofocus type="search" id="search" name="search" placeholder="Ej. Adrian Segura Becerra - XaS6cr" aria-label="Search">
+                                                            </div>
+                                                            <div class="col-12 col-md-12 mt-md-2">
+                                                                <button class="btn max-btn-lg bg-gradient-pink-white text-gray my-2 my-sm-0" type="submit">Buscar</button>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-12 col-md-12 mt-md-2">
-                                                            <button class="btn max-btn-lg bg-gradient-pink-white text-gray my-2 my-sm-0" type="submit">Buscar</button>
-                                                        </div>
-                                                    </div>
 
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <hr>
+                                        <hr> -->
 
                                 </div>
                                 <div class="card-body px-0 pb-0">
                                     <div class="tab-content" id="v-pills-tabContent">
                                         <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
                                             <div class="table-responsive p-0">
-                                                <table class="align-items-center mb-0 table table-borderless" id="user_list_table_coordinador">
-                                                    <thead class="thead-light">
+                                                <table class="table align-items-center mb-0 table table-striped table-bordered" id="user_cursos">
+                                                    <thead>
                                                         <tr>
-
-                                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Usuario</th>                                                            
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th>
-                                                            <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Imprimir</th> -->
+                                                            <!-- <th><input type="checkbox" name="checkAll" id="checkAll" value=""/></th> -->
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre </th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Alta</th>
+                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Modalidad</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php echo $tablaCoordinadores;?>
+                                                        
+                                                     <?php echo $tablaUsers ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -369,6 +346,7 @@
 
                 </div>
             </div>
+
 
             <footer class="footer pt-3  ">
                 <div class="container-fluid">
@@ -387,17 +365,14 @@
             </footer>
 
     </main>
-    <?php
-     echo $modalEdit; 
-     echo $modalEditCoordinador;
-    ?>
+    <?php echo $modalEdit; ?>
 
     <div class="modal fade" id="Modal_Add" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Asistente para Crear Profesores
+                        Asistente para Crear Encuestas
                     </h5>
 
                     <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
@@ -405,45 +380,56 @@
                     </span>
                 </div>
                 <div class="modal-body">
-                    <p style="font-size: 12px">A continuación ingrese los datos del usuario.</p>
+                    <p style="font-size: 12px">A continuación ingrese los datos de la encuesta.</p>
                     <hr>
-                    <form method="POST" enctype="multipart/form-data" id="form_datos">
+                    <form method="POST" enctype="multipart/form-data" id="form_encuestas">
                         <div class="form-group row">
+
                             <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="prefijo">Prefijo <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="prefijo" id="prefijo" required>
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_curso">Curso <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="id_curso" id="id_curso" required>
                                     <option value="" selected>Selecciona una Opción</option>
-                                    <option value="Dr.">Dr.</option>
-                                    <option value="Dra.">Dra.</option>
-                                    <option value="Sr.">Sr.</option>
-                                    <option value="Sra.">Sra.</option>
+                                    <?= $optionCursos;?>                               
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="nombre">Nombre <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" require>
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="pregunta">Pregunta <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="pregunta" name="pregunta" placeholder="Escriba la pregunta" require>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="imagen">Imagen <span class="required">*</span></label>
-                                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/png, image/jpeg, image/jpg" require>
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="respuesta_1">Respuesta 1<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="respuesta_1" name="respuesta_1" placeholder="Escriba la pregunta" require>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="nacionalidad">Nacionalidad <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="nacionalidad" id="nacionalidad" required>
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="respuesta_2">Respuesta 2<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="respuesta_2" name="respuesta_2" placeholder="Escriba la pregunta" require>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="respuesta_3">Respuesta 3<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="respuesta_3" name="respuesta_3" placeholder="Escriba la pregunta" require>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="respuesta_4">Respuesta 4<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="respuesta_4" name="respuesta_4" placeholder="Escriba la pregunta" require>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="respuesta_correcta">Respuesta Correcta <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="respuesta_correcta" id="respuesta_correcta" required>
                                     <option value="" selected>Selecciona una Opción</option>
-                                    <option value="0">Nacional</option>
-                                    <option value="1">Internacional</option>
+                                    <option value="1">Respuesta 1</option>
+                                    <option value="2">Respuesta 2</option>  
+                                    <option value="3">Respuesta 3</option> 
+                                    <option value="4">Respuesta 4</option> 
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-12">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="descripcion">Descripción <span class="required">*</span></label>
-                                <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
-                            </div>
-
+                           
 
                             <div class="modal-footer">
                                 <button type="submit" class="btn bg-gradient-success" id="btn_upload" name="btn_upload">Aceptar</button>
@@ -457,12 +443,12 @@
         </div>
     </div>
 
-    <div class="modal fade" id="Modal_Add_Coordinador" role="dialog" aria-labelledby="" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="Modal_Add_Asigna" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Asistente para Crear Coordinadores
+                        Asistente para Asignar Cursos
                     </h5>
 
                     <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
@@ -472,26 +458,27 @@
                 <div class="modal-body">
                     <p style="font-size: 12px">A continuación ingrese los datos del usuario.</p>
                     <hr>
-                    <form method="POST" enctype="multipart/form-data" id="form_datos_coordinador">
+                    <form method="POST" enctype="multipart/form-data" id="form_asigna_curso">
                         <div class="form-group row">
-                            <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="prefijo">Prefijo <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="prefijo" id="prefijo" required>
+
+                            <div class="form-group col-md-12">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_registrado">Usuario <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="id_registrado" id="id_registrado" required>
                                     <option value="" selected>Selecciona una Opción</option>
-                                    <option value="Dr.">Dr.</option>
-                                    <option value="Dra.">Dra.</option>
-                                    <option value="Sr.">Sr.</option>
-                                    <option value="Sra.">Sra.</option>
+                                    <?= $optionUsers ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_curso">Curso <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="id_curso" id="id_curso_u" disabled required>
+                                    <option value="" selected>Selecciona una Opción</option>
+
                                 </select>
                             </div>
 
-                            <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="nombre">Nombre <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" require>
-                            </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn bg-gradient-success" id="btn_upload_1" name="btn_upload_1">Aceptar</button>
+                                <button type="submit" class="btn bg-gradient-success" id="btn_save_asigna_curso" name="btn_save_asigna_curso">Aceptar</button>
                                 <button type="button" class="btn bg-gradient-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
@@ -516,140 +503,10 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
 
 <script>
-    function borrarProfesor(dato) {
-        const SwalBootstrapEliminar = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn bg-gradient-info mx-2',
-                cancelButton: 'btn bg-gradient-danger mx-2'
-            },
-            buttonsStyling: false
-        })
-        SwalBootstrapEliminar.fire({
-            title: '¿Está Seguro de Eliminar al Profesor?',
-            showCancelButton: true,
-            confirmButtonText: 'Si',
-            cancelButtonText: 'No',
-        }).
-        then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-
-                $.ajax({
-                    url: "/Profesores/borrarProfesor/",
-                    type: "POST",
-                    dataType: 'json',
-                    data: {
-                        dato
-                    },
-                    beforeSend: function() {
-                        console.log("Procesando....");
-                        // alert('Se está borrando');
-
-                    },
-                    success: function(respuesta) {
-                        console.log(respuesta);
-                        console.log('despues de borrar');
-                        // alert('Bien borrado');
-                        Swal.fire("¡Se borró correctamente!", "", "success").
-                        then((value) => {
-
-                            window.location.reload();
-                        });
-                    },
-                    error: function(respuesta) {
-                        console.log(respuesta);
-                        // alert('Error');
-                        Swal.fire("¡Ha ocurrido un error al intentar borrar el profesor!", "", "error").
-                        then((value) => {
-
-                        });
-                    }
-                })
-            } else if (result.isDenied) {
-                // Swal.fire('Changes are not saved', '', 'info')
-            }
-        })
-
-    }
-
-
-    function borrarCoordinador(dato) {
-        const SwalBootstrapEliminar = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn bg-gradient-info mx-2',
-                cancelButton: 'btn bg-gradient-danger mx-2'
-            },
-            buttonsStyling: false
-        })
-        SwalBootstrapEliminar.fire({
-            title: '¿Está Seguro de Eliminar al Coordinador?',
-            showCancelButton: true,
-            confirmButtonText: 'Si',
-            cancelButtonText: 'No',
-        }).
-        then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-
-                $.ajax({
-                    url: "/Profesores/borrarCoordinador/",
-                    type: "POST",
-                    dataType: 'json',
-                    data: {
-                        dato
-                    },
-                    beforeSend: function() {
-                        console.log("Procesando....");
-                        // alert('Se está borrando');
-
-                    },
-                    success: function(respuesta) {
-                        console.log(respuesta);
-                        console.log('despues de borrar');
-                        // alert('Bien borrado');
-                        Swal.fire("¡Se borró correctamente!", "", "success").
-                        then((value) => {
-
-                            window.location.reload();
-                        });
-                    },
-                    error: function(respuesta) {
-                        console.log(respuesta);
-                        // alert('Error');
-                        Swal.fire("¡Ha ocurrido un error al intentar borrar el coordinador!", "", "error").
-                        then((value) => {
-
-                        });
-                    }
-                })
-            } else if (result.isDenied) {
-                // Swal.fire('Changes are not saved', '', 'info')
-            }
-        })
-
-    }
-
     $(document).ready(function() {
 
-        $("#form_etiquetas").on("click", function(event) {
-            event.preventDefault();
-            var formData = new FormData(document.getElementById("form_etiquetas"));
-
-            no_habitacion = $("#no_habitacion").val();
-            clave_ra = $("#clave_ra").val();
-            no_etiquetas = $("#no_etiquetas").val();
-
-            console.log(no_habitacion);
-            console.log(clave_ra);
-            console.log(no_etiquetas);
-
-            $("#a_abrir_etiqueta").attr("href", "/Asistentes/abrirpdf/" + clave_ra + "/" + no_etiquetas + "/" + no_habitacion);
-            $("#a_abrir_etiqueta")[0].click();
-
-        });
-
-        $('#profesores a').addClass('active');
-        $('#profesores .fa-users').addClass('text-white');
+        $('#encuestas a').addClass('active');
+        $('#encuestas .fa-users').addClass('text-white');
 
 
         $('#user_list_table').DataTable({
@@ -695,7 +552,52 @@
             }
         });
 
-        $('#user_list_table_coordinador').DataTable({
+        $('#user_cursos').DataTable({
+            "drawCallback": function(settings) {
+                $('.current').addClass("btn bg-gradient-musa morado-musa-text btn-rounded").removeClass("paginate_button");
+                $('.paginate_button').addClass("btn").removeClass("paginate_button");
+                $('.dataTables_length').addClass("m-4");
+                $('.dataTables_info').addClass("mx-4");
+                $('.dataTables_filter').addClass("m-4");
+                $('input').addClass("form-control");
+                $('select').addClass("form-control");
+                $('.previous.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
+                $('.next.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2");
+                $('.previous').addClass("btn-outline-info btn-rounded mx-2");
+                $('.next').addClass("btn-outline-info btn-rounded mx-2");
+                $('a.bg-gradiente-musa').addClass("btn-rounded");
+            },
+            "language": {
+
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+
+            }
+        });
+
+
+
+        $('#user_list_table_faltante').DataTable({
             "drawCallback": function(settings) {
                 $('.current').addClass("btn bg-gradient-musa morado-musa-text btn-rounded").removeClass("paginate_button");
                 $('.paginate_button').addClass("btn").removeClass("paginate_button");
@@ -738,193 +640,16 @@
             }
         });
 
-        $(".btn_download").on("click", function(event) {
+
+        $("#form_encuestas").on("submit", function(event) {
             event.preventDefault();
-            var valueButton = $(this).attr('id');
-            var code = $(this).attr('data-value');
-            var id_constancia = $(this).attr('data-id');
-
-            document.getElementById('a-download' + id_constancia).click();
-
-
-            $.ajax({
-                url: "/Home/enviarEmail",
-                type: "POST",
-                data: {
-                    code: code
-                },
-                cache: false,
-                dataType: "json",
-                // contentType: false,
-                // processData: false,
-                beforeSend: function() {
-                    console.log("Procesando....");
-
-                },
-                success: function(respuesta) {
-                    console.log(respuesta);
-
-                    Swal.fire(
-                        'OK',
-                        'Your certificate has been sent !!!',
-                        'Success'
-                    );
-
-                },
-                error: function(respuesta) {
-                    console.log(respuesta);
-                }
-
-            });
-
-        });
-
-
-        $('table#user_list_table').on("click", "button.btn_qr", function(event) {
-            event.preventDefault();
-
-            var valueButton = $(this).val();
-            $(this).hide();
-
-            $.ajax({
-                url: "/Asistentes/generaterQr",
-                type: "POST",
-                data: {
-                    id_ticket_virtual: valueButton
-                },
-                cache: false,
-                dataType: "json",
-                // contentType: false,
-                // processData: false,
-                beforeSend: function() {
-                    console.log("Procesando....");
-
-                },
-                success: function(respuesta) {
-                    //console.log(respuesta);
-
-                    //boton descargar
-                    $("#btn-download" + valueButton).attr("data-id", respuesta.id_constancia);
-                    $("#btn-download" + valueButton).attr("data-value", respuesta.code);
-                    $("#btn-download" + valueButton).removeClass("d-none");
-                    $("#btn-download" + valueButton).attr("href", respuesta.ruta_constancia);
-                    //$("#btn-download"+valueButton).attr("target", "_blank");
-
-                    // a de descargar pdf
-                    $("#a-download" + valueButton).attr("href", respuesta.ruta_constancia);
-                    $("#a-download" + valueButton).attr("download", "");
-
-                },
-                error: function(respuesta) {
-                    console.log(respuesta);
-                }
-
-            });
-        });
-
-        $("#pais").on("change", function() {
-            var pais = $(this).val();
-            $.ajax({
-                url: "/Usuarios/getEstadoPais",
-                type: "POST",
-                data: {
-                    pais
-                },
-                dataType: "json",
-                beforeSend: function() {
-                    console.log("Procesando....");
-                    $('#estado')
-                        .find('option')
-                        .remove()
-                        .end();
-
-                },
-                success: function(respuesta) {
-                    console.log(respuesta);
-
-                    $('#estado').removeAttr('disabled');
-
-                    $('#estado')
-                        .append($('<option>', {
-                                value: ''
-                            })
-                            .text('Selecciona una opción'));
-
-                    $.each(respuesta, function(key, value) {
-                        //console.log(key);
-                        console.log(value);
-                        $('#estado')
-                            .append($('<option>', {
-                                    value: value.id_estado
-                                })
-                                .text(value.estado));
-                    });
-
-                },
-                error: function(respuesta) {
-                    console.log(respuesta);
-                }
-
-            });
-        });
-
-        $("#pais_edit").on("change", function() {
-            var pais = $(this).val();
-            // alert(pais);
-            $.ajax({
-                url: "/Usuarios/getEstadoPais",
-                type: "POST",
-                data: {
-                    pais
-                },
-                dataType: "json",
-                beforeSend: function() {
-                    console.log("Procesando....");
-                    $('#estado_edit')
-                        .find('option')
-                        .remove()
-                        .end();
-
-                },
-                success: function(respuesta) {
-                    console.log(respuesta);
-
-                    $('#estado_edit').removeAttr('disabled');
-
-                    $('#estado_edit')
-                        .append($('<option>', {
-                                value: ''
-                            })
-                            .text('Selecciona una opción'));
-
-                    $.each(respuesta, function(key, value) {
-                        //console.log(key);
-                        console.log(value);
-                        $('#estado_edit')
-                            .append($('<option>', {
-                                    value: value.id_estado
-                                })
-                                .text(value.estado));
-                    });
-
-                },
-                error: function(respuesta) {
-                    console.log(respuesta);
-                }
-
-            });
-        });
-
-
-        $("#form_datos").on("submit", function(event) {
-            event.preventDefault();
-            var formData = new FormData(document.getElementById("form_datos"));
+            var formData = new FormData(document.getElementById("form_encuestas"));
 
             for (var value of formData.values()) {
                 console.log(value);
             }
             $.ajax({
-                url: "/Profesores/saveData",
+                url: "/Encuestas/saveEncuesta",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -938,12 +663,12 @@
                     console.log(respuesta);
 
                     if (respuesta == 'success') {
-                        Swal.fire("¡Se creo el usuario correctamente!", "", "success").
+                        Swal.fire("¡Encuesta guardado correctamente!", "", "success").
                         then((value) => {
                             window.location.reload();
                         });
                     } else {
-                        Swal.fire("¡Hubo un error al crear el usuario!", "", "warning").
+                        Swal.fire("¡Hubo un error guardar la encuesta!", "", "warning").
                         then((value) => {
                             window.location.reload();
                         });
@@ -952,7 +677,7 @@
                 error: function(respuesta) {
                     console.log(respuesta);
                     // alert('Error');
-                    Swal.fire("¡Hubo un error al crear el usuario!", "", "warning").
+                    Swal.fire("¡Hubo un error guardar la encuesta!", "", "warning").
                     then((value) => {
                         window.location.reload();
                     });
@@ -960,15 +685,15 @@
             });
         });
 
-        $("#form_datos_coordinador").on("submit", function(event) {
+        $("#form_asigna_curso").on("submit", function(event) {
             event.preventDefault();
-            var formData = new FormData(document.getElementById("form_datos_coordinador"));
+            var formData = new FormData(document.getElementById("form_asigna_curso"));
 
             for (var value of formData.values()) {
                 console.log(value);
             }
             $.ajax({
-                url: "/Profesores/saveDataCoordinador",
+                url: "/Cursos/saveAsignaCurso",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -982,12 +707,13 @@
                     console.log(respuesta);
 
                     if (respuesta == 'success') {
-                        Swal.fire("¡Se creo el usuario correctamente!", "", "success").
+                        Swal.fire("¡Curso asignado correctamente!", "", "success").
                         then((value) => {
                             window.location.reload();
+
                         });
                     } else {
-                        Swal.fire("¡Hubo un error al crear el usuario!", "", "warning").
+                        Swal.fire("¡Hubo un error al asignar el curso!", "", "warning").
                         then((value) => {
                             window.location.reload();
                         });
@@ -996,28 +722,77 @@
                 error: function(respuesta) {
                     console.log(respuesta);
                     // alert('Error');
-                    Swal.fire("¡Hubo un error al crear el usuario!", "", "warning").
+                    Swal.fire("¡Hubo un error al asignar el curso!", "", "warning").
                     then((value) => {
                         window.location.reload();
                     });
                 }
             });
+        });
+
+
+
+        $(".change_status").on("change", function() {
+            var status = $(this).val();
+            var id_curso = $(this).attr('data-id-curso');
+
+            $.ajax({
+                url: "/Cursos/updateStatusCurso",
+                type: "POST",
+                data: {
+                    status,
+                    id_curso
+                },
+                // contentType: false,
+                // processData: false,
+                beforeSend: function() {
+                    console.log("Procesando....");
+                    // alert('Se está borrando');
+
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+
+                    if (respuesta == 'success') {
+                        Swal.fire("¡Se cambio el estatus correctamente!", "", "success").
+                        then((value) => {
+                            window.location.reload();
+                        });
+                    } else {
+                        Swal.fire("¡Hubo un error al cambiar el estatus!", "", "warning").
+                        then((value) => {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                    // alert('Error');
+                    Swal.fire("¡Hubo un error al cambiar el estatus!", "", "warning").
+                    then((value) => {
+                        window.location.reload();
+                    });
+                }
+            });
+
+            // alert(valor);
+            // alert(id_curso);
         });
 
         
 
-        $(".form_datos_edit").on("submit", function(event) {
+        $(".form_encuestas_edit").on("submit", function(event) {
             event.preventDefault();
             // var formData = new FormData(document.getElementById("form_datos_edit"));
             var formData = $(this).serialize();
 
-            console.log(formData);
+            // console.log(formData);
 
             // for (var value of formData.values()) {
             //     console.log(value);
             // }
             $.ajax({
-                url: "/Profesores/updateData",
+                url: "/Encuestas/updateData",
                 type: "POST",
                 data: formData,
                 // contentType: false,
@@ -1031,12 +806,12 @@
                     console.log(respuesta);
 
                     if (respuesta == 'success') {
-                        Swal.fire("¡Se actualizo el profesor correctamente!", "", "success").
+                        Swal.fire("¡Se actualizo la encuesta correctamente!", "", "success").
                         then((value) => {
                             window.location.reload();
                         });
                     } else {
-                        Swal.fire("¡Hubo un error al actualizar el profesor!", "", "warning").
+                        Swal.fire("¡Hubo un error al actualizar la encuesta!", "", "warning").
                         then((value) => {
                             window.location.reload();
                         });
@@ -1045,7 +820,7 @@
                 error: function(respuesta) {
                     console.log(respuesta);
                     // alert('Error');
-                    Swal.fire("¡Hubo un error al crear el profesor!", "", "warning").
+                    Swal.fire("¡Hubo un error al actualizar la encuesta!", "", "warning").
                     then((value) => {
                         window.location.reload();
                     });
@@ -1053,29 +828,140 @@
             });
         });
 
-        $("#email").on("keyup", function() {
-            console.log($(this).val());
-            $.ajax({
-                type: "POST",
-                async: false,
-                url: "/Usuarios/isUserValidate",
-                data: {
-                    email: $(this).val()
-                },
-                success: function(data) {
-                    console.log(data)
-                    if (data == "true") {
-                        //el usuario ya existe
-                        $("#msg_email").css('color', 'red');
-                        $("#msg_email").html('Este correo ya se ha registrado');
+        $(".btn_quitar_user_curso").on("click", function() {
+            var id_ac = $(this).attr('data-id');
+            var nombre_user = $(this).attr('data-nombre-user');
+            var nombre_curso = $(this).attr('data-nombre-curso');
 
-                    } else {
-                        $("#msg_email").css('color', 'red');
-                        $("#msg_email").html('');
-                    }
+            const SwalBootstrapMail = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn bg-gradient-info mx-2',
+                    cancelButton: 'btn bg-gradient-danger mx-2'
+                },
+                buttonsStyling: false
+            })
+
+            SwalBootstrapMail.fire({
+                title: '¿Estas seguro de eliminar el curso al usuario?',
+                text: "Vas a quitarle el curso al usuario",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Si'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    //borrar aqui
+                    $.ajax({
+                        url: "/Cursos/deleteCourseUser",
+                        type: "POST",
+                        data: {
+                            id_ac
+                        },
+                        beforeSend: function() {
+                            console.log("Procesando....");
+                        },
+                        success: function(respuesta) {
+                            console.log(respuesta);
+                            if (respuesta == 'success') {
+
+                                Swal.fire(
+                                    '¡Se ha eliminado el curso ' + nombre_curso + ' al usuario ' + nombre_user + '!',
+                                    '',
+                                    'success'
+                                ).then((data) => {
+                                    // console.log();               
+                                    window.location.reload();
+                                })
+
+                            } else {
+                                Swal.fire(
+                                    '!Falló!',
+                                    'Hubo un error al borrar el curso',
+                                    'error'
+                                )
+                            }
+
+                        },
+                        error: function(respuesta) {
+                            console.log(respuesta);
+                        }
+                    });
                 }
+            })
+
+        });
+
+        $("#id_registrado").on("change", function() {
+            var id_registrado = $(this).val();
+            $.ajax({
+                url: "/Cursos/getCursosNotInUser",
+                type: "POST",
+                data: {
+                    id_registrado
+                },
+                dataType: "json",
+                beforeSend: function() {
+                    console.log("Procesando....");
+                    $('#id_curso_u')
+                        .find('option')
+                        .remove()
+                        .end();
+
+                },
+                success: function(respuesta) {
+                    // console.log(respuesta);
+
+                    $('#id_curso_u').removeAttr('disabled');
+
+                    $('#id_curso_u')
+                        .append($('<option>', {
+                                value: ''
+                            })
+                            .text('Selecciona una opción'));
+
+                    $.each(respuesta, function(key, value) {
+                        //console.log(key);
+                        console.log(value);
+                        $('#id_curso_u')
+                            .append($('<option>', {
+                                    value: value.id_curso
+                                })
+                                .text(value.nombre));
+                    });
+
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                }
+
             });
         });
+
+        // $("#email").on("keyup", function() {
+        //     console.log($(this).val());
+        //     $.ajax({
+        //         type: "POST",
+        //         async: false,
+        //         url: "/Usuarios/isUserValidate",
+        //         data: {
+        //             email: $(this).val()
+        //         },
+        //         success: function(data) {
+        //             console.log(data)
+        //             if (data == "true") {
+        //                 //el usuario ya existe
+        //                 $("#msg_email").css('color','red');
+        //                 $("#msg_email").html('Este correo ya se ha registrado');
+
+        //             } else {
+        //                 $("#msg_email").css('color','red');
+        //                 $("#msg_email").html('');
+        //             }
+        //         }
+        //     });
+        // });
 
     });
 </script>

@@ -11,7 +11,7 @@ class Profesores implements Crud{
     public static function getAll(){       
       $mysqli = Database::getInstance(true);
       $query =<<<sql
-      SELECT * FROM registrados
+      SELECT * FROM profesores
 sql;
     
       return $mysqli->queryAll($query);
@@ -118,6 +118,22 @@ sql;
       $mysqli = Database::getInstance(true);
         $query=<<<sql
         DELETE FROM profesores WHERE id_profesor = $id 
+sql;
+
+        // $log = new \stdClass();
+        // $log->_sql= $query;
+        // $log->_parametros = $id;
+        // $log->_id = $id;
+        // UtileriasLog::addAccion($log);
+        
+        return $mysqli->delete($query);
+        
+    }
+
+    public static function deleteCoordinador($id){
+      $mysqli = Database::getInstance(true);
+        $query=<<<sql
+        DELETE FROM coordinadores WHERE id_coordinador = $id 
 sql;
 
         // $log = new \stdClass();

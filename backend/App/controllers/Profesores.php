@@ -626,7 +626,7 @@ html;
                 
                 <td>
                      <button class="btn bg-gradient-primary mb-0 btn-icon-only" type="button" title="Editar Usuario" data-toggle="modal" data-target="#editar-usuario-coordinador{$value['id_coordinador']}"><i class="fa fa-edit" aria-hidden="true"></i></button>
-                     <button class="btn bg-gradient-danger mb-0 btn-icon-only" id="btn-borrar-{$value['id_coordinador']}" onclick="borrarProfesor({$value['id_coordinador']})" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Eliminar Profesor"><span class="fas fa-trash"></span></button>
+                     <button class="btn bg-gradient-danger mb-0 btn-icon-only" id="btn-borrar-{$value['id_coordinador']}" onclick="borrarCoordinador({$value['id_coordinador']})" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Eliminar Coordinador"><span class="fas fa-trash"></span></button>
                 </td>
         </tr>
 html;
@@ -772,6 +772,14 @@ html;
     $delete_prof = ProfesoresDao::delete($id);
 
     echo json_encode($delete_prof);
+}
+
+public function borrarCoordinador(){
+
+  $id = $_POST['dato'];
+  $delete_prof = ProfesoresDao::deleteCoordinador($id);
+
+  echo json_encode($delete_prof);
 }
 
   public function getComprobanteVacunacionById($id)

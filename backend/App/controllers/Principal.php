@@ -8,7 +8,6 @@ use \Core\View;
 use \Core\MasterDom;
 use \App\controllers\Contenedor;
 use \Core\Controller;
-use \App\models\Asistentes as AsistentesDao;
 
 class Principal extends Controller{
 
@@ -17,8 +16,8 @@ class Principal extends Controller{
     function __construct(){
         parent::__construct();
         $this->_contenedor = new Contenedor;
-        //View::set('header',$this->_contenedor->header());
-        //View::set('footer',$this->_contenedor->footer());
+        View::set('header',$this->_contenedor->header());
+        View::set('footer',$this->_contenedor->footer());
     }
 
     public function getUsuario(){
@@ -26,69 +25,48 @@ class Principal extends Controller{
     }
 
     public function index() {
+     $extraHeader =<<<html
+ 
+html;
+
+    //   $permisoGlobalHidden = (Controller::getPermisoGlobalUsuario($this->__usuario)[0]['permisos_globales']) != 1 ? "style=\"display:none;\"" : "";
+    //   $asistentesHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_asistentes", 1)==0)? "style=\"display:none;\"" : "";  
+    //   $vuelosHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_vuelos", 1)==0)? "style=\"display:none;\"" : "";  
+    //   $pickUpHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_pickup", 1)==0)? "style=\"display:none;\"" : "";
+    //   $habitacionesHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_habitaciones", 1)==0)? "style=\"display:none;\"" : ""; 
+    //   $cenasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_cenas", 1)==0)? "style=\"display:none;\"" : ""; 
+    //   $cenasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_cenas", 1)==0)? "style=\"display:none;\"" : ""; 
+    //   $aistenciasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_asistencias", 1)==0)? "style=\"display:none;\"" : ""; 
+    //   $vacunacionHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_vacunacion", 1)==0)? "style=\"display:none;\"" : ""; 
+    //   $pruebasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_pruebas_covid", 1)==0)? "style=\"display:none;\"" : "";
+    //   $configuracionHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_configuracion", 1)==0)? "style=\"display:none;\"" : "";
+    //   $utileriasHidden = (Controller::getPermisosUsuario($this->__usuario, "seccion_utilerias", 1)==0)? "style=\"display:none;\"" : "";  
+
+    //   $all_ra = AsistentesDao::getAllRegistrosAcceso();
+    //   $this->setTicketVirtual($all_ra);
+    //   $this->setClaveRA($all_ra);
+      
+
+    //   View::set('permisoGlobalHidden',$permisoGlobalHidden);
+    //   View::set('asistentesHidden',$asistentesHidden);
+    //   View::set('vuelosHidden',$vuelosHidden);
+    //   View::set('pickUpHidden',$pickUpHidden);
+    //   View::set('habitacionesHidden',$habitacionesHidden);
+    //   View::set('cenasHidden',$cenasHidden);
+    //   View::set('aistenciasHidden',$aistenciasHidden);
+    //   View::set('vacunacionHidden',$vacunacionHidden);
+    //   View::set('pruebasHidden',$pruebasHidden);
+    //   View::set('configuracionHidden',$configuracionHidden);
+    //   View::set('utileriasHidden',$utileriasHidden);
+
       View::set('asideMenu',$this->_contenedor->asideMenu());
       View::render("principal_all");
-    }
-
-    
-
-    public function setTicketVirtual($asistentes){
-        foreach ($asistentes as $key => $value) {
-            if ($value['clave'] == '' || $value['clave'] == NULL || $value['clave'] == 'NULL') {
-                $clave_10 = $this->generateRandomString(6);
-                AsistentesDao::updateTicketVirtualRA($value['id_registro_acceso'], $clave_10);
-                $this->generaterQr($clave_10);
-            }
-        }
-    }
-
-    public function setClaveRA($all_ra){
-        foreach ($all_ra as $key => $value) {
-            if ($value['clave'] == '' || $value['clave'] == NULL || $value['clave'] == 'NULL') {
-                $clave_10 = $this->generateRandomString(10);
-                // var_dump($clave_10);
-                AsistentesDao::updateClaveRA($value['id_registro_acceso'], $clave_10);
-                $this->generaterQr($clave_10);
-            }
-            
-        }
     }
 
     public function generateRandomString($length = 6){
         return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
     }
 
-    public function generaterQr($clave_ticket){
-
-        $codigo_rand = $clave_ticket;
-
-        $config = array(
-            'ecc' => 'H',    // L-smallest, M, Q, H-best
-            'size' => 11,    // 1-50
-            'dest_file' => '../public/qrs/' . $codigo_rand . '.png',
-            'quality' => 90,
-            'logo' => 'logo.jpg',
-            'logo_size' => 100,
-            'logo_outline_size' => 20,
-            'logo_outline_color' => '#FFFF00',
-            'logo_radius' => 15,
-            'logo_opacity' => 100,
-        );
-
-        // Contenido del código QR
-        $data = $codigo_rand;
-
-        // Crea una clase de código QR
-        $oPHPQRCode = new PHPQRCode();
-
-        // establecer configuración
-        $oPHPQRCode->set_config($config);
-
-        // Crea un código QR
-        $qrcode = $oPHPQRCode->generate($data);
-
-        //   $url = explode('/', $qrcode );
-    }
 
 }
 

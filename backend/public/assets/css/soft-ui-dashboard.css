@@ -10369,7 +10369,7 @@ fieldset:disabled .btn {
 }
 
 .bg-gradient-musa {
-  background-image: linear-gradient(0deg, turquoise, pink 75%);
+  background-image: linear-gradient(0deg, yellow, orange 75%);
 }
 
 .bg-gradient-pink-white {
@@ -22885,7 +22885,7 @@ z-index: 9999;
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
   /* background-image: linear-gradient(310deg, #ff0032 0%, #b10303 100%); */
-  background-image: linear-gradient(0deg, turquoise, pink 75%);
+  background-image: linear-gradient(0deg, yellow, orange 75%);
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-background,

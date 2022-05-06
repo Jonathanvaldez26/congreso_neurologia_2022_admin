@@ -58,6 +58,62 @@ class Contenedor extends Controller{
                     </a>
                 </li>
 
+                <li id="usuarios" class="nav-item">
+                    <a href="/Usuarios/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Usuarios</span>
+                    </a>
+                </li>
+
+                <li id="cursos" class="nav-item">
+                    <a href="/Cursos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fas fa-play morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Cursos</span>
+                    </a>
+                </li>
+
+                <li id="transmision" class="nav-item">
+                    <a href="/Transmision/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fas fa-play morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Transmision</span>
+                    </a>
+                </li>
+
+                <li id="profesores" class="nav-item">
+                    <a href="/Profesores/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Profesores</span>
+                    </a>
+                </li>
+
+                <li id="encuestas" class="nav-item">
+                    <a href="/Encuestas/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Encuestas</span>
+                    </a>
+                </li>
+
+                <li id="programa" class="nav-item">
+                    <a href="/Programa/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Programa</span>
+                    </a>
+                </li>
+                
+                
+
                 <li id="asistentes" class="nav-item" {$asistentesHidden};>
                     <a href="/Asistentes/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -101,14 +157,14 @@ class Contenedor extends Controller{
                 </li>
                 <li id="salud" class="nav-item" {$vacunacionHidden};>
                     <hr class="horizontal dark" />
-                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">SALUD</h6>
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGOS EN SITIO</h6>
                 </li>
-                <li id="vacunacion" class="nav-item" {$vacunacionHidden};>
-                    <a href="/ComprobantesVacunacion/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                <li id="pagos" class="nav-item" {$vacunacionHidden};>
+                    <a href="/CobroEnSitio/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-shield-virus morado-musa-text"></span>
+                            <span class="fa fa-money morado-musa-text"></span>
                         </div>
-                        <span class="nav-link-text ms-1">Comprobante Vacunación</span>
+                        <span class="nav-link-text ms-1">Cobrar en Sitio</span>
                     </a>
                 </li>
                 <li id="pruebas_usuario" class="nav-item" {$pruebasHidden};>
@@ -183,39 +239,39 @@ html;
     public function header($extra = ''){
      $usuario = $this->__usuario;
      
-        $principal = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
-        $principalAdd = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
-        $asistentes = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);
-        $asistentessAdd = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);
-        $bu = Controller::getPermisosUsuario($usuario, "seccion_bu", 1);
-        $buAdd = Controller::getPermisosUsuario($usuario, "seccion_bu", 1);
-        $lineas = Controller::getPermisosUsuario($usuario, "seccion_lineas", 1);
-        $lineasAdd = Controller::getPermisosUsuario($usuario, "seccion_lineas", 1);
-        $posiciones = Controller::getPermisosUsuario($usuario, "seccion_posiciones", 1);
-        $posicionesAdd = Controller::getPermisosUsuario($usuario, "seccion_posiciones", 1);
-        $restaurantes = Controller::getPermisosUsuario($usuario, "seccion_restaurantes", 1);
-        $restaurantesAdd = Controller::getPermisosUsuario($usuario, "seccion_restaurantes", 1);
-        $gafete = Controller::getPermisosUsuario($usuario, "seccion_gafete", 1);
-        $gafeteAdd = Controller::getPermisosUsuario($usuario, "seccion_gafete", 1);
-        $vuelos = Controller::getPermisosUsuario($usuario, "seccion_vuelos", 1);
-        $vuelosAdd = Controller::getPermisosUsuario($usuario, "seccion_vuelos", 1);
-        $pickup = Controller::getPermisosUsuario($usuario, "seccion_pickup", 1);
-        $pickupAdd = Controller::getPermisosUsuario($usuario, "seccion_pickup", 1);
-        $habitaciones = Controller::getPermisosUsuario($usuario, "seccion_habitaciones", 1);
-        $habitacionesAdd = Controller::getPermisosUsuario($usuario, "seccion_habitaciones", 1);
-        $cenas = Controller::getPermisosUsuario($usuario, "seccion_cenas", 1);
-        $cenasAdd = Controller::getPermisosUsuario($usuario, "seccion_cenas", 1);
-        $vacunacion = Controller::getPermisosUsuario($usuario, "seccion_vacunacion", 1);
-        $vacunacionAdd = Controller::getPermisosUsuario($usuario, "seccion_vacunacion", 1);
+        // $principal = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
+        // $principalAdd = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
+        // $asistentes = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);
+        // $asistentessAdd = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);
+        // $bu = Controller::getPermisosUsuario($usuario, "seccion_bu", 1);
+        // $buAdd = Controller::getPermisosUsuario($usuario, "seccion_bu", 1);
+        // $lineas = Controller::getPermisosUsuario($usuario, "seccion_lineas", 1);
+        // $lineasAdd = Controller::getPermisosUsuario($usuario, "seccion_lineas", 1);
+        // $posiciones = Controller::getPermisosUsuario($usuario, "seccion_posiciones", 1);
+        // $posicionesAdd = Controller::getPermisosUsuario($usuario, "seccion_posiciones", 1);
+        // $restaurantes = Controller::getPermisosUsuario($usuario, "seccion_restaurantes", 1);
+        // $restaurantesAdd = Controller::getPermisosUsuario($usuario, "seccion_restaurantes", 1);
+        // $gafete = Controller::getPermisosUsuario($usuario, "seccion_gafete", 1);
+        // $gafeteAdd = Controller::getPermisosUsuario($usuario, "seccion_gafete", 1);
+        // $vuelos = Controller::getPermisosUsuario($usuario, "seccion_vuelos", 1);
+        // $vuelosAdd = Controller::getPermisosUsuario($usuario, "seccion_vuelos", 1);
+        // $pickup = Controller::getPermisosUsuario($usuario, "seccion_pickup", 1);
+        // $pickupAdd = Controller::getPermisosUsuario($usuario, "seccion_pickup", 1);
+        // $habitaciones = Controller::getPermisosUsuario($usuario, "seccion_habitaciones", 1);
+        // $habitacionesAdd = Controller::getPermisosUsuario($usuario, "seccion_habitaciones", 1);
+        // $cenas = Controller::getPermisosUsuario($usuario, "seccion_cenas", 1);
+        // $cenasAdd = Controller::getPermisosUsuario($usuario, "seccion_cenas", 1);
+        // $vacunacion = Controller::getPermisosUsuario($usuario, "seccion_vacunacion", 1);
+        // $vacunacionAdd = Controller::getPermisosUsuario($usuario, "seccion_vacunacion", 1);
 
-        $pruebas_covid = Controller::getPermisosUsuario($usuario, "seccion_pruebas_covid", 1);
-        $pruebas_covidAdd = Controller::getPermisosUsuario($usuario, "seccion_pruebas_covid", 1);
-        $asistencias = Controller::getPermisosUsuario($usuario, "seccion_asistencias", 1);
-        $asistenciasAdd = Controller::getPermisosUsuario($usuario, "seccion_asistencias", 1);
-        $utilerias = Controller::getPermisosUsuario($usuario, "seccion_utilerias", 1);
-        $utileriasAdd = Controller::getPermisosUsuario($usuario, "seccion_utilerias", 1);
-        $configuracion = Controller::getPermisosUsuario($usuario, "seccion_configuracion", 1);
-        $configuracionAdd = Controller::getPermisosUsuario($usuario, "seccion_configuracion", 1);
+        // $pruebas_covid = Controller::getPermisosUsuario($usuario, "seccion_pruebas_covid", 1);
+        // $pruebas_covidAdd = Controller::getPermisosUsuario($usuario, "seccion_pruebas_covid", 1);
+        // $asistencias = Controller::getPermisosUsuario($usuario, "seccion_asistencias", 1);
+        // $asistenciasAdd = Controller::getPermisosUsuario($usuario, "seccion_asistencias", 1);
+        // $utilerias = Controller::getPermisosUsuario($usuario, "seccion_utilerias", 1);
+        // $utileriasAdd = Controller::getPermisosUsuario($usuario, "seccion_utilerias", 1);
+        // $configuracion = Controller::getPermisosUsuario($usuario, "seccion_configuracion", 1);
+        // $configuracionAdd = Controller::getPermisosUsuario($usuario, "seccion_configuracion", 1);
       
      $header =<<<html
         <!DOCTYPE html>
@@ -307,415 +363,419 @@ html;
         </head>
 html;
 
+
+
     return $header.$extra;
     }
 
     public function footer($extra = ''){
-      $footer =<<<html
-      <!-- jQuery -->
+        $footer =<<<html
+        <!-- jQuery -->
 
-        <script>
-          function catalogos() {
-              var catalogo = document.getElementById("catalogos");
+          <script>
+            function catalogos() {
+                var catalogo = document.getElementById("catalogos");
 
-              if (catalogo.hasAttribute('hidden')) {
-                  catalogo.removeAttribute('hidden');
-              } else {
-                  catalogo.setAttribute('hidden','')
-              }
-          }
+                if (catalogo.hasAttribute('hidden')) {
+                    catalogo.removeAttribute('hidden');
+                } else {
+                    catalogo.setAttribute('hidden','')
+                }
+            }
 
-          function utilerias() {
-              var utileria = document.getElementById("utilerias");
+            function utilerias() {
+                var utileria = document.getElementById("utilerias");
 
-              if (utileria.hasAttribute('hidden')) {
-                  utileria.removeAttribute('hidden');
-              } else {
-                  utileria.setAttribute('hidden','')
-              }
-          }
-      </script>
+                if (utileria.hasAttribute('hidden')) {
+                    utileria.removeAttribute('hidden');
+                } else {
+                    utileria.setAttribute('hidden','')
+                }
+            }
+        </script>
 
-      <script src="/js/jquery.min.js"></script>
-      <!--   Core JS Files   -->
-      <script src="../../assets/js/core/popper.min.js"></script>
-      <script src="../../assets/js/core/bootstrap.min.js"></script>
-      <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-      <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-      <!-- Kanban scripts -->
-      <script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
-      <script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
-      <script src="../../assets/js/plugins/chartjs.min.js"></script>
-      <script src="../../assets/js/plugins/threejs.js"></script>
-      <script src="../../assets/js/plugins/orbit-controls.js"></script>
-      
+        <script src="/js/jquery.min.js"></script>
+        <!--   Core JS Files   -->
+        <script src="../../assets/js/core/popper.min.js"></script>
+        <script src="../../assets/js/core/bootstrap.min.js"></script>
+        <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <!-- Kanban scripts -->
+        <script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
+        <script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
+        <script src="../../assets/js/plugins/chartjs.min.js"></script>
+        <script src="../../assets/js/plugins/threejs.js"></script>
+        <script src="../../assets/js/plugins/orbit-controls.js"></script>
+        
+      <!-- Github buttons -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+      <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
+
+
+        <!-- VIEJO INICIO -->
+        <script src="/js/jquery.min.js"></script>
+       
+        <script src="/js/custom.min.js"></script>
+
+        <script src="/js/validate/jquery.validate.js"></script>
+        <script src="/js/alertify/alertify.min.js"></script>
+        <script src="/js/login.js"></script>
+        <!-- VIEJO FIN -->
+
+        <!--   Core JS Files   -->
+        <script src="../../assets/js/core/popper.min.js"></script>
+        <script src="../../assets/js/core/bootstrap.min.js"></script>
+        <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <!-- Kanban scripts -->
+        <script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
+        <script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
+        <script src="../../assets/js/plugins/chartjs.min.js"></script>
+        <script src="../../assets/js/plugins/threejs.js"></script>
+        <script src="../../assets/js/plugins/orbit-controls.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+        <script src="http://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
+        
+        <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
+           
+        <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
+        <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <!-- jQuery -->
+        <script src="/js/jquery.min.js"></script>
+        <!--   Core JS Files   -->
+        <script src="/assets/js/core/popper.min.js"></script>
+        <script src="/assets/js/core/bootstrap.min.js"></script>
+        <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <!-- Kanban scripts -->
+        <script src="/assets/js/plugins/dragula/dragula.min.js"></script>
+        <script src="/assets/js/plugins/jkanban/jkanban.js"></script>
+        <script src="/assets/js/plugins/chartjs.min.js"></script>
+        <script src="/assets/js/plugins/threejs.js"></script>
+        <script src="/assets/js/plugins/orbit-controls.js"></script>
+        
     <!-- Github buttons -->
-      <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-      <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
+        <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+       
+        <script>
+          var ctx = document.getElementById("chart-bars").getContext("2d");
 
-
-      <!-- VIEJO INICIO -->
-      <script src="/js/jquery.min.js"></script>
-     
-      <script src="/js/custom.min.js"></script>
-
-      <script src="/js/validate/jquery.validate.js"></script>
-      <script src="/js/alertify/alertify.min.js"></script>
-      <script src="/js/login.js"></script>
-      <!-- VIEJO FIN -->
-
-      <!--   Core JS Files   -->
-      <script src="../../assets/js/core/popper.min.js"></script>
-      <script src="../../assets/js/core/bootstrap.min.js"></script>
-      <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-      <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-      <!-- Kanban scripts -->
-      <script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
-      <script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
-      <script src="../../assets/js/plugins/chartjs.min.js"></script>
-      <script src="../../assets/js/plugins/threejs.js"></script>
-      <script src="../../assets/js/plugins/orbit-controls.js"></script>
-
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-      <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
-      <script src="http://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
-      <link rel="stylesheet" href="http://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
-      
-      <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
-      <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
-         
-      <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
-      <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
-
-      <script src="/js/jquery.min.js"></script>
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-      <!-- jQuery -->
-      <script src="/js/jquery.min.js"></script>
-      <!--   Core JS Files   -->
-      <script src="/assets/js/core/popper.min.js"></script>
-      <script src="/assets/js/core/bootstrap.min.js"></script>
-      <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
-      <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
-      <!-- Kanban scripts -->
-      <script src="/assets/js/plugins/dragula/dragula.min.js"></script>
-      <script src="/assets/js/plugins/jkanban/jkanban.js"></script>
-      <script src="/assets/js/plugins/chartjs.min.js"></script>
-      <script src="/assets/js/plugins/threejs.js"></script>
-      <script src="/assets/js/plugins/orbit-controls.js"></script>
-      
-  <!-- Github buttons -->
-      <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-      <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
-      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-      <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-     
-      <script>
-        var ctx = document.getElementById("chart-bars").getContext("2d");
-
-        new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [{
-              label: "Sales",
-              tension: 0.4,
-              borderWidth: 0,
-              borderRadius: 4,
-              borderSkipped: false,
-              backgroundColor: "#fff",
-              data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-              maxBarThickness: 6
-            }, ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                display: false,
-              }
-            },
-            interaction: {
-              intersect: false,
-              mode: 'index',
-            },
-            scales: {
-              y: {
-                grid: {
-                  drawBorder: false,
-                  display: false,
-                  drawOnChartArea: false,
-                  drawTicks: false,
-                },
-                ticks: {
-                  suggestedMin: 0,
-                  suggestedMax: 500,
-                  beginAtZero: true,
-                  padding: 15,
-                  font: {
-                    size: 14,
-                    family: "Open Sans",
-                    style: 'normal',
-                    lineHeight: 2
-                  },
-                  color: "#fff"
-                },
-              },
-              x: {
-                grid: {
-                  drawBorder: false,
-                  display: false,
-                  drawOnChartArea: false,
-                  drawTicks: false
-                },
-                ticks: {
-                  display: false
-                },
-              },
-            },
-          },
-        });
-
-
-        var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-        new Chart(ctx2, {
-          type: "line",
-          data: {
-            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [{
-                label: "Mobile apps",
+          new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+              datasets: [{
+                label: "Sales",
                 tension: 0.4,
                 borderWidth: 0,
-                pointRadius: 0,
-                borderColor: "#cb0c9f",
-                borderWidth: 3,
-                backgroundColor: gradientStroke1,
-                fill: true,
-                data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                borderRadius: 4,
+                borderSkipped: false,
+                backgroundColor: "#fff",
+                data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
                 maxBarThickness: 6
-
-              },
-              {
-                label: "Websites",
-                tension: 0.4,
-                borderWidth: 0,
-                pointRadius: 0,
-                borderColor: "#3A416F",
-                borderWidth: 3,
-                backgroundColor: gradientStroke2,
-                fill: true,
-                data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-                maxBarThickness: 6
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                display: false,
-              }
+              }, ],
             },
-            interaction: {
-              intersect: false,
-              mode: 'index',
-            },
-            scales: {
-              y: {
-                grid: {
-                  drawBorder: false,
-                  display: true,
-                  drawOnChartArea: true,
-                  drawTicks: false,
-                  borderDash: [5, 5]
-                },
-                ticks: {
-                  display: true,
-                  padding: 10,
-                  color: '#b2b9bf',
-                  font: {
-                    size: 11,
-                    family: "Open Sans",
-                    style: 'normal',
-                    lineHeight: 2
-                  },
-                }
-              },
-              x: {
-                grid: {
-                  drawBorder: false,
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
                   display: false,
-                  drawOnChartArea: false,
-                  drawTicks: false,
-                  borderDash: [5, 5]
-                },
-                ticks: {
-                  display: true,
-                  color: '#b2b9bf',
-                  padding: 20,
-                  font: {
-                    size: 11,
-                    family: "Open Sans",
-                    style: 'normal',
-                    lineHeight: 2
-                  },
                 }
               },
+              interaction: {
+                intersect: false,
+                mode: 'index',
+              },
+              scales: {
+                y: {
+                  grid: {
+                    drawBorder: false,
+                    display: false,
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                  },
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 500,
+                    beginAtZero: true,
+                    padding: 15,
+                    font: {
+                      size: 14,
+                      family: "Open Sans",
+                      style: 'normal',
+                      lineHeight: 2
+                    },
+                    color: "#fff"
+                  },
+                },
+                x: {
+                  grid: {
+                    drawBorder: false,
+                    display: false,
+                    drawOnChartArea: false,
+                    drawTicks: false
+                  },
+                  ticks: {
+                    display: false
+                  },
+                },
+              },
             },
-          },
-        });
+          });
 
 
-        (function() {
-          const container = document.getElementById("globe");
-          const canvas = container.getElementsByTagName("canvas")[0];
+          var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-          const globeRadius = 100;
-          const globeWidth = 4098 / 2;
-          const globeHeight = 1968 / 2;
+          var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
 
-          function convertFlatCoordsToSphereCoords(x, y) {
-            let latitude = ((x - globeWidth) / globeWidth) * -180;
-            let longitude = ((y - globeHeight) / globeHeight) * -90;
-            latitude = (latitude * Math.PI) / 180;
-            longitude = (longitude * Math.PI) / 180;
-            const radius = Math.cos(longitude) * globeRadius;
+          gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+          gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+          gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
 
-            return {
-              x: Math.cos(latitude) * radius,
-              y: Math.sin(longitude) * globeRadius,
-              z: Math.sin(latitude) * radius
-            };
-          }
+          var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
 
-          function makeMagic(points) {
-            const {
-              width,
-              height
-            } = container.getBoundingClientRect();
+          gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+          gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+          gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
 
-            // 1. Setup scene
-            const scene = new THREE.Scene();
-            // 2. Setup camera
-            const camera = new THREE.PerspectiveCamera(45, width / height);
-            // 3. Setup renderer
-            const renderer = new THREE.WebGLRenderer({
-              canvas,
-              antialias: true
-            });
-            renderer.setSize(width, height);
-            // 4. Add points to canvas
-            // - Single geometry to contain all points.
-            const mergedGeometry = new THREE.Geometry();
-            // - Material that the dots will be made of.
-            const pointGeometry = new THREE.SphereGeometry(0.5, 1, 1);
-            const pointMaterial = new THREE.MeshBasicMaterial({
-              color: "#989db5",
-            });
+          new Chart(ctx2, {
+            type: "line",
+            data: {
+              labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+              datasets: [{
+                  label: "Mobile apps",
+                  tension: 0.4,
+                  borderWidth: 0,
+                  pointRadius: 0,
+                  borderColor: "#cb0c9f",
+                  borderWidth: 3,
+                  backgroundColor: gradientStroke1,
+                  fill: true,
+                  data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                  maxBarThickness: 6
 
-            for (let point of points) {
+                },
+                {
+                  label: "Websites",
+                  tension: 0.4,
+                  borderWidth: 0,
+                  pointRadius: 0,
+                  borderColor: "#3A416F",
+                  borderWidth: 3,
+                  backgroundColor: gradientStroke2,
+                  fill: true,
+                  data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+                  maxBarThickness: 6
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false,
+                }
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index',
+              },
+              scales: {
+                y: {
+                  grid: {
+                    drawBorder: false,
+                    display: true,
+                    drawOnChartArea: true,
+                    drawTicks: false,
+                    borderDash: [5, 5]
+                  },
+                  ticks: {
+                    display: true,
+                    padding: 10,
+                    color: '#b2b9bf',
+                    font: {
+                      size: 11,
+                      family: "Open Sans",
+                      style: 'normal',
+                      lineHeight: 2
+                    },
+                  }
+                },
+                x: {
+                  grid: {
+                    drawBorder: false,
+                    display: false,
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                    borderDash: [5, 5]
+                  },
+                  ticks: {
+                    display: true,
+                    color: '#b2b9bf',
+                    padding: 20,
+                    font: {
+                      size: 11,
+                      family: "Open Sans",
+                      style: 'normal',
+                      lineHeight: 2
+                    },
+                  }
+                },
+              },
+            },
+          });
+
+
+          (function() {
+            const container = document.getElementById("globe");
+            const canvas = container.getElementsByTagName("canvas")[0];
+
+            const globeRadius = 100;
+            const globeWidth = 4098 / 2;
+            const globeHeight = 1968 / 2;
+
+            function convertFlatCoordsToSphereCoords(x, y) {
+              let latitude = ((x - globeWidth) / globeWidth) * -180;
+              let longitude = ((y - globeHeight) / globeHeight) * -90;
+              latitude = (latitude * Math.PI) / 180;
+              longitude = (longitude * Math.PI) / 180;
+              const radius = Math.cos(longitude) * globeRadius;
+
+              return {
+                x: Math.cos(latitude) * radius,
+                y: Math.sin(longitude) * globeRadius,
+                z: Math.sin(latitude) * radius
+              };
+            }
+
+            function makeMagic(points) {
               const {
-                x,
-                y,
-                z
-              } = convertFlatCoordsToSphereCoords(
-                point.x,
-                point.y,
                 width,
                 height
-              );
+              } = container.getBoundingClientRect();
 
-              if (x && y && z) {
-                pointGeometry.translate(x, y, z);
-                mergedGeometry.merge(pointGeometry);
-                pointGeometry.translate(-x, -y, -z);
+              // 1. Setup scene
+              const scene = new THREE.Scene();
+              // 2. Setup camera
+              const camera = new THREE.PerspectiveCamera(45, width / height);
+              // 3. Setup renderer
+              const renderer = new THREE.WebGLRenderer({
+                canvas,
+                antialias: true
+              });
+              renderer.setSize(width, height);
+              // 4. Add points to canvas
+              // - Single geometry to contain all points.
+              const mergedGeometry = new THREE.Geometry();
+              // - Material that the dots will be made of.
+              const pointGeometry = new THREE.SphereGeometry(0.5, 1, 1);
+              const pointMaterial = new THREE.MeshBasicMaterial({
+                color: "#989db5",
+              });
+
+              for (let point of points) {
+                const {
+                  x,
+                  y,
+                  z
+                } = convertFlatCoordsToSphereCoords(
+                  point.x,
+                  point.y,
+                  width,
+                  height
+                );
+
+                if (x && y && z) {
+                  pointGeometry.translate(x, y, z);
+                  mergedGeometry.merge(pointGeometry);
+                  pointGeometry.translate(-x, -y, -z);
+                }
+              }
+
+              const globeShape = new THREE.Mesh(mergedGeometry, pointMaterial);
+              scene.add(globeShape);
+
+              container.classList.add("peekaboo");
+
+              // Setup orbital controls
+              camera.orbitControls = new THREE.OrbitControls(camera, canvas);
+              camera.orbitControls.enableKeys = false;
+              camera.orbitControls.enablePan = false;
+              camera.orbitControls.enableZoom = false;
+              camera.orbitControls.enableDamping = false;
+              camera.orbitControls.enableRotate = true;
+              camera.orbitControls.autoRotate = true;
+              camera.position.z = -265;
+
+              function animate() {
+                // orbitControls.autoRotate is enabled so orbitControls.update
+                // must be called inside animation loop.
+                camera.orbitControls.update();
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+              }
+              animate();
+            }
+
+            function hasWebGL() {
+              const gl =
+                canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+              if (gl && gl instanceof WebGLRenderingContext) {
+                return true;
+              } else {
+                return false;
               }
             }
 
-            const globeShape = new THREE.Mesh(mergedGeometry, pointMaterial);
-            scene.add(globeShape);
-
-            container.classList.add("peekaboo");
-
-            // Setup orbital controls
-            camera.orbitControls = new THREE.OrbitControls(camera, canvas);
-            camera.orbitControls.enableKeys = false;
-            camera.orbitControls.enablePan = false;
-            camera.orbitControls.enableZoom = false;
-            camera.orbitControls.enableDamping = false;
-            camera.orbitControls.enableRotate = true;
-            camera.orbitControls.autoRotate = true;
-            camera.position.z = -265;
-
-            function animate() {
-              // orbitControls.autoRotate is enabled so orbitControls.update
-              // must be called inside animation loop.
-              camera.orbitControls.update();
-              requestAnimationFrame(animate);
-              renderer.render(scene, camera);
+            function init() {
+              if (hasWebGL()) {
+                window
+                window.fetch("https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-dashboard-pro/assets/js/points.json")
+                  .then(response => response.json())
+                  .then(data => {
+                    makeMagic(data.points);
+                  });
+              }
             }
-            animate();
-          }
-
-          function hasWebGL() {
-            const gl =
-              canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-            if (gl && gl instanceof WebGLRenderingContext) {
-              return true;
-            } else {
-              return false;
+            init();
+          })();
+        </script>
+        <script>
+          var win = navigator.platform.indexOf('Win') > -1;
+          if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+              damping: '0.5'
             }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
           }
-
-          function init() {
-            if (hasWebGL()) {
-              window
-              window.fetch("https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-dashboard-pro/assets/js/points.json")
-                .then(response => response.json())
-                .then(data => {
-                  makeMagic(data.points);
-                });
-            }
-          }
-          init();
-        })();
-      </script>
-      <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-          var options = {
-            damping: '0.5'
-          }
-          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-      </script>
-      <!-- Github buttons -->
-      <script async defer src="https://buttons.github.io/buttons.js"></script>
-      <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-      <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
-     
-      
+        </script>
+        <!-- Github buttons -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
+       
+        
 html;
 
-  return $footer.$extra;
-  }
+
+
+    return $footer.$extra;
+    }
 
 }

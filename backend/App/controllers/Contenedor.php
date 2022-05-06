@@ -239,7 +239,7 @@ html;
     public function header($extra = ''){
      $usuario = $this->__usuario;
      
-        // $principal = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
+         $principal = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
         // $principalAdd = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
         // $asistentes = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);
         // $asistentessAdd = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);

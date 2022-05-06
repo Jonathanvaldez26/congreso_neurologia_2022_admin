@@ -129,14 +129,14 @@ class Contenedor extends Controller{
                 </li>
                 <li id="salud" class="nav-item" {$vacunacionHidden};>
                     <hr class="horizontal dark" />
-                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">SALUD</h6>
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGOS EN SITIO</h6>
                 </li>
-                <li id="vacunacion" class="nav-item" {$vacunacionHidden};>
-                    <a href="/ComprobantesVacunacion/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                <li id="pagos" class="nav-item" {$vacunacionHidden};>
+                    <a href="/CobroEnSitio/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-shield-virus morado-musa-text"></span>
+                            <span class="fa fa-money morado-musa-text"></span>
                         </div>
-                        <span class="nav-link-text ms-1">Comprobante Vacunación</span>
+                        <span class="nav-link-text ms-1">Cobrar en Sitio</span>
                     </a>
                 </li>
                 <li id="pruebas_usuario" class="nav-item" {$pruebasHidden};>

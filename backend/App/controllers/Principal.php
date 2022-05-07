@@ -6,7 +6,7 @@ defined("APPPATH") OR die("Access denied");
 
 use \Core\View;
 use \Core\MasterDom;
-use \App\controllers\Contenedor;
+use \App\controllers\Contenedor_2;
 use \Core\Controller;
 use \App\models\Asistentes as AsistentesDao;
 
@@ -16,8 +16,8 @@ class Principal extends Controller{
 
     function __construct(){
         parent::__construct();
-        $this->_contenedor = new Contenedor;
-        // View::set('header',$this->_contenedor->header());
+        $this->_contenedor = new Contenedor_2;
+        View::set('header',$this->_contenedor->header());
         View::set('footer',$this->_contenedor->footer());
     }
 

@@ -10,17 +10,13 @@ use \Core\View;
 use \Core\MasterDom;
 use \App\controllers\Contenedor;
 use \Core\Controller;
-use \App\models\Colaboradores as ColaboradoresDao;
-use \App\models\Accidentes as AccidentesDao;
 use \App\models\General as GeneralDao;
-use \App\models\Pases as PasesDao;
-use \App\models\PruebasCovidUsuarios as PruebasCovidUsuariosDao;
-use \App\models\ComprobantesVacunacion as ComprobantesVacunacionDao;
 use \App\models\Asistentes as AsistentesDao;
 use \App\models\Especialidades as EspecialidadesDao;
 use \App\models\Usuarios as UsuariosDao;
 use \App\models\Cursos as CursosDao;
 use \App\models\Profesores as ProfesoresDao;
+use \App\models\Programa as ProgramaDao;
 
 use Generator;
 
@@ -78,9 +74,18 @@ html;
     $profesores = ProfesoresDao::getAll();
     $optionProfesores = '';
 
-    foreach ($users as $key => $value) {
+    foreach ($profesores as $key => $value) {
       $optionProfesores .= <<<html
-                <option value="{$value['id_profesor ']}">{$value['nombre']}</option>
+                <option value="{$value['id_profesor']}">{$value['nombre']}</option>
+html;
+    }
+
+    $coordinadores = ProfesoresDao::getAllCoordinadores();
+    $optionCoordinadores = '';
+
+    foreach ($coordinadores as $key => $value) {
+      $optionCoordinadores .= <<<html
+                <option value="{$value['id_coordinador']}">{$value['nombre']}</option>
 html;
     }
 
@@ -90,6 +95,7 @@ html;
     View::set('tablaUsers', $this->getUsers());
     View::set('asideMenu', $this->_contenedor->asideMenu());
     View::set('optionProfesores', $optionProfesores);
+    View::set('optionCoordinadores', $optionCoordinadores);
     View::set('optionModalidad', $optionModalidad);
     View::set('optionUsers', $optionUsers);
     View::set('optionCursos', $optionCursos);
@@ -102,41 +108,33 @@ html;
   {
     $data = new \stdClass();
 
-    $nombre = MasterDom::getData('nombre');
-    $fecha_curso = MasterDom::getData('fecha_curso');
-    $horario_transmision = MasterDom::getData('horario_transmision');
-    // $pdf_constancia = MasterDom::getData('pdf_constancia');
-    $id_modalidad = MasterDom::getData('id_modalidad');
-    $caratula = MasterDom::getData('caratula');
-    $url = MasterDom::getData('url_curso');
+    $id_profesor = MasterDom::getData('id_profesor');
+    $id_coordinador = MasterDom::getData('id_coordinador');
+    $hora_inicio = MasterDom::getData('hora_inicio');
+    $hora_fin = MasterDom::getData('hora_fin');
+    $fecha_programa = MasterDom::getData('fecha_programa');
+    $url = MasterDom::getData('url_programa');
     $duracion = MasterDom::getData('duracion');
     $descripcion = MasterDom::getData('descripcion');
-    $name_files = $this->generateRandomString();
+    $clave = $this->generateRandomString();
 
-    $data->_nombre = $nombre;
-    $data->_clave = $name_files;
-    $data->_fecha_curso = $fecha_curso;
-    $data->_horario_transmision = $horario_transmision;
-    // $data->_pdf_constancia = $name_files . ".pdf";
-    $data->_id_modalidad = $id_modalidad;
-    $data->_caratula = $name_files . ".png";
+    $data->_id_profesor = $id_profesor;
+    $data->_id_coordinador = $id_coordinador;
+    $data->_hora_inicio = $hora_inicio;
+    $data->_hora_fin = $hora_fin;
+    $data->_fecha = $fecha_programa;
     $data->_url = $url;
+    $data->_clave = $clave;
     $data->_duracion = $duracion;
     $data->_descripcion = $descripcion;
 
-    // $tipo_archivo_constancia = $pdf_constancia['type'];
-    // $tipo_archivo_caratula = $caratula['type'];
-
-    // if (move_uploaded_file($pdf_constancia["tmp_name"], "cursos_files/" . $name_files . '.pdf') && move_uploaded_file($caratula["tmp_name"], "cursos_files/" . $name_files . '.png')) {
-
-    if (move_uploaded_file($caratula["tmp_name"], "cursos_files/" . $name_files . '.png')) {
-      $id = CursosDao::insert($data);
+      $id = ProgramaDao::insert($data);
       if ($id) {
         echo 'success';
       } else {
         echo 'fail';
       }
-    }
+   
   }
 
   public function saveAsignaCurso()
@@ -442,50 +440,50 @@ html;
   {
 
     $html = "";
-    foreach (CursosDao::getAll() as $key => $value) {
+    foreach (ProgramaDao::getAll() as $key => $value) {
 
 
-      $optionsStatus = '';
+//       $optionsStatus = '';
 
 
-      $estatus = '';
-      if ($value['status'] == 0) {
+//       $estatus = '';
+//       if ($value['status'] == 0) {
 
-        $optionsStatus .= <<<html
+//         $optionsStatus .= <<<html
 
-                <option value="0" selected>Inactivo</option>
-                <option value="1">Activo sin transmision</option>
-                <option value="2">Activo en transmision</option>
-html;
+//                 <option value="0" selected>Inactivo</option>
+//                 <option value="1">Activo sin transmision</option>
+//                 <option value="2">Activo en transmision</option>
+// html;
 
-        $estatus .= <<<html
+//         $estatus .= <<<html
                 
-                <span class="badge badge-danger">Inactivo</span>
-html;
-      } elseif ($value['status'] == 1) {
-        $optionsStatus .= <<<html
+//                 <span class="badge badge-danger">Inactivo</span>
+// html;
+//       } elseif ($value['status'] == 1) {
+//         $optionsStatus .= <<<html
 
-                <option value="0">Inactivo</option>
-                <option value="1" selected>Activo sin transmision</option>
-                <option value="2">Activo en transmision</option>
-html;
-        $estatus .= <<<html
+//                 <option value="0">Inactivo</option>
+//                 <option value="1" selected>Activo sin transmision</option>
+//                 <option value="2">Activo en transmision</option>
+// html;
+//         $estatus .= <<<html
                 
-                <span class="badge badge-warning">Activo sin trasmisión</span>
-html;
-      } else {
+//                 <span class="badge badge-warning">Activo sin trasmisión</span>
+// html;
+//       } else {
 
-        $optionsStatus .= <<<html
+//         $optionsStatus .= <<<html
 
-                <option value="0">Inactivo</option>
-                <option value="1">Activo sin transmision</option>
-                <option value="2" selected>Activo en transmision</option>
-html;
+//                 <option value="0">Inactivo</option>
+//                 <option value="1">Activo sin transmision</option>
+//                 <option value="2" selected>Activo en transmision</option>
+// html;
 
-        $estatus .= <<<html
-                <span class="badge badge-success">Activo en transmisión</span>
-html;
-      }
+//         $estatus .= <<<html
+//                 <span class="badge badge-success">Activo en transmisión</span>
+// html;
+//       }
 
 
       $html .= <<<html
@@ -494,15 +492,7 @@ html;
                     <div class="d-flex px-3 py-1">
                         
                         <div class="d-flex flex-column justify-content-center text-black">
-                    
-                            
-                                <h6 class="mb-0 text-sm text-move text-black">
-                                    <span class="fas fa-play" style="font-size: 13px"></span> {$value['nombre']} - {$estatus}
-                                    <hr>
-                                    <p><span class="fas fa-calendar"></span> Fecha curso : {$value['fecha_curso']}</p>
-                                    <p><span class="fas fa-clock"></span> Horario curso : {$value['horario_transmision']}</p>
-                                    
-                                </h6>
+                             <p>Descripción : {$value['descripcion']} </p> 
                         </div>
                     </div>
                 </td>
@@ -511,30 +501,33 @@ html;
                     
                 <div class="d-flex flex-column justify-content-center text-black">                    
                                     
-                        <h6 class="mb-0 text-sm  text-black">
-                            <p>Descripción : {$value['descripcion']} </p>                            
+                        <h6 class="mb-0 text-sm  text-black">                                                       
                             <p>URL : <a href="$value[url]" target="blank_">{$value['url']}</a></p>
-                            <p>Modalidad : {$value['nombre_modalidad']} </p>   
-                            <p>Duración : {$value['duracion']} - Vistas : {$value['vistas']}</p>  
+                            <p>Hora Inicio : {$value['hora_inicio']} </p>   
+                            <p>Hora Fin : {$value['hora_fin']} </p>  
+                            <p>Fecha : {$value['fecha']} </p>  
+                            <p>duración : {$value['duracion']} </p>  
                                                      
                         </h6>
                 </div>
                 <hr>
                 </td>
 
-                <td>
-                    <div class="d-flex  justify-content-center text-black">
-                     <button class="btn bg-gradient-primary mb-0 btn-icon-only" type="button" title="Editar Usuario" data-toggle="modal" data-target="#editar-curso{$value['id_curso']}"><i class="fa fa-edit" aria-hidden="true"></i></button>
-                     
-                     </div>
+                <td> 
+                     <div class="d-flex flex-column justify-content-center text-black">                    
+                                      
+                            <h6 class="mb-0 text-sm  text-black">                                                       
+                                <p>Profesor : {$value['nombre_profesor']} </p>  
+                                <p>Coordinador : {$value['nombre_coordinador']} </p>                               
+                            </h6>
+                    </div>
                 </td>
 
                 <td>
-                    <div class="d-flex  justify-content-center text-black">
-                      <select class="form-control change_status" style="width: 150px;" data-id-curso="{$value['id_curso']}">
-                        {$optionsStatus}
-                      </select>
-                     </div> 
+                  <div class="d-flex  justify-content-center text-black">
+                    <button class="btn bg-gradient-primary mb-0 btn-icon-only" type="button" title="Editar Usuario" data-toggle="modal" data-target="#editar-curso{$value['id_curso']}"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                  
+                  </div> 
                 </td>
         </tr>
 html;

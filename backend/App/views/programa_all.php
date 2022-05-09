@@ -105,15 +105,15 @@
                                     <li class="nav-item">
                                         <a class="nav-link mb-0 px-0 py-1 active" href="#cursos_all" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
                                             <span class="fas fa-play"></span>
-                                            <span class="ms-1">Cursos</span>
+                                            <span class="ms-1">Programa</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link mb-0 px-0 py-1" href="#asigna_curso" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
                                             <span class="fas fa-play"></span>
                                             <span class="ms-1">Asignar Curso</span>
                                         </a>
-                                    </li>
+                                    </li> -->
 
 
                                 </ul>
@@ -383,68 +383,43 @@
                 <div class="modal-body">
                     <p style="font-size: 12px">A continuación ingrese los datos del usuario.</p>
                     <hr>
-                    <form method="POST" enctype="multipart/form-data" id="form_cursos">
+                    <form method="POST" enctype="multipart/form-data" id="form_programa">
                         <div class="form-group row">
                             <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="profesor">Profesor <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="profesor" id="profesor" required>
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_profesor">Profesor <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="id_profesor" id="id_profesor" required>
                                     <option value="" selected>Selecciona una Opción</option>
                                     <?=$optionProfesores?>                               
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="coordinador">Coordinador <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="coordinador" id="coordinador" required>
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_coordinador">Coordinador <span class="required">*</span></label>
+                                <select class="multisteps-form__select form-control all_input_select" name="id_coordinador" id="id_coordinador" required>
                                     <option value="" selected>Selecciona una Opción</option>
-                                    <?=$optionProfesores?>                               
+                                    <?=$optionCoordinadores?>                               
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="nombre">Nombre <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" require>
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="hora_inicio">Horario de Inicio <span class="required">*</span></label>
+                                <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" placeholder="Horario de incio" require>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="fecha_curso">Fecha Curso <span class="required">*</span></label>
-                                <input type="date" class="form-control" id="fecha_curso" name="fecha_curso" placeholder="Fecha Curso" require>
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="hora_fin">Horario de Finalización <span class="required">*</span></label>
+                                <input type="time" class="form-control" id="hora_fin" name="hora_fin" placeholder="Horario de incio" require>
+                            </div>
+
+                        
+                            <div class="form-group col-md-4">
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="fecha_programa">Fecha Programa <span class="required">*</span></label>
+                                <input type="date" class="form-control" id="fecha_programa" name="fecha_programa" placeholder="Fecha Programa" require>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="horario_transmision">Horario Transmisión <span class="required">*</span></label>
-                                <input type="time" class="form-control" id="horario_transmision" name="horario_transmision" placeholder="Horario transmisión" require>
-                            </div>
-
-                            <!-- <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="pdf_constancia">Constacia <span class="required">*</span></label>
-                                <input type="file" class="form-control" id="pdf_constancia" name="pdf_constancia" accept="application/pdf" require>
-                            </div> -->
-
-                            <!-- <div class="form-group col-md-4" style="display: none;">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="free">Gratis <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="free" id="free" required>
-                                    <option value="" selected>Selecciona una Opción</option>
-                                    <option value="1">Si</option>
-                                    <option value="2">No</option>                                </select>
-                            </div> -->
-
-                            <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="id_modalidad">Modalidad <span class="required">*</span></label>
-                                <select class="multisteps-form__select form-control all_input_select" name="id_modalidad" id="id_modalidad" required>
-                                    <option value="" selected>Selecciona una Opción</option>
-                                    <?= $optionModalidad ?>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="caratula">Caratula <span class="required">*</span></label>
-                                <input type="file" class="form-control" id="caratula" name="caratula" accept="image/png, image/jpeg, image/jpg" require>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="url_curso">URL <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="url_curso" name="url_curso" placeholder="URL" require>
+                                <label class="control-label col-md-12 col-sm-1 col-xs-12" for="url_programa">URL <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="url_programa" name="url_programa" placeholder="URL" require>
                             </div>
 
                             <div class="form-group col-md-4">
@@ -452,12 +427,12 @@
                                 <input type="text" class="form-control" id="duracion" name="duracion" placeholder="Duracion" require>
                             </div>
 
-
-
                             <div class="form-group col-md-12">
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="descripcion">Descripción <span class="required">*</span></label>
                                 <textarea name="descripcion" id="descripcion" class="form-control"></textarea>
                             </div>
+
+                           
 
                             <div class="modal-footer">
                                 <button type="submit" class="btn bg-gradient-success" id="btn_upload" name="btn_upload">Aceptar</button>
@@ -533,22 +508,6 @@
 <script>
     $(document).ready(function() {
 
-        $("#form_etiquetas").on("click", function(event) {
-            event.preventDefault();
-            var formData = new FormData(document.getElementById("form_etiquetas"));
-
-            no_habitacion = $("#no_habitacion").val();
-            clave_ra = $("#clave_ra").val();
-            no_etiquetas = $("#no_etiquetas").val();
-
-            console.log(no_habitacion);
-            console.log(clave_ra);
-            console.log(no_etiquetas);
-
-            $("#a_abrir_etiqueta").attr("href", "/Asistentes/abrirpdf/" + clave_ra + "/" + no_etiquetas + "/" + no_habitacion);
-            $("#a_abrir_etiqueta")[0].click();
-
-        });
 
         $('#programa a').addClass('active');
         $('#programa .fa-users').addClass('text-white');
@@ -686,15 +645,15 @@
         });
 
 
-        $("#form_cursos").on("submit", function(event) {
+        $("#form_programa").on("submit", function(event) {
             event.preventDefault();
-            var formData = new FormData(document.getElementById("form_cursos"));
+            var formData = new FormData(document.getElementById("form_programa"));
 
             for (var value of formData.values()) {
                 console.log(value);
             }
             $.ajax({
-                url: "/Cursos/saveCurso",
+                url: "/Programa/saveCurso",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -708,12 +667,12 @@
                     console.log(respuesta);
 
                     if (respuesta == 'success') {
-                        Swal.fire("¡Curso guardado correctamente!", "", "success").
+                        Swal.fire("Programa guardado correctamente!", "", "success").
                         then((value) => {
                             window.location.reload();
                         });
                     } else {
-                        Swal.fire("¡Hubo un error guardar el curso!", "", "warning").
+                        Swal.fire("¡Hubo un error guardar el Programa!", "", "warning").
                         then((value) => {
                             window.location.reload();
                         });
@@ -722,7 +681,7 @@
                 error: function(respuesta) {
                     console.log(respuesta);
                     // alert('Error');
-                    Swal.fire("¡Hubo un error guardar el curso!", "", "warning").
+                    Swal.fire("¡Hubo un error guardar el Programa!", "", "warning").
                     then((value) => {
                         window.location.reload();
                     });

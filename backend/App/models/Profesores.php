@@ -18,6 +18,16 @@ sql;
       
     }
 
+    public static function getAllCoordinadores(){       
+      $mysqli = Database::getInstance(true);
+      $query =<<<sql
+      SELECT * FROM coordinadores
+sql;
+    
+      return $mysqli->queryAll($query);
+      
+    }
+
     public static function getUserNotInCourse(){
       $mysqli = Database::getInstance(true);
       $query =<<<sql

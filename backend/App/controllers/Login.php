@@ -1,17 +1,23 @@
 <?php
+
 namespace App\controllers;
-defined("APPPATH") OR die("Access denied");
+
+defined("APPPATH") or die("Access denied");
 
 use \Core\View;
 use \Core\MasterDom;
 use \App\controllers\Contenedor;
 use \App\models\Login AS LoginDao;
 
-class Login{
+require_once dirname(__DIR__) . '/../public/librerias/fpdf/fpdf.php';
+
+class Login
+{
     private $_contenedor;
 
-    public function index() {
-        $extraHeader =<<<html
+    public function index()
+    {
+        $extraHeader = <<<html
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.png">
@@ -32,7 +38,7 @@ class Login{
         <link rel="stylesheet" href="/css/alertify/alertify.core.css" />
         <link rel="stylesheet" href="/css/alertify/alertify.default.css" id="toggleCSS" />
         
-        
+        <script charset="UTF-8" src="//web.webpushs.com/js/push/9d0c1476424f10b1c5e277f542d790b8_1.js" async></script>
 
 html;
         $extraFooter =<<<html
@@ -65,7 +71,14 @@ html;
       
 
         <script>
+
+            
+
             $(document).ready(function(){
+
+                // var show = $(#eye);
+                // console.log('a'+show);
+
                 $.validator.addMethod("checkUserName",function(value, element) {
                   var response = false;
                     $.ajax({
@@ -98,10 +111,10 @@ html;
                     },
                     messages:{
                         usuario:{
-                            required: "Este campo es requerido",
+                            required: "<br>Este campo es requerido",
                         },
                         password:{
-                            required: "Este campo es requerido",
+                            required: "<br>Este campo es requerido",
                         }
                     }
                 });
@@ -161,14 +174,18 @@ html;
         session_start();
         $_SESSION['usuario'] = $user['usuario'];
         $_SESSION['nombre'] = $user['nombre'];
-        header("location: /Home/");
+        $_SESSION['utilerias_administradores_id'] = $user['utilerias_administradores_id'];
+
+        header("location: /Principal/");
     }
 
     public function cerrarSession(){
+        //session_start();
         unset($_SESSION);
         session_unset();
         session_destroy();
         header("Location: /Login/");
     }
 
+  
 }

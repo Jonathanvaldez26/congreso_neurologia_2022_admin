@@ -54,7 +54,7 @@ class App
         else
         {
             //include APPPATH . "/views/errors/404.php";
-	    header('Location: /Home/');
+	    header('Location: /Principal/');
             exit;
         }
 

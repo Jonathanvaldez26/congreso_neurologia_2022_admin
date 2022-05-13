@@ -10,7 +10,8 @@
                         <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                             <div class="card card-plain mt-8">
                                 <div class="card-header pb-0 text-start">
-                                    <h3 class="font-weight-bolder text-primary text-gradient">GRUPO LAHE</h3>
+                                    <h3 class="font-weight-bolder text-danger text-gradient">GRUPO LAHE</h3>
+                                    <h5 class="font-weight-bolder text-danger text-gradient">Administrador CONAVE 2022</h5>
                                     <p class="mb-0">Introduce tus credenciales para iniciar sesión.</p>
                                 </div>
                                 <div class="card-body">
@@ -19,13 +20,19 @@
                                         <div class="mb-3">
                                             <input type="email" name="usuario" id="usuario" class="form-control" placeholder="usuario@grupolahe.com" aria-label="Email">
                                         </div>
-                                        <label>Contraseña</label>
-                                        <div class="mb-3">
-                                            <input type="password" name="password" id="password" class="form-control" placeholder="•••••••••" aria-label="Password">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label>Contraseña</label>
+                                                <div class="mb-0">
+                                                    <input type="password" name="password" id="password" class="form-control" placeholder="•••••••••" aria-label="Password">
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-2" id="eye">
+                                                <i class="fa fa-eye mt-4 pt-3"></i>
+                                            </div> -->
                                         </div>
-
                                         <div class="text-center">
-                                            <button type="button" id="btnEntrar" class="btn bg-gradient-primary w-100 mt-4 mb-0">ENTRAR</button>
+                                            <button type="button" id="btnEntrar" class="btn bg-gradient-danger w-100 mt-4 mb-0">ENTRAR</button>
                                         </div>
                                     </form>
                                 </div>
@@ -42,7 +49,7 @@
         </section>
     </main>
     <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-    <footer class="footer py-4">
+    <footer class="footer py-7">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center mb-0 mt-0">

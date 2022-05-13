@@ -13,7 +13,7 @@ class Cuenta implements Crud{
       $mysqli = Database::getInstance();
       $query=<<<sql
       SELECT catalogo_cuenta_id, catalogo_empresa_id, fecha_alta, status FROM catalogo_cuenta ORDER BY catalogo_cuenta_id ASC;
-      sql;
+sql;
       return $mysqli->queryAll($query);
     }
 
@@ -21,7 +21,7 @@ class Cuenta implements Crud{
 	    $mysqli = Database::getInstance(1);
       $query=<<<sql
       INSERT INTO catalogo_cuenta VALUES({$cuenta['catalogo_cuenta_id']}, 5, NOW(), 1)
-      sql;
+sql;
         $parametros = array(
           ':catalogo_cuenta_id'=>$cuenta->_catalogo_cuenta_id+1,
           ':catalogo_empresa_id'=>$cuenta->_catalogo_empresa_id+1,

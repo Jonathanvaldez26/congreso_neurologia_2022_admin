@@ -18,42 +18,269 @@ class Contenedor extends Controller{
       return $this->__usuario;
     }
 
+    public function asideMenu(){
+
+      // $permisos = (Controller::getPermisoUser($this->__usuario)['perfil_id']) != 1 ? "style=\"display:none;\"" : "";
+
+      $menu = <<<html
+      <aside class="bg-white-aside sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+        <div class="sidenav-header" style="margin-bottom: 30px;">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+
+            <a class="navbar-brand m-0" href="/Principal/" target="_blank">
+                <img src="/assets/img/favicon.png" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold"></span>
+                <p style="margin-top: 15px;"><span class="fa fa-user morado-musa-text"></span> {$_SESSION['nombre']}</p>
+            </a>
+
+
+        </div>
+        <hr class="horizontal dark mt-0">
+
+
+        <div class="collapse navbar-collapse  w-auto h-auto h-100" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <!--li class="nav-item">
+                    <a href="/Principal/" class="nav-link active" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-home text-white" ></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Principal</span>
+                    </a>
+                </li-->
+
+                <li id="principal" class="nav-item" >
+                    <a href="/Principal/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-home morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Principal</span>
+                    </a>
+                </li>
+
+                <li id="usuarios" class="nav-item">
+                    <a href="/Usuarios/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Usuarios</span>
+                    </a>
+                </li>
+
+                <li id="cursos" class="nav-item">
+                    <a href="/Cursos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fas fa-play morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Cursos</span>
+                    </a>
+                </li>
+
+                <li id="transmision" class="nav-item">
+                    <a href="/Transmision/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fas fa-play morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Transmision</span>
+                    </a>
+                </li>
+
+                <li id="profesores" class="nav-item">
+                    <a href="/Profesores/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Profesores</span>
+                    </a>
+                </li>
+
+                <li id="encuestas" class="nav-item">
+                    <a href="/Encuestas/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Encuestas</span>
+                    </a>
+                </li>
+
+                <li id="programa" class="nav-item">
+                    <a href="/Programa/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Programa</span>
+                    </a>
+                </li>
+
+                <li id="trabajos" class="nav-item">
+                    <a href="/TrabajosLibres/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Trabajos Libres</span>
+                    </a>
+                </li>
+                
+                
+
+                <li id="asistentes" class="nav-item" >
+                    <a href="/Asistentes/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-users morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Asistentes</span>
+                    </a>
+                </li>
+                <li id="vuelos" class="nav-item" >
+                    <a href="/Vuelos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-plane morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Vuelos</span>
+                    </a>
+                </li>
+                <!--<li id="pickup" class="nav-item" >
+                    <a href="/PickUp/" class="nav-link " aria-controls="ecommerceExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-bus morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">PickUp</span>
+                    </a>
+                </li>-->
+               <!-- <li id="habitaciones" class="nav-item" >
+                    <a href="/Habitaciones/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-hotel morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Habitaciones</span>
+                    </a>
+                </li>-->
+                
+                <li id="asistencias" class="nav-item" >
+                    <a href="/Asistencias/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-bell morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Asistencias</span>
+                    </a>
+                </li>
+                <li id="salud" class="nav-item" >
+                    <hr class="horizontal dark" />
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGOS EN SITIO</h6>
+                </li>
+                <li id="pagos" class="nav-item" >
+                    <a href="/CobroEnSitio/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-money morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Cobrar en Sitio</span>
+                    </a>
+                </li>
+                <li id="pruebas_usuario" class="nav-item" >
+                    <a href="/PruebasCovidUsuarios/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-virus-slash morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Pruebas Covid Usuarios</span>
+                    </a>
+                </li>
+
+                <!-- <li id="pruebas_sitio" class="nav-item" >
+                    <a href="/PruebasCovidEnSitio/" class="nav-link" aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-virus morado-musa-text" ></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Pruebas Covid En Sitio</span>
+                    </a>
+                </li>-->
+
+                <li id="config" class="nav-item" >
+                    <hr class="horizontal dark" />
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OTROS</h6>
+                </li>
+                <li id="configuracion" class="nav-item" >
+                    <a href="/Configuracion/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-tools morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Configuración</span>
+                    </a>
+                </li>
+                <li id="util" class="nav-item" >
+                    <a data-bs-toggle="collapse" onclick="utilerias()" href="#utilerias" class="nav-link " aria-controls="utilerias" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-user-circle-o morado-musa-text"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Utilerias</span>
+                    </a>
+                    <div class="collapse " id="utilerias" hidden>
+                        <ul class="nav ms-4 ps-3">
+                            <li id="administradores" class="nav-item ">
+                                <a class="nav-link " href="/Administradores/">
+                                    <span class="sidenav-mini-icon"> A </span>
+                                    <span class="sidenav-normal">Administradores</span>
+                                </a>
+                            </li>
+                            <li id="perfiles" class="nav-item ">
+                                <a class="nav-link " href="/Perfiles/">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> Perfiles </span>
+                                </a>
+                            </li>
+                            <li id="log" class="nav-item ">
+                                <a class="nav-link " href="/Log/">
+                                    <span class="sidenav-mini-icon"> L </span>
+                                    <span class="sidenav-normal"> Log </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </aside>
+html; 
+
+      return $menu;
+    }
+
     public function header($extra = ''){
      $usuario = $this->__usuario;
      
-        $principal = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
-        $principalAdd = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
-        $asistentes = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);
-        $asistentessAdd = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);
-        $bu = Controller::getPermisosUsuario($usuario, "seccion_bu", 1);
-        $buAdd = Controller::getPermisosUsuario($usuario, "seccion_bu", 1);
-        $lineas = Controller::getPermisosUsuario($usuario, "seccion_lineas", 1);
-        $lineasAdd = Controller::getPermisosUsuario($usuario, "seccion_lineas", 1);
-        $posiciones = Controller::getPermisosUsuario($usuario, "seccion_posiciones", 1);
-        $posicionesAdd = Controller::getPermisosUsuario($usuario, "seccion_posiciones", 1);
-        $restaurantes = Controller::getPermisosUsuario($usuario, "seccion_restaurantes", 1);
-        $restaurantesAdd = Controller::getPermisosUsuario($usuario, "seccion_restaurantes", 1);
-        $gafete = Controller::getPermisosUsuario($usuario, "seccion_gafete", 1);
-        $gafeteAdd = Controller::getPermisosUsuario($usuario, "seccion_gafete", 1);
-        $vuelos = Controller::getPermisosUsuario($usuario, "seccion_vuelos", 1);
-        $vuelosAdd = Controller::getPermisosUsuario($usuario, "seccion_vuelos", 1);
-        $pickup = Controller::getPermisosUsuario($usuario, "seccion_pickup", 1);
-        $pickupAdd = Controller::getPermisosUsuario($usuario, "seccion_pickup", 1);
-        $habitaciones = Controller::getPermisosUsuario($usuario, "seccion_habitaciones", 1);
-        $habitacionesAdd = Controller::getPermisosUsuario($usuario, "seccion_habitaciones", 1);
-        $cenas = Controller::getPermisosUsuario($usuario, "seccion_cenas", 1);
-        $cenasAdd = Controller::getPermisosUsuario($usuario, "seccion_cenas", 1);
-        $vacunacion = Controller::getPermisosUsuario($usuario, "seccion_vacunacion", 1);
-        $vacunacionAdd = Controller::getPermisosUsuario($usuario, "seccion_vacunacion", 1);
+        // $principal = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
+        // $principalAdd = Controller::getPermisosUsuario($usuario, "seccion_principal", 1);
+        // $asistentes = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);
+        // $asistentessAdd = Controller::getPermisosUsuario($usuario, "seccion_asistentes", 1);
+        // $bu = Controller::getPermisosUsuario($usuario, "seccion_bu", 1);
+        // $buAdd = Controller::getPermisosUsuario($usuario, "seccion_bu", 1);
+        // $lineas = Controller::getPermisosUsuario($usuario, "seccion_lineas", 1);
+        // $lineasAdd = Controller::getPermisosUsuario($usuario, "seccion_lineas", 1);
+        // $posiciones = Controller::getPermisosUsuario($usuario, "seccion_posiciones", 1);
+        // $posicionesAdd = Controller::getPermisosUsuario($usuario, "seccion_posiciones", 1);
+        // $restaurantes = Controller::getPermisosUsuario($usuario, "seccion_restaurantes", 1);
+        // $restaurantesAdd = Controller::getPermisosUsuario($usuario, "seccion_restaurantes", 1);
+        // $gafete = Controller::getPermisosUsuario($usuario, "seccion_gafete", 1);
+        // $gafeteAdd = Controller::getPermisosUsuario($usuario, "seccion_gafete", 1);
+        // $vuelos = Controller::getPermisosUsuario($usuario, "seccion_vuelos", 1);
+        // $vuelosAdd = Controller::getPermisosUsuario($usuario, "seccion_vuelos", 1);
+        // $pickup = Controller::getPermisosUsuario($usuario, "seccion_pickup", 1);
+        // $pickupAdd = Controller::getPermisosUsuario($usuario, "seccion_pickup", 1);
+        // $habitaciones = Controller::getPermisosUsuario($usuario, "seccion_habitaciones", 1);
+        // $habitacionesAdd = Controller::getPermisosUsuario($usuario, "seccion_habitaciones", 1);
+        // $cenas = Controller::getPermisosUsuario($usuario, "seccion_cenas", 1);
+        // $cenasAdd = Controller::getPermisosUsuario($usuario, "seccion_cenas", 1);
+        // $vacunacion = Controller::getPermisosUsuario($usuario, "seccion_vacunacion", 1);
+        // $vacunacionAdd = Controller::getPermisosUsuario($usuario, "seccion_vacunacion", 1);
 
-        $pruebas_covid = Controller::getPermisosUsuario($usuario, "seccion_pruebas_covid", 1);
-        $pruebas_covidAdd = Controller::getPermisosUsuario($usuario, "seccion_pruebas_covid", 1);
-        $asistencias = Controller::getPermisosUsuario($usuario, "seccion_asistencias", 1);
-        $asistenciasAdd = Controller::getPermisosUsuario($usuario, "seccion_asistencias", 1);
-        $utilerias = Controller::getPermisosUsuario($usuario, "seccion_utilerias", 1);
-        $utileriasAdd = Controller::getPermisosUsuario($usuario, "seccion_utilerias", 1);
-        $configuracion = Controller::getPermisosUsuario($usuario, "seccion_configuracion", 1);
-        $configuracionAdd = Controller::getPermisosUsuario($usuario, "seccion_configuracion", 1);
+        // $pruebas_covid = Controller::getPermisosUsuario($usuario, "seccion_pruebas_covid", 1);
+        // $pruebas_covidAdd = Controller::getPermisosUsuario($usuario, "seccion_pruebas_covid", 1);
+        // $asistencias = Controller::getPermisosUsuario($usuario, "seccion_asistencias", 1);
+        // $asistenciasAdd = Controller::getPermisosUsuario($usuario, "seccion_asistencias", 1);
+        // $utilerias = Controller::getPermisosUsuario($usuario, "seccion_utilerias", 1);
+        // $utileriasAdd = Controller::getPermisosUsuario($usuario, "seccion_utilerias", 1);
+        // $configuracion = Controller::getPermisosUsuario($usuario, "seccion_configuracion", 1);
+        // $configuracionAdd = Controller::getPermisosUsuario($usuario, "seccion_configuracion", 1);
       
      $header =<<<html
         <!DOCTYPE html>
@@ -62,11 +289,9 @@ class Contenedor extends Controller{
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.png">
-            <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-            <title>
-               GRUPO LAHE
-            </title>
+            <link rel="apple-touch-icon" sizes="76x76" href="https://foromusa.com/assets/images/Musa0-01.png">
+            <link rel="icon" type="image/png" href="https://foromusa.com/assets/images/Musa0-01.png">
+            
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
             <!-- Nucleo Icons -->
             <link href="../../assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -157,7 +382,7 @@ html;
         <!-- jQuery -->
 
           <script>
-            function catalogos(params) {
+            function catalogos() {
                 var catalogo = document.getElementById("catalogos");
 
                 if (catalogo.hasAttribute('hidden')) {
@@ -167,7 +392,7 @@ html;
                 }
             }
 
-            function utilerias(params) {
+            function utilerias() {
                 var utileria = document.getElementById("utilerias");
 
                 if (utileria.hasAttribute('hidden')) {

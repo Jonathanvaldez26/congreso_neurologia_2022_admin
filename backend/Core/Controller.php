@@ -34,7 +34,6 @@ class Controller{
     }
 
     public static function getPermisosUsuario($usuario, $seccion, $valor){
-
         $id = GeneralDao::getPermisos($usuario);
         foreach ($id as $key => $value) {
             $secciones = $value[$seccion];
@@ -72,15 +71,6 @@ class Controller{
 
     }
 
-    public static function getPermisoGlobalUsuario($usuario){
-
-        $id = GeneralDao::getPermisos($usuario);
-
-        return $id;
-        
-
-    }
-
     public static function getPermisoRecursosHumanos($usuario){
         $id = GeneralDao::getUsuario($usuario);
 
@@ -90,14 +80,6 @@ class Controller{
         
 
         return $permiso;
-
-    }
-
-    public static function getPermisoUser($usuario){
-        
-        $id = GeneralDao::getPerfilUsuario($usuario);
-
-        return $id;
 
     }
 

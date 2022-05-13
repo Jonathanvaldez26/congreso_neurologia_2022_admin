@@ -1,46 +1,36 @@
 <?php
 
 namespace App\controllers;
-//defined("APPPATH") OR die("Access denied");
-require_once dirname(__DIR__) . '/../public/librerias/fpdf/fpdf.php';
-require_once dirname(__DIR__) . '/../public/librerias/phpqrcode/qrlib.php';
 
+defined("APPPATH") or die("Access denied");
 
 use \Core\View;
 use \Core\MasterDom;
-use \App\controllers\Contenedor;
 use \Core\Controller;
-use \App\models\Colaboradores as ColaboradoresDao;
-use \App\models\Accidentes as AccidentesDao;
 use \App\models\General as GeneralDao;
-use \App\models\Pases as PasesDao;
-use \App\models\PruebasCovidUsuarios as PruebasCovidUsuariosDao;
-use \App\models\ComprobantesVacunacion as ComprobantesVacunacionDao;
 use \App\models\Asistentes as AsistentesDao;
 use \App\models\Especialidades as EspecialidadesDao;
 use \App\models\Usuarios as UsuariosDao;
 use \App\models\Cursos as CursosDao;
-use Generator;
 
 class Usuarios extends Controller
 {
 
-    private $_contenedor;
-    
-    function __construct()
-    {
-        parent::__construct();
-        // $this->_contenedor = new Contenedor;
-        // View::set('header', $this->_contenedor->header());
-        // View::set('footer', $this->_contenedor->footer());
-        // if (Controller::getPermisosUsuario($this->__usuario, "seccion_asistentes", 1) == 0)
-        //     header('Location: /Principal/');
-    }
+  private $_contenedor;
+
+  function __construct()
+  {
+    parent::__construct();
+    $this->_contenedor = new Contenedor;
+    View::set('header', $this->_contenedor->header());
+    View::set('footer', $this->_contenedor->footer());
+
+  }
 
     public function index()
     {
 
-      $header =<<<html
+        $header =<<<html
         <!DOCTYPE html>
         <html lang="es">
         
@@ -131,619 +121,621 @@ class Usuarios extends Controller
         </head>
 html;
 
-$menu = <<<html
-      <aside class="bg-white-aside sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
-        <div class="sidenav-header" style="margin-bottom: 30px;">
-            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+// $menu = <<<html
+//       <aside class="bg-white-aside sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+//         <div class="sidenav-header" style="margin-bottom: 30px;">
+//             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
 
-            <a class="navbar-brand m-0" href="/Principal/" target="_blank">
-                <img src="/assets/img/favicon.png" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold"></span>
-                <p style="margin-top: 15px;"><span class="fa fa-user morado-musa-text"></span> {$_SESSION['nombre']}</p>
-            </a>
-
-
-        </div>
-        <hr class="horizontal dark mt-0">
+//             <a class="navbar-brand m-0" href="/Principal/" target="_blank">
+//                 <img src="/assets/img/favicon.png" class="navbar-brand-img h-100" alt="main_logo">
+//                 <span class="ms-1 font-weight-bold"></span>
+//                 <p style="margin-top: 15px;"><span class="fa fa-user morado-musa-text"></span> {$_SESSION['nombre']}</p>
+//             </a>
 
 
-        <div class="collapse navbar-collapse  w-auto h-auto h-100" id="sidenav-collapse-main">
-            <ul class="navbar-nav">
-                <!--li class="nav-item">
-                    <a href="/Principal/" class="nav-link active" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-home text-white" ></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Principal</span>
-                    </a>
-                </li-->
-
-                <li id="principal" class="nav-item" >
-                    <a href="/Principal/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-home morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Principal</span>
-                    </a>
-                </li>
-
-                <li id="usuarios" class="nav-item">
-                    <a href="/Usuarios/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-users morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Usuarios</span>
-                    </a>
-                </li>
-
-                <li id="cursos" class="nav-item">
-                    <a href="/Cursos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fas fa-play morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Cursos</span>
-                    </a>
-                </li>
-
-                <li id="transmision" class="nav-item">
-                    <a href="/Transmision/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fas fa-play morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Transmision</span>
-                    </a>
-                </li>
-
-                <li id="profesores" class="nav-item">
-                    <a href="/Profesores/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-users morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Profesores</span>
-                    </a>
-                </li>
-
-                <li id="encuestas" class="nav-item">
-                    <a href="/Encuestas/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-users morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Encuestas</span>
-                    </a>
-                </li>
-
-                <li id="programa" class="nav-item">
-                    <a href="/Programa/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-users morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Programa</span>
-                    </a>
-                </li>
-                
-                
-
-                <li id="asistentes" class="nav-item" >
-                    <a href="/Asistentes/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-users morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Asistentes</span>
-                    </a>
-                </li>
-                <li id="vuelos" class="nav-item" >
-                    <a href="/Vuelos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-plane morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Vuelos</span>
-                    </a>
-                </li>
-                <!--<li id="pickup" class="nav-item" >
-                    <a href="/PickUp/" class="nav-link " aria-controls="ecommerceExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-bus morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">PickUp</span>
-                    </a>
-                </li>-->
-               <!-- <li id="habitaciones" class="nav-item" >
-                    <a href="/Habitaciones/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-hotel morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Habitaciones</span>
-                    </a>
-                </li>-->
-                
-                <li id="asistencias" class="nav-item" >
-                    <a href="/Asistencias/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-bell morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Asistencias</span>
-                    </a>
-                </li>
-                <li id="salud" class="nav-item" >
-                    <hr class="horizontal dark" />
-                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGOS EN SITIO</h6>
-                </li>
-                <li id="pagos" class="nav-item" >
-                    <a href="/CobroEnSitio/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-money morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Cobrar en Sitio</span>
-                    </a>
-                </li>
-                <li id="pruebas_usuario" class="nav-item" >
-                    <a href="/PruebasCovidUsuarios/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-virus-slash morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Pruebas Covid Usuarios</span>
-                    </a>
-                </li>
-
-                <!-- <li id="pruebas_sitio" class="nav-item" >
-                    <a href="/PruebasCovidEnSitio/" class="nav-link" aria-controls="basicExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-virus morado-musa-text" ></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Pruebas Covid En Sitio</span>
-                    </a>
-                </li>-->
-
-                <li id="config" class="nav-item" >
-                    <hr class="horizontal dark" />
-                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OTROS</h6>
-                </li>
-                <li id="configuracion" class="nav-item" >
-                    <a href="/Configuracion/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-tools morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Configuración</span>
-                    </a>
-                </li>
-                <li id="util" class="nav-item" >
-                    <a data-bs-toggle="collapse" onclick="utilerias()" href="#utilerias" class="nav-link " aria-controls="utilerias" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-user-circle-o morado-musa-text"></span>
-                        </div>
-                        <span class="nav-link-text ms-1">Utilerias</span>
-                    </a>
-                    <div class="collapse " id="utilerias" hidden>
-                        <ul class="nav ms-4 ps-3">
-                            <li id="administradores" class="nav-item ">
-                                <a class="nav-link " href="/Administradores/">
-                                    <span class="sidenav-mini-icon"> A </span>
-                                    <span class="sidenav-normal">Administradores</span>
-                                </a>
-                            </li>
-                            <li id="perfiles" class="nav-item ">
-                                <a class="nav-link " href="/Perfiles/">
-                                    <span class="sidenav-mini-icon"> P </span>
-                                    <span class="sidenav-normal"> Perfiles </span>
-                                </a>
-                            </li>
-                            <li id="log" class="nav-item ">
-                                <a class="nav-link " href="/Log/">
-                                    <span class="sidenav-mini-icon"> L </span>
-                                    <span class="sidenav-normal"> Log </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-    </aside>
-html; 
-
-$footer =<<<html
-    <!-- jQuery -->
-
-        <script>
-            function catalogos() {
-                var catalogo = document.getElementById("catalogos");
-
-                if (catalogo.hasAttribute('hidden')) {
-                    catalogo.removeAttribute('hidden');
-                } else {
-                    catalogo.setAttribute('hidden','')
-                }
-            }
-
-            function utilerias() {
-                var utileria = document.getElementById("utilerias");
-
-                if (utileria.hasAttribute('hidden')) {
-                    utileria.removeAttribute('hidden');
-                } else {
-                    utileria.setAttribute('hidden','')
-                }
-            }
-        </script>
-
-        <script src="/js/jquery.min.js"></script>
-        <!--   Core JS Files   -->
-        <script src="../../assets/js/core/popper.min.js"></script>
-        <script src="../../assets/js/core/bootstrap.min.js"></script>
-        <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-        <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-        <!-- Kanban scripts -->
-        <script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
-        <script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
-        <script src="../../assets/js/plugins/chartjs.min.js"></script>
-        <script src="../../assets/js/plugins/threejs.js"></script>
-        <script src="../../assets/js/plugins/orbit-controls.js"></script>
-
-        <!-- Github buttons -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
+//         </div>
+//         <hr class="horizontal dark mt-0">
 
 
-        <!-- VIEJO INICIO -->
-        <script src="/js/jquery.min.js"></script>
+//         <div class="collapse navbar-collapse  w-auto h-auto h-100" id="sidenav-collapse-main">
+//             <ul class="navbar-nav">
+//                 <!--li class="nav-item">
+//                     <a href="/Principal/" class="nav-link active" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-home text-white" ></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Principal</span>
+//                     </a>
+//                 </li-->
 
-        <script src="/js/custom.min.js"></script>
+//                 <li id="principal" class="nav-item" >
+//                     <a href="/Principal/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-home morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Principal</span>
+//                     </a>
+//                 </li>
 
-        <script src="/js/validate/jquery.validate.js"></script>
-        <script src="/js/alertify/alertify.min.js"></script>
-        <script src="/js/login.js"></script>
-        <!-- VIEJO FIN -->
+//                 <li id="usuarios" class="nav-item">
+//                     <a href="/Usuarios/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-users morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Usuarios</span>
+//                     </a>
+//                 </li>
 
-        <!--   Core JS Files   -->
-        <script src="../../assets/js/core/popper.min.js"></script>
-        <script src="../../assets/js/core/bootstrap.min.js"></script>
-        <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-        <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-        <!-- Kanban scripts -->
-        <script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
-        <script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
-        <script src="../../assets/js/plugins/chartjs.min.js"></script>
-        <script src="../../assets/js/plugins/threejs.js"></script>
-        <script src="../../assets/js/plugins/orbit-controls.js"></script>
+//                 <li id="cursos" class="nav-item">
+//                     <a href="/Cursos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fas fa-play morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Cursos</span>
+//                     </a>
+//                 </li>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+//                 <li id="transmision" class="nav-item">
+//                     <a href="/Transmision/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fas fa-play morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Transmision</span>
+//                     </a>
+//                 </li>
 
-        <script src="http://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
-        <link rel="stylesheet" href="http://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
+//                 <li id="profesores" class="nav-item">
+//                     <a href="/Profesores/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-users morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Profesores</span>
+//                     </a>
+//                 </li>
 
-        <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
-        
-        <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
-        <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
+//                 <li id="encuestas" class="nav-item">
+//                     <a href="/Encuestas/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-users morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Encuestas</span>
+//                     </a>
+//                 </li>
 
-        <script src="/js/jquery.min.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <!-- jQuery -->
-        <script src="/js/jquery.min.js"></script>
-        <!--   Core JS Files   -->
-        <script src="/assets/js/core/popper.min.js"></script>
-        <script src="/assets/js/core/bootstrap.min.js"></script>
-        <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
-        <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
-        <!-- Kanban scripts -->
-        <script src="/assets/js/plugins/dragula/dragula.min.js"></script>
-        <script src="/assets/js/plugins/jkanban/jkanban.js"></script>
-        <script src="/assets/js/plugins/chartjs.min.js"></script>
-        <script src="/assets/js/plugins/threejs.js"></script>
-        <script src="/assets/js/plugins/orbit-controls.js"></script>
-
-        <!-- Github buttons -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-        <script>
-        var ctx = document.getElementById("chart-bars").getContext("2d");
-
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [{
-                label: "Sales",
-                tension: 0.4,
-                borderWidth: 0,
-                borderRadius: 4,
-                borderSkipped: false,
-                backgroundColor: "#fff",
-                data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-                maxBarThickness: 6
-            }, ],
-            },
-            options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                display: false,
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                grid: {
-                    drawBorder: false,
-                    display: false,
-                    drawOnChartArea: false,
-                    drawTicks: false,
-                },
-                ticks: {
-                    suggestedMin: 0,
-                    suggestedMax: 500,
-                    beginAtZero: true,
-                    padding: 15,
-                    font: {
-                    size: 14,
-                    family: "Open Sans",
-                    style: 'normal',
-                    lineHeight: 2
-                    },
-                    color: "#fff"
-                },
-                },
-                x: {
-                grid: {
-                    drawBorder: false,
-                    display: false,
-                    drawOnChartArea: false,
-                    drawTicks: false
-                },
-                ticks: {
-                    display: false
-                },
-                },
-            },
-            },
-        });
+//                 <li id="programa" class="nav-item">
+//                     <a href="/Programa/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-users morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Programa</span>
+//                     </a>
+//                 </li>
 
 
-        var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+//                 <li id="asistentes" class="nav-item" >
+//                     <a href="/Asistentes/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-users morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Asistentes</span>
+//                     </a>
+//                 </li>
+//                 <li id="vuelos" class="nav-item" >
+//                     <a href="/Vuelos/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-plane morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Vuelos</span>
+//                     </a>
+//                 </li>
+//                 <!--<li id="pickup" class="nav-item" >
+//                     <a href="/PickUp/" class="nav-link " aria-controls="ecommerceExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-bus morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">PickUp</span>
+//                     </a>
+//                 </li>-->
+//                <!-- <li id="habitaciones" class="nav-item" >
+//                     <a href="/Habitaciones/" class="nav-link " aria-controls="authExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-hotel morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Habitaciones</span>
+//                     </a>
+//                 </li>-->
 
-        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+//                 <li id="asistencias" class="nav-item" >
+//                     <a href="/Asistencias/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-bell morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Asistencias</span>
+//                     </a>
+//                 </li>
+//                 <li id="salud" class="nav-item" >
+//                     <hr class="horizontal dark" />
+//                     <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGOS EN SITIO</h6>
+//                 </li>
+//                 <li id="pagos" class="nav-item" >
+//                     <a href="/CobroEnSitio/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-money morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Cobrar en Sitio</span>
+//                     </a>
+//                 </li>
+//                 <li id="pruebas_usuario" class="nav-item" >
+//                     <a href="/PruebasCovidUsuarios/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-virus-slash morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Pruebas Covid Usuarios</span>
+//                     </a>
+//                 </li>
 
-        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+//                 <!-- <li id="pruebas_sitio" class="nav-item" >
+//                     <a href="/PruebasCovidEnSitio/" class="nav-link" aria-controls="basicExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-virus morado-musa-text" ></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Pruebas Covid En Sitio</span>
+//                     </a>
+//                 </li>-->
 
-        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+//                 <li id="config" class="nav-item" >
+//                     <hr class="horizontal dark" />
+//                     <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">OTROS</h6>
+//                 </li>
+//                 <li id="configuracion" class="nav-item" >
+//                     <a href="/Configuracion/" class="nav-link " aria-controls="applicationsExamples" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-tools morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Configuración</span>
+//                     </a>
+//                 </li>
+//                 <li id="util" class="nav-item" >
+//                     <a data-bs-toggle="collapse" onclick="utilerias()" href="#utilerias" class="nav-link " aria-controls="utilerias" role="button" aria-expanded="false">
+//                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+//                             <span class="fa fa-user-circle-o morado-musa-text"></span>
+//                         </div>
+//                         <span class="nav-link-text ms-1">Utilerias</span>
+//                     </a>
+//                     <div class="collapse " id="utilerias" hidden>
+//                         <ul class="nav ms-4 ps-3">
+//                             <li id="administradores" class="nav-item ">
+//                                 <a class="nav-link " href="/Administradores/">
+//                                     <span class="sidenav-mini-icon"> A </span>
+//                                     <span class="sidenav-normal">Administradores</span>
+//                                 </a>
+//                             </li>
+//                             <li id="perfiles" class="nav-item ">
+//                                 <a class="nav-link " href="/Perfiles/">
+//                                     <span class="sidenav-mini-icon"> P </span>
+//                                     <span class="sidenav-normal"> Perfiles </span>
+//                                 </a>
+//                             </li>
+//                             <li id="log" class="nav-item ">
+//                                 <a class="nav-link " href="/Log/">
+//                                     <span class="sidenav-mini-icon"> L </span>
+//                                     <span class="sidenav-normal"> Log </span>
+//                                 </a>
+//                             </li>
+//                         </ul>
+//                     </div>
+//                 </li>
+//             </ul>
+//         </div>
 
-        new Chart(ctx2, {
-            type: "line",
-            data: {
-            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [{
-                label: "Mobile apps",
-                tension: 0.4,
-                borderWidth: 0,
-                pointRadius: 0,
-                borderColor: "#cb0c9f",
-                borderWidth: 3,
-                backgroundColor: gradientStroke1,
-                fill: true,
-                data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                maxBarThickness: 6
+//     </aside>
+// html;
 
-                },
-                {
-                label: "Websites",
-                tension: 0.4,
-                borderWidth: 0,
-                pointRadius: 0,
-                borderColor: "#3A416F",
-                borderWidth: 3,
-                backgroundColor: gradientStroke2,
-                fill: true,
-                data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-                maxBarThickness: 6
-                },
-            ],
-            },
-            options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                display: false,
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                grid: {
-                    drawBorder: false,
-                    display: true,
-                    drawOnChartArea: true,
-                    drawTicks: false,
-                    borderDash: [5, 5]
-                },
-                ticks: {
-                    display: true,
-                    padding: 10,
-                    color: '#b2b9bf',
-                    font: {
-                    size: 11,
-                    family: "Open Sans",
-                    style: 'normal',
-                    lineHeight: 2
-                    },
-                }
-                },
-                x: {
-                grid: {
-                    drawBorder: false,
-                    display: false,
-                    drawOnChartArea: false,
-                    drawTicks: false,
-                    borderDash: [5, 5]
-                },
-                ticks: {
-                    display: true,
-                    color: '#b2b9bf',
-                    padding: 20,
-                    font: {
-                    size: 11,
-                    family: "Open Sans",
-                    style: 'normal',
-                    lineHeight: 2
-                    },
-                }
-                },
-            },
-            },
-        });
+// $footer =<<<html
+//     <!-- jQuery -->
+
+//         <script>
+//             function catalogos() {
+//                 var catalogo = document.getElementById("catalogos");
+
+//                 if (catalogo.hasAttribute('hidden')) {
+//                     catalogo.removeAttribute('hidden');
+//                 } else {
+//                     catalogo.setAttribute('hidden','')
+//                 }
+//             }
+
+//             function utilerias() {
+//                 var utileria = document.getElementById("utilerias");
+
+//                 if (utileria.hasAttribute('hidden')) {
+//                     utileria.removeAttribute('hidden');
+//                 } else {
+//                     utileria.setAttribute('hidden','')
+//                 }
+//             }
+//         </script>
+
+//         <script src="/js/jquery.min.js"></script>
+//         <!--   Core JS Files   -->
+//         <script src="../../assets/js/core/popper.min.js"></script>
+//         <script src="../../assets/js/core/bootstrap.min.js"></script>
+//         <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+//         <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+//         <!-- Kanban scripts -->
+//         <script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
+//         <script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
+//         <script src="../../assets/js/plugins/chartjs.min.js"></script>
+//         <script src="../../assets/js/plugins/threejs.js"></script>
+//         <script src="../../assets/js/plugins/orbit-controls.js"></script>
+
+//         <!-- Github buttons -->
+//         <script async defer src="https://buttons.github.io/buttons.js"></script>
+//         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+//         <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
 
 
-        (function() {
-            const container = document.getElementById("globe");
-            const canvas = container.getElementsByTagName("canvas")[0];
+//         <!-- VIEJO INICIO -->
+//         <script src="/js/jquery.min.js"></script>
 
-            const globeRadius = 100;
-            const globeWidth = 4098 / 2;
-            const globeHeight = 1968 / 2;
+//         <script src="/js/custom.min.js"></script>
 
-            function convertFlatCoordsToSphereCoords(x, y) {
-            let latitude = ((x - globeWidth) / globeWidth) * -180;
-            let longitude = ((y - globeHeight) / globeHeight) * -90;
-            latitude = (latitude * Math.PI) / 180;
-            longitude = (longitude * Math.PI) / 180;
-            const radius = Math.cos(longitude) * globeRadius;
+//         <script src="/js/validate/jquery.validate.js"></script>
+//         <script src="/js/alertify/alertify.min.js"></script>
+//         <script src="/js/login.js"></script>
+//         <!-- VIEJO FIN -->
 
-            return {
-                x: Math.cos(latitude) * radius,
-                y: Math.sin(longitude) * globeRadius,
-                z: Math.sin(latitude) * radius
-            };
-            }
+//         <!--   Core JS Files   -->
+//         <script src="../../assets/js/core/popper.min.js"></script>
+//         <script src="../../assets/js/core/bootstrap.min.js"></script>
+//         <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+//         <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+//         <!-- Kanban scripts -->
+//         <script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
+//         <script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
+//         <script src="../../assets/js/plugins/chartjs.min.js"></script>
+//         <script src="../../assets/js/plugins/threejs.js"></script>
+//         <script src="../../assets/js/plugins/orbit-controls.js"></script>
 
-            function makeMagic(points) {
-            const {
-                width,
-                height
-            } = container.getBoundingClientRect();
+//         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+//         <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-            // 1. Setup scene
-            const scene = new THREE.Scene();
-            // 2. Setup camera
-            const camera = new THREE.PerspectiveCamera(45, width / height);
-            // 3. Setup renderer
-            const renderer = new THREE.WebGLRenderer({
-                canvas,
-                antialias: true
-            });
-            renderer.setSize(width, height);
-            // 4. Add points to canvas
-            // - Single geometry to contain all points.
-            const mergedGeometry = new THREE.Geometry();
-            // - Material that the dots will be made of.
-            const pointGeometry = new THREE.SphereGeometry(0.5, 1, 1);
-            const pointMaterial = new THREE.MeshBasicMaterial({
-                color: "#989db5",
-            });
+//         <script src="http://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
+//         <link rel="stylesheet" href="http://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
 
-            for (let point of points) {
-                const {
-                x,
-                y,
-                z
-                } = convertFlatCoordsToSphereCoords(
-                point.x,
-                point.y,
-                width,
-                height
-                );
+//         <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
+//         <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
 
-                if (x && y && z) {
-                pointGeometry.translate(x, y, z);
-                mergedGeometry.merge(pointGeometry);
-                pointGeometry.translate(-x, -y, -z);
-                }
-            }
+//         <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
+//         <link rel="stylesheet" href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" />
 
-            const globeShape = new THREE.Mesh(mergedGeometry, pointMaterial);
-            scene.add(globeShape);
+//         <script src="/js/jquery.min.js"></script>
+//         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-            container.classList.add("peekaboo");
+//         <!-- jQuery -->
+//         <script src="/js/jquery.min.js"></script>
+//         <!--   Core JS Files   -->
+//         <script src="/assets/js/core/popper.min.js"></script>
+//         <script src="/assets/js/core/bootstrap.min.js"></script>
+//         <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+//         <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+//         <!-- Kanban scripts -->
+//         <script src="/assets/js/plugins/dragula/dragula.min.js"></script>
+//         <script src="/assets/js/plugins/jkanban/jkanban.js"></script>
+//         <script src="/assets/js/plugins/chartjs.min.js"></script>
+//         <script src="/assets/js/plugins/threejs.js"></script>
+//         <script src="/assets/js/plugins/orbit-controls.js"></script>
 
-            // Setup orbital controls
-            camera.orbitControls = new THREE.OrbitControls(camera, canvas);
-            camera.orbitControls.enableKeys = false;
-            camera.orbitControls.enablePan = false;
-            camera.orbitControls.enableZoom = false;
-            camera.orbitControls.enableDamping = false;
-            camera.orbitControls.enableRotate = true;
-            camera.orbitControls.autoRotate = true;
-            camera.position.z = -265;
+//         <!-- Github buttons -->
+//         <script async defer src="https://buttons.github.io/buttons.js"></script>
+//         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+//         <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
+//         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+//         <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-            function animate() {
-                // orbitControls.autoRotate is enabled so orbitControls.update
-                // must be called inside animation loop.
-                camera.orbitControls.update();
-                requestAnimationFrame(animate);
-                renderer.render(scene, camera);
-            }
-            animate();
-            }
+//         <script>
+//         var ctx = document.getElementById("chart-bars").getContext("2d");
 
-            function hasWebGL() {
-            const gl =
-                canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-            if (gl && gl instanceof WebGLRenderingContext) {
-                return true;
-            } else {
-                return false;
-            }
-            }
+//         new Chart(ctx, {
+//             type: "bar",
+//             data: {
+//             labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+//             datasets: [{
+//                 label: "Sales",
+//                 tension: 0.4,
+//                 borderWidth: 0,
+//                 borderRadius: 4,
+//                 borderSkipped: false,
+//                 backgroundColor: "#fff",
+//                 data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
+//                 maxBarThickness: 6
+//             }, ],
+//             },
+//             options: {
+//             responsive: true,
+//             maintainAspectRatio: false,
+//             plugins: {
+//                 legend: {
+//                 display: false,
+//                 }
+//             },
+//             interaction: {
+//                 intersect: false,
+//                 mode: 'index',
+//             },
+//             scales: {
+//                 y: {
+//                 grid: {
+//                     drawBorder: false,
+//                     display: false,
+//                     drawOnChartArea: false,
+//                     drawTicks: false,
+//                 },
+//                 ticks: {
+//                     suggestedMin: 0,
+//                     suggestedMax: 500,
+//                     beginAtZero: true,
+//                     padding: 15,
+//                     font: {
+//                     size: 14,
+//                     family: "Open Sans",
+//                     style: 'normal',
+//                     lineHeight: 2
+//                     },
+//                     color: "#fff"
+//                 },
+//                 },
+//                 x: {
+//                 grid: {
+//                     drawBorder: false,
+//                     display: false,
+//                     drawOnChartArea: false,
+//                     drawTicks: false
+//                 },
+//                 ticks: {
+//                     display: false
+//                 },
+//                 },
+//             },
+//             },
+//         });
 
-            function init() {
-            if (hasWebGL()) {
-                window
-                window.fetch("https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-dashboard-pro/assets/js/points.json")
-                .then(response => response.json())
-                .then(data => {
-                    makeMagic(data.points);
-                });
-            }
-            }
-            init();
-        })();
-        </script>
-        <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-            damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-        </script>
-        <!-- Github buttons -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
-html;
 
+//         var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+//         var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+//         gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+//         gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+//         gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
+//         var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+//         gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+//         gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+//         gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+
+//         new Chart(ctx2, {
+//             type: "line",
+//             data: {
+//             labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+//             datasets: [{
+//                 label: "Mobile apps",
+//                 tension: 0.4,
+//                 borderWidth: 0,
+//                 pointRadius: 0,
+//                 borderColor: "#cb0c9f",
+//                 borderWidth: 3,
+//                 backgroundColor: gradientStroke1,
+//                 fill: true,
+//                 data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+//                 maxBarThickness: 6
+
+//                 },
+//                 {
+//                 label: "Websites",
+//                 tension: 0.4,
+//                 borderWidth: 0,
+//                 pointRadius: 0,
+//                 borderColor: "#3A416F",
+//                 borderWidth: 3,
+//                 backgroundColor: gradientStroke2,
+//                 fill: true,
+//                 data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+//                 maxBarThickness: 6
+//                 },
+//             ],
+//             },
+//             options: {
+//             responsive: true,
+//             maintainAspectRatio: false,
+//             plugins: {
+//                 legend: {
+//                 display: false,
+//                 }
+//             },
+//             interaction: {
+//                 intersect: false,
+//                 mode: 'index',
+//             },
+//             scales: {
+//                 y: {
+//                 grid: {
+//                     drawBorder: false,
+//                     display: true,
+//                     drawOnChartArea: true,
+//                     drawTicks: false,
+//                     borderDash: [5, 5]
+//                 },
+//                 ticks: {
+//                     display: true,
+//                     padding: 10,
+//                     color: '#b2b9bf',
+//                     font: {
+//                     size: 11,
+//                     family: "Open Sans",
+//                     style: 'normal',
+//                     lineHeight: 2
+//                     },
+//                 }
+//                 },
+//                 x: {
+//                 grid: {
+//                     drawBorder: false,
+//                     display: false,
+//                     drawOnChartArea: false,
+//                     drawTicks: false,
+//                     borderDash: [5, 5]
+//                 },
+//                 ticks: {
+//                     display: true,
+//                     color: '#b2b9bf',
+//                     padding: 20,
+//                     font: {
+//                     size: 11,
+//                     family: "Open Sans",
+//                     style: 'normal',
+//                     lineHeight: 2
+//                     },
+//                 }
+//                 },
+//             },
+//             },
+//         });
+
+
+//         (function() {
+//             const container = document.getElementById("globe");
+//             const canvas = container.getElementsByTagName("canvas")[0];
+
+//             const globeRadius = 100;
+//             const globeWidth = 4098 / 2;
+//             const globeHeight = 1968 / 2;
+
+//             function convertFlatCoordsToSphereCoords(x, y) {
+//             let latitude = ((x - globeWidth) / globeWidth) * -180;
+//             let longitude = ((y - globeHeight) / globeHeight) * -90;
+//             latitude = (latitude * Math.PI) / 180;
+//             longitude = (longitude * Math.PI) / 180;
+//             const radius = Math.cos(longitude) * globeRadius;
+
+//             return {
+//                 x: Math.cos(latitude) * radius,
+//                 y: Math.sin(longitude) * globeRadius,
+//                 z: Math.sin(latitude) * radius
+//             };
+//             }
+
+//             function makeMagic(points) {
+//             const {
+//                 width,
+//                 height
+//             } = container.getBoundingClientRect();
+
+//             // 1. Setup scene
+//             const scene = new THREE.Scene();
+//             // 2. Setup camera
+//             const camera = new THREE.PerspectiveCamera(45, width / height);
+//             // 3. Setup renderer
+//             const renderer = new THREE.WebGLRenderer({
+//                 canvas,
+//                 antialias: true
+//             });
+//             renderer.setSize(width, height);
+//             // 4. Add points to canvas
+//             // - Single geometry to contain all points.
+//             const mergedGeometry = new THREE.Geometry();
+//             // - Material that the dots will be made of.
+//             const pointGeometry = new THREE.SphereGeometry(0.5, 1, 1);
+//             const pointMaterial = new THREE.MeshBasicMaterial({
+//                 color: "#989db5",
+//             });
+
+//             for (let point of points) {
+//                 const {
+//                 x,
+//                 y,
+//                 z
+//                 } = convertFlatCoordsToSphereCoords(
+//                 point.x,
+//                 point.y,
+//                 width,
+//                 height
+//                 );
+
+//                 if (x && y && z) {
+//                 pointGeometry.translate(x, y, z);
+//                 mergedGeometry.merge(pointGeometry);
+//                 pointGeometry.translate(-x, -y, -z);
+//                 }
+//             }
+
+//             const globeShape = new THREE.Mesh(mergedGeometry, pointMaterial);
+//             scene.add(globeShape);
+
+//             container.classList.add("peekaboo");
+
+//             // Setup orbital controls
+//             camera.orbitControls = new THREE.OrbitControls(camera, canvas);
+//             camera.orbitControls.enableKeys = false;
+//             camera.orbitControls.enablePan = false;
+//             camera.orbitControls.enableZoom = false;
+//             camera.orbitControls.enableDamping = false;
+//             camera.orbitControls.enableRotate = true;
+//             camera.orbitControls.autoRotate = true;
+//             camera.position.z = -265;
+
+//             function animate() {
+//                 // orbitControls.autoRotate is enabled so orbitControls.update
+//                 // must be called inside animation loop.
+//                 camera.orbitControls.update();
+//                 requestAnimationFrame(animate);
+//                 renderer.render(scene, camera);
+//             }
+//             animate();
+//             }
+
+//             function hasWebGL() {
+//             const gl =
+//                 canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+//             if (gl && gl instanceof WebGLRenderingContext) {
+//                 return true;
+//             } else {
+//                 return false;
+//             }
+//             }
+
+//             function init() {
+//             if (hasWebGL()) {
+//                 window
+//                 window.fetch("https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-dashboard-pro/assets/js/points.json")
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     makeMagic(data.points);
+//                 });
+//             }
+//             }
+//             init();
+//         })();
+//         </script>
+//         <script>
+//         var win = navigator.platform.indexOf('Win') > -1;
+//         if (win && document.querySelector('#sidenav-scrollbar')) {
+//             var options = {
+//             damping: '0.5'
+//             }
+//             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+//         }
+//         </script>
+//         <!-- Github buttons -->
+//         <script async defer src="https://buttons.github.io/buttons.js"></script>
+//         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+//         <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
+// html;
+
+        $all_re = UsuariosDao::getAll();
+        $this->setClaveRA($all_re);
 
         $especialidades = EspecialidadesDao::getAll();
         $optionEspecialidad = '';
@@ -763,13 +755,13 @@ html;
         }
 
         View::set('header',($header));
-        View::set('asideMenu',$menu);
-        View::set('footer',$footer);
+        // View::set('asideMenu',$menu);
+        // View::set('footer',$footer);
         View::set('optionEspecialidad', $optionEspecialidad);
         View::set('optionPais', $optionPais);
-        
+
         // View::set('tabla', $this->getAllColaboradoresAsignados());
-        View::render("usuarios_all");
+        View::render("usuario_all");
     }
 
     public function getEstadoPais(){
@@ -784,7 +776,8 @@ html;
 
     //Metodo para reaslizar busqueda de usuarios, sin este metodo no podemos obtener informacion en la vista
     public function Usuario() {
-        $search = $_POST['search'];       
+        $search = $_POST['search'];
+
 
         // $all_ra = AsistentesDao::getAllRegistrosAcceso();
         // $this->setTicketVirtual($all_ra);
@@ -794,8 +787,8 @@ html;
         foreach (GeneralDao::getAllColaboradoresByName($search) as $key => $value) {
             $modalEdit .= $this->generarModalEditUser($value);
         }
-        
-           
+
+
 
         $especialidades = EspecialidadesDao::getAll();
         $optionEspecialidad = '';
@@ -818,13 +811,13 @@ html;
         View::set('optionEspecialidad', $optionEspecialidad);
         View::set('optionPais', $optionPais);
         View::set('tabla', $this->getAllColaboradoresAsignadosByName($search));
-        View::set('modalEdit',$modalEdit);  
+        View::set('modalEdit',$modalEdit);
         View::render("usuarios_all");
     }
 
     public function saveData()
     {
-        $data = new \stdClass();            
+        $data = new \stdClass();
         $data->_nombre = MasterDom::getData('nombre');
         $data->_apellidop = MasterDom::getData('apellidop');
         $data->_apellidom = MasterDom::getData('apellidom');
@@ -851,7 +844,7 @@ html;
 
     public function updateData()
     {
-        $data = new \stdClass();            
+        $data = new \stdClass();
         $data->_nombre = MasterDom::getData('nombre');
         $data->_apellidop = MasterDom::getData('apellidop');
         $data->_apellidom = MasterDom::getData('apellidom');
@@ -896,7 +889,7 @@ html;
         foreach ($all_ra as $key => $value) {
             if ($value['clave'] == '' || $value['clave'] == NULL || $value['clave'] == 'NULL') {
                 $clave_10 = $this->generateRandomString(10);
-                AsistentesDao::updateClaveRA($value['id_registro_acceso'], $clave_10);
+                UsuariosDao::updateClaveRA($value['id_registrado'], $clave_10);
             }
         }
     }
@@ -1066,34 +1059,34 @@ html;
 
 // exit;
 
-        
-            View::set('asideMenu',$this->_contenedor->asideMenu());        
-            View::set('header', $this->_contenedor->header($extraHeader));
-            View::set('footer', $this->_contenedor->footer($extraFooter));
-            // View::set('tabla', $this->getComprobanteVacunacionById($id));
-            // View::set('tabla_prueba_covid', $this->getPruebasCovidById($id));
-            View::set('tablaUsersCursos',$this->getUsersCourseByClave($id));
-            View::render("usuarios_detalles");
+
+        View::set('asideMenu',$this->_contenedor->asideMenu());
+        View::set('header', $this->_contenedor->header($extraHeader));
+        View::set('footer', $this->_contenedor->footer($extraFooter));
+        // View::set('tabla', $this->getComprobanteVacunacionById($id));
+        // View::set('tabla_prueba_covid', $this->getPruebasCovidById($id));
+        View::set('tablaUsersCursos',$this->getUsersCourseByClave($id));
+        View::render("usuarios_detalles");
     }
 
     public function getUsersCourseByClave($clave)
-  {
+    {
 
-    $html = "";
-    foreach (CursosDao::getAllUsersCourseByClave($clave) as $key => $value) {
-        $duracion = $value['duracion'];
-    
-        $duracion_sec = substr($duracion,strlen($duracion)-2,2);
-        $duracion_min = substr($duracion,strlen($duracion)-5,2);
-        $secs_totales = (intval($duracion_min)*60)+intval($duracion_sec);
+        $html = "";
+        foreach (CursosDao::getAllUsersCourseByClave($clave) as $key => $value) {
+            $duracion = $value['duracion'];
 
-
-       $porcentaje_num = ($value['segundos']*100)/($secs_totales);
-       $porcentaje = number_format($porcentaje_num, 0);
+            $duracion_sec = substr($duracion,strlen($duracion)-2,2);
+            $duracion_min = substr($duracion,strlen($duracion)-5,2);
+            $secs_totales = (intval($duracion_min)*60)+intval($duracion_sec);
 
 
+            $porcentaje_num = ($value['segundos']*100)/($secs_totales);
+            $porcentaje = number_format($porcentaje_num, 0);
 
-      $html .= <<<html
+
+
+            $html .= <<<html
             <tr>
                 <td>
                     <div class="d-flex px-3 py-1">
@@ -1130,10 +1123,10 @@ html;
                 </td>
         </tr>
 html;
-    }
+        }
 
-    return $html;
-  }
+        return $html;
+    }
 
     public function generaterQr($clave_ticket)
     {
@@ -1264,13 +1257,11 @@ html;
         echo json_encode($data);
     }
 
-
-
     public function getAllColaboradoresAsignadosByName($name){
 
         $html = "";
         foreach (GeneralDao::getAllColaboradoresByName($name) as $key => $value) {
-          
+
 
             $value['apellidop'] = utf8_encode($value['apellidop']);
             $value['apellidom'] = utf8_encode($value['apellidom']);
@@ -1313,17 +1304,18 @@ html;
          
                 <td style="text-align:left; vertical-align:middle;"> 
                     
-                    <span>{$value['especialidad']}</span>
+                    <span>{$value['nombre_especialidad']}</span>
 
                 </td>
 
                 <td>
                      <button class="btn bg-gradient-primary mb-0 btn-icon-only" type="button" title="Editar Usuario" data-toggle="modal" data-target="#editar-usuario{$value['id_registrado']}"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                     <a href="/Usuarios/abrirpdfGafete/{$value['clave']}/{$value['ticket_virtual']}" class="btn mb-0 bg-pink btn-icon-only morado-musa-text" title="Imprimir Gafetes" data-bs-placement="top" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Imprimir Gafetes" target="_blank"><i class="fas fa-print"> </i></a>
                 </td>
         </tr>
 html;
         }
-       
+
         return $html;
     }
 
@@ -1390,14 +1382,14 @@ html;
                                 <label class="control-label col-md-12 col-sm-1 col-xs-12" for="pais">País <span class="required">*</span></label>
                                 <select class="multisteps-form__select form-control all_input_select" name="pais" id="pais_edit" required>
 html;
-                                
-                                foreach(UsuariosDao::getPais() as $key => $value){
-                                    $selectedPais = ($value['id_pais'] == $datos['id_pais']) ? 'selected' : '';  
-                                    $modal .= <<<html
+
+        foreach(UsuariosDao::getPais() as $key => $value){
+            $selectedPais = ($value['id_pais'] == $datos['id_pais']) ? 'selected' : '';
+            $modal .= <<<html
                                             <option value="{$value['id_pais']}" $selectedPais>{$value['pais']}</option>
 html;
-                                }
-                            $modal .= <<<html
+        }
+        $modal .= <<<html
                                 </select>
                             </div>
 
@@ -1407,14 +1399,14 @@ html;
 html;
 
 
-                                foreach(UsuariosDao::getStateByCountry($datos['id_pais']) as $key => $value){
-                                    $selectedEstado = ($value['id_estado'] == $datos['id_estado']) ? 'selected' : '';  
-                                    $modal .= <<<html
+        foreach(UsuariosDao::getStateByCountry($datos['id_pais']) as $key => $value){
+            $selectedEstado = ($value['id_estado'] == $datos['id_estado']) ? 'selected' : '';
+            $modal .= <<<html
                                             <option value="{$value['id_estado']}" $selectedEstado>{$value['estado']}</option>
 html;
-                                }
-                                   
-                            $modal .= <<<html
+        }
+
+        $modal .= <<<html
 
                                 </select>
                             </div>
@@ -1435,361 +1427,36 @@ html;
         return $modal;
     }
 
-    public function getComprobanteVacunacionById($id)
-    {
+    public function abrirpdfGafete($clave, $clave_ticket = null){
 
-        $comprobantes = ComprobantesVacunacionDao::getComprobateByClaveUser($id);
-        $tabla = '';
-        foreach ($comprobantes as $key => $value) {
+        $this->generaterQr($clave_ticket);
+        $datos_user = UsuariosDao::getUserRegisterByClave($clave)[0];
 
-            $tabla .= <<<html
-        <tr>
-          <td class="text-center">
-            <span class="badge badge-success"><i class="fas fa-check"> </i> Aprobado</span> <br>
-            <span class="badge badge-secondary">Folio <i class="fas fa-hashtag"> </i> {$value['id_c_v']}</span>
-             <hr>
-             <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br><span class="fas fa-suitcase"> </span> {$value['nombre_ejecutivo']} <span class="badge badge-success" style="background-color:  {$value['color']}; color:white "><strong>{$value['nombre_linea_ejecutivo']}</strong></span></p>-->
-                      
-          </td>
-          <td>
-            <h6 class="mb-0 text-sm"> <span class="fas fa-user-md"> </span>  {$value['nombre_completo']}</h6>
-            <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fa-business-time" style="font-size: 13px;"></span><b> Bu: </b>{$value['nombre_bu']}</p>-->
-              <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-pills" style="font-size: 13px;"></span><b> Linea Principal: </b>{$value['nombre_linea']}</p>
-              <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fa-hospital" style="font-size: 13px;"></span><b> Posición: </b>{$value['nombre_posicion']}</p>-->
-
-            <hr>
-
-              <!--p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br></p-->
-
-              <!--p class="text-sm font-weight-bold mb-0 "><span class="fa fa-whatsapp" style="font-size: 13px; color:green;"></span><b> </b>{$value['telefono']}</p>
-              <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-mail-bulk" style="font-size: 13px;"></span><b>  </b><a "mailto:{$value['email']}">{$value['email']}</a></p-->
-
-              <div class="d-flex flex-column justify-content-center">
-                  <u><a href="mailto:{$value['email']}"><h6 class="mb-0 text-sm"><span class="fa fa-mail-bulk" style="font-size: 13px"></span> {$value['email']}</h6></a></u>
-                  <u><a href="https://api.whatsapp.com/send?phone=52{$value['telefono']}&text=Buen%20d%C3%ADa,%20te%20contacto%20de%20parte%20del%20Equipo%20Grupo%20LAHE%20%F0%9F%98%80" target="_blank"><p class="text-sm font-weight-bold text-secondary mb-0"><span class="fa fa-whatsapp" style="font-size: 13px; color:green;"></span> {$value['telefono']}</p></a></u>
-              </div>
-          </td>
-          <td>
-            <p class="text-center" style="font-size: small;"><span class="fa fa-calendar-check-o" style="font-size: 13px;"></span> Fecha Carga: {$value['fecha_carga_documento']}</p>
-            <p class="text-center" style="font-size: small;"><span class="fa fa-syringe" style="font-size: 13px;"></span> # Dosis: {$value['numero_dosis']}</p>
-            <p class="text-center" style="font-size: small;"><span class="fa fa-cubes" style="font-size: 13px;"></span> <strong>Marca: {$value['marca_dosis']}</strong></p>
-          </td>
-          <td class="text-center">
-            <button type="button" class="btn bg-gradient-primary btn_iframe" data-document="{$value['documento']}" data-toggle="modal" data-target="#ver-documento-{$value['id_c_v']}">
-              <i class="fas fa-eye"></i>
-            </button>
-          </td>
-        </tr>
-
-        <div class="modal fade" id="ver-documento-{$value['id_c_v']}" tabindex="-1" role="dialog" aria-labelledby="ver-documento-{$value['id_c_v']}" aria-hidden="true">
-          <div class="modal-dialog" role="document" style="max-width: 1000px;">
-            <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Comprobante de Vacunación</h5>
-                  <span type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
-                      X
-                  </span>
-              </div>
-              <div class="modal-body bg-gray-200">
-                <div class="row">
-                  <div class="col-md-8 col-12">
-                    <div class="card card-body mb-4 iframe">
-                      <!--<iframe src="https://registro.foromusa.com/comprobante_vacunacion/{$value['documento']}" style="width:100%; height:700px;" frameborder="0" >
-                      </iframe>-->
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-12">
-                    <div class="card card-body mb-4">
-                      <h5>Datos Personales</h5>
-                      <div class="mb-2">
-                        <h6 class="fas fa-user"> </h6>
-                        <span> <b>Nombre:</b> {$value['nombre_completo']}</span>
-                        <span class="badge badge-success">Aprobado</span>
-                      </div>
-                      <!-- <div class="mb-2">
-                        <h6 class="fas fa-address-card"> </h6>
-                        <span> <b>Número de empleado:</b> {$value['numero_empleado']}</span>
-                      </div>
-                      <div class="mb-2">
-                        <h6 class="fas fa-business-time"> </h6>
-                        <span> <b>Bu:</b> {$value['nombre_bu']}</span>
-                      </div>-->
-                      <div class="mb-2">
-                        <h6 class="fas fa-pills"> </h6>
-                        <span> <b>Línea:</b> {$value['nombre_linea']}</span>
-                      </div>
-                      <!--<div class="mb-2">
-                        <h6 class="fas fa-hospital"> </h6>
-                        <span> <b>Posición:</b> {$value['nombre_posicion']}</span>
-                      </div>-->
-                      <div class="mb-2">
-                        <h6 class="fa fa-mail-bulk"> </h6>
-                        <span> <b>Correo Electrónico:</b> <u><a href="mailto:{$value['email']}">{$value['email']}</a></u></span>
-                      </div>
-                      <div class="mb-2">
-                      <h6 class="fa fa-whatsapp" style="font-size: 13px; color:green;"> </h6>
-                      <span> <b></b> <u><a href="https://api.whatsapp.com/send?phone=52{$value['telefono']}&text=Buen%20d%C3%ADa,%20te%20contacto%20de%20parte%20del%20Equipo%20Grupo%20LAHE%20%F0%9F%98%80" target="_blank">{$value['telefono']}</a></u></span>
-                      </div>
-                    </div>
-                    <div class="card card-body mb-4">
-                      <h5>Datos del Comprobante</h5>
-                      <div class="mb-2">
-                        <h6 class="fas fa-calendar"> </h6>
-                        <span> <b>Fecha de alta:</b> {$value['fecha_carga_documento']}</span>
-                      </div>
-                      <div class="mb-2">
-                        <h6 class="fas fa-hashtag"> </h6>
-                        <span> <b>Número de Dósis:</b> {$value['numero_dosis']}</span>
-                      </div>
-                      <div class="mb-2">
-                        <h6 class="fas fa-syringe"> </h6>
-                        <span> <b>Marca:</b> {$value['marca_dosis']}</span>
-                      </div>
-                    </div>
-                    <div class="card card-body">
-                      <h5>Notas</h5>
-html;
-
-            if ($value['nota'] != '') {
-                $tabla .= <<<html
-                      <div class="editar_section" id="editar_section">
-                        <p id="">
-                          {$value['nota']}
-                        </p>
-                        <button id="editar_nota" type="button" class="btn bg-gradient-primary w-50 editar_nota" >
-                          Editar
-                        </button>
-                      </div>
-
-                      <div class="hide-section editar_section_textarea" id="editar_section_textarea">
-                        <form class="form-horizontal guardar_nota" id="guardar_nota" action="" method="POST">
-                          <input type="text" id="id_comprobante_vacuna" name="id_comprobante_vacuna" value="{$value['id_c_v']}" readonly style="display:none;"> 
-                          <p>
-                            <textarea class="form-control" name="nota" id="nota" placeholder="Agregar notas sobre la respuesta de la validación del documento" required> {$value['nota']} </textarea>
-                          </p>
-                          <div class="row">
-                            <div class="col-md-6 col-12">
-                            <button type="submit" id="guardar_editar_nota" class="btn bg-gradient-dark guardar_editar_nota" >
-                              Guardar
-                            </button>
-                            </div>
-                            <div class="col-md-6 col-12">
-                              <button type="button" id="cancelar_editar_nota" class="btn bg-gradient-danger cancelar_editar_nota" >
-                                Cancelar
-                              </button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-html;
-            } else {
-                $tabla .= <<<html
-                      <p>
-                        {$value['nota']}
-                      </p>
-                      <form class="form-horizontal guardar_nota" id="guardar_nota" action="" method="POST">
-                        <input type="text" id="id_comprobante_vacuna" name="id_comprobante_vacuna" value="{$value['id_c_v']}" readonly style="display:none;"> 
-                        <p>
-                          <textarea class="form-control" name="nota" id="nota" placeholder="Agregar notas sobre la respuesta de la validación del documento" required></textarea>
-                        </p>
-                        <button type="submit" class="btn bg-gradient-dark w-50" >
-                          Guardar
-                        </button>
-                      </form>
-html;
-            }
-            $tabla .= <<<html
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-html;
-        }
+        $nombre_completo = mb_strtoupper($datos_user['nombre']) . "\n\n" . mb_strtoupper($datos_user['apellidop']);
 
 
-        return $tabla;
-    }
 
-    public function getPruebasCovidById($id)
-    {
-        $pruebas = PruebasCovidUsuariosDao::getComprobateByIdUser($id);
-        $tabla = '';
-        foreach ($pruebas as $key => $value) {
-            $tabla .= <<<html
-        <tr>
-          <td class="text-center">
-            <span class="badge badge-success"><i class="fas fa-check"></i> Aprobada</span> <br>
-            <span class="badge badge-secondary">Folio <i class="fas fa-hashtag"> </i> {$value['id_c_v']}</span>
-            <hr>
-            <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br><span class="fas fa-suitcase"> </span> {$value['nombre_ejecutivo']} <span class="badge badge-success" style="background-color:  {$value['color']}; color:white "><strong>{$value['nombre_linea_ejecutivo']}</strong></span></p>-->
-          </td>
-          <td>
-            <h6 class="mb-0 text-sm"> <span class="fas fa-user-md"> </span>  {$value['nombre_completo']}</h6>
-            <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fa-business-time" style="font-size: 13px;"></span><b> Bu: </b>{$value['nombre_bu']}</p>-->
-              <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-pills" style="font-size: 13px;"></span><b> Linea Principal: </b>{$value['nombre_linea']}</p>
-              <!--<p class="text-sm font-weight-bold mb-0 "><span class="fa fa-hospital" style="font-size: 13px;"></span><b> Posición: </b>{$value['nombre_posicion']}</p>-->
+        $pdf = new \FPDF($orientation = 'P', $unit = 'mm', array(390, 152));
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 8);    //Letra Arial, negrita (Bold), tam. 20
+        $pdf->setY(1);
+        $pdf->SetFont('Arial', 'B', 16);
+        // $pdf->Image('qrs/gafetes/'.$clave_ticket.'.png', 50, 85, 50, 50);
+        $pdf->SetFont('Arial', 'B', 25);
+        // $pdf->Multicell(133, 80, $clave_ticket, 0, 'C');
 
-            <hr>
+        //$pdf->Image('1.png', 1, 0, 190, 190);
+        $pdf->SetFont('Arial', 'B', 5);    //Letra Arial, negrita (Bold), tam. 20
+        //$nombre = utf8_decode("Jonathan Valdez Martinez");
+        //$num_linea =utf8_decode("Línea: 39");
+        //$num_linea2 =utf8_decode("Línea: 39");
 
-              <!--p class="text-sm font-weight-bold mb-0 "><span class="fa fas fa-user-tie" style="font-size: 13px;"></span><b> Ejecutivo Asignado a Línea: </b><br></p-->
-
-              <!--p class="text-sm font-weight-bold mb-0 "><span class="fa fa-whatsapp" style="font-size: 13px; color:green;"></span><b> </b>{$value['telefono']}</p>
-              <p class="text-sm font-weight-bold mb-0 "><span class="fa fa-mail-bulk" style="font-size: 13px;"></span><b>  </b><a "mailto:{$value['email']}">{$value['email']}</a></p-->
-
-              <div class="d-flex flex-column justify-content-center">
-                  <u><a href="mailto:{$value['email']}"><h6 class="mb-0 text-sm"><span class="fa fa-mail-bulk" style="font-size: 13px"></span> {$value['email']}</h6></a></u>
-                  <u><a href="https://api.whatsapp.com/send?phone=52{$value['telefono']}&text=Buen%20d%C3%ADa,%20te%20contacto%20de%20parte%20del%20Equipo%20Grupo%20LAHE%20%F0%9F%98%80" target="_blank"><p class="text-sm font-weight-bold text-secondary mb-0"><span class="fa fa-whatsapp" style="font-size: 13px; color:green;"></span> {$value['telefono']}</p></a></u>
-              </div>
-          </td>
-          <td>
-            <p class="text-center" style="font-size: small;">{$value['fecha_carga_documento']}</p>
-          </td>
-          <td>
-            <p class="text-center" style="font-size: small;">{$value['tipo_prueba']}</p>
-          </td>
-          <td>
-            <p class="text-center" style="font-size: small;">{$value['resultado']}</p>
-          </td>
-          <td class="text-center">
-            <button type="button" class="btn bg-gradient-primary btn_iframe_pruebas_covid" data-document="{$value['documento']}" data-toggle="modal" data-target="#ver-documento-{$value['id_c_v']}">
-              <i class="fas fa-eye"></i>
-            </button>
-          </td>
-        </tr>
-
-        <div class="modal fade" id="ver-documento-{$value['id_c_v']}" tabindex="-1" role="dialog" aria-labelledby="ver-documento-{$value['id_c_v']}" aria-hidden="true">
-          <div class="modal-dialog" role="document" style="max-width: 1000px;">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Documento Prueba SARS-CoV-2</h5>
-                      <span type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
-                          X
-                      </span>
-                  </div>
-                  <div class="modal-body bg-gray-200">
-                    <div class="row">
-                      <div class="col-md-8 col-12">
-                        <div class="card card-body mb-4 iframe">
-                          <!--<iframe src="/PDF/{$value['documento']}" style="width:100%; height:700px;" frameborder="0" >
-                          </iframe>-->
-                        </div>
-                      </div>
-                      <div class="col-md-4 col-12">
-                        <div class="card card-body mb-4">
-                          <h5>Datos Personales</h5>
-                          <div class="mb-2">
-                            <h6 class="fas fa-user"> </h6>
-                            <span> <b>Nombre:</b> {$value['nombre_completo']}</span>
-                            <span class="badge badge-success">Aprobado</span>
-                          </div>
-                          <!--<div class="mb-2">
-                            <h6 class="fas fa-address-card"> </h6>
-                            <span> <b>Número de empleado:</b> {$value['numero_empleado']}</span>
-                          </div>
-                          <div class="mb-2">
-                            <h6 class="fas fa-business-time"> </h6>
-                            <span> <b>Bu:</b> {$value['nombre_bu']}</span>
-                          </div>-->
-                          <div class="mb-2">
-                            <h6 class="fas fa-pills"> </h6>
-                            <span> <b>Línea:</b> {$value['nombre_linea']}</span>
-                          </div>
-                          <!--<div class="mb-2">
-                            <h6 class="fas fa-hospital"> </h6>
-                            <span> <b>Posición:</b> {$value['nombre_posicion']}</span>
-                          </div>-->
-                          <div class="mb-2">
-                            <h6 class="fa fa-mail-bulk"> </h6>
-                            <span> <b>Correo Electrónico:</b> <u><a href="mailto:{$value['email']}">{$value['email']}</a></u></span>
-                          </div>
-                          <div class="mb-2">
-                            <h6 class="fa fa-whatsapp" style="font-size: 13px; color:green;"> </h6>
-                            <span> <b></b> <u><a href="https://api.whatsapp.com/send?phone=52{$value['telefono']}&text=Buen%20d%C3%ADa,%20te%20contacto%20de%20parte%20del%20Equipo%20Grupo%20LAHE%20%F0%9F%98%80" target="_blank">{$value['telefono']}</a></u></span>
-                          </div>
-                        </div>
-                        <div class="card card-body mb-4">
-                          <h5>Datos de la Prueba</h5>
-                          <div class="mb-2">
-                            <h6 class="fas fa-calendar"> </h6>
-                            <span> <b>Fecha de alta:</b> {$value['fecha_carga_documento']}</span>
-                          </div>
-                          <div class="mb-2">
-                            <h6 class="fas fa-hashtag"> </h6>
-                            <span> <b>Resultado:</b> {$value['resultado']}</span>
-                          </div>
-                          <div class="mb-2">
-                            <h6 class="fas fa-syringe"> </h6>
-                            <span> <b>Tipo de prueba:</b> {$value['tipo_prueba']}</span>
-                          </div>
-                        </div>
-                        <div class="card card-body">
-                          <h5>Notas</h5>
-                          
-html;
-            if ($value['nota'] != '') {
-                $tabla .= <<<html
-                          <div class="editar_section" id="editar_section">
-                            <p id="">
-                              {$value['nota']}
-                            </p>
-                            <button id="editar_nota" type="button" class="btn bg-gradient-primary w-50 editar_nota" >
-                              Editar
-                            </button>
-                          </div>
-
-                          <div class="hide-section editar_section_textarea" id="editar_section_textarea">
-                            <form class="form-horizontal guardar_nota" id="guardar_nota" action="" method="POST">
-                              <input type="text" id="id_prueba_covid" name="id_prueba_covid" value="{$value['id_c_v']}" readonly style="display:none;"> 
-                              <p>
-                                <textarea class="form-control nota" name="nota" id="nota" placeholder="Agregar notas sobre la respuesta de la validación del documento" required> {$value['nota']} </textarea>
-                              </p>
-                              <div class="row">
-                                <div class="col-md-6 col-12">
-                                <button type="submit" id="guardar_editar_nota" class="btn bg-gradient-dark guardar_editar_nota" >
-                                  Guardar
-                                </button>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                  <button type="button" id="cancelar_editar_nota" class="btn bg-gradient-danger cancelar_editar_nota" >
-                                    Cancelar
-                                  </button>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-html;
-            } else {
-                $tabla .= <<<html
-                          <p>
-                            {$value['nota']}
-                          </p>
-                          <form class="form-horizontal guardar_nota" id="guardar_nota" action="" method="POST">
-                            <input type="text" id="id_prueba_covid" name="id_prueba_covid" value="{$value['id_c_v']}" readonly style="display:none;"> 
-                            <p>
-                              <textarea class="form-control nota" name="nota" id="nota" placeholder="Agregar notas sobre la respuesta de la validación del documento" required></textarea>
-                            </p>
-                            <button type="submit" class="btn bg-gradient-dark w-50" >
-                              Guardar
-                            </button>
-                          </form>
-html;
-            }
-            $tabla .= <<<html
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-html;
-        }
-
-
-        return $tabla;
+        $pdf->SetXY(10, 250);
+        $pdf->SetFont('Arial', 'B', 30);
+        #4D9A9B
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Multicell(95, 10, utf8_decode($nombre_completo), 0, 'C');
+        $pdf->output();
     }
 
     public function getAsistentesFaltantes()
@@ -1824,7 +1491,6 @@ html;
         return $html;
     }
 
-
     function generateRandomString($length = 6)
     {
         return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
@@ -1836,7 +1502,7 @@ html;
         $nombre_completo = $datos_user['nombre'] . " " . $datos_user['segundo_nombre'] . " " . $datos_user['apellido_paterno'] . " " . $datos_user['apellido_materno'];
         //$nombre_completo = utf8_decode($_POST['nombre']);
         //$datos_user['numero_habitacion']
-        
+
 
 
         $pdf = new \FPDF($orientation = 'L', $unit = 'mm', array(37, 155));
@@ -1857,7 +1523,7 @@ html;
             #4D9A9B
             $pdf->SetTextColor(0, 0, 0);
             $pdf->Multicell(120, 4.2, $nombre_completo . utf8_decode(" #habitación"). " - " . $no_habitacion, 0, 'C');
- 
+
             $textypos += 6;
             $pdf->setX(2);
 
@@ -1865,10 +1531,9 @@ html;
         }
 
         $pdf->Output();
-       
+
     }
 }
-
 class PHPQRCode
 { // class start
 
@@ -2215,4 +1880,3 @@ class PHPQRCode
         return $ext_type;
     }
 } // class end
-

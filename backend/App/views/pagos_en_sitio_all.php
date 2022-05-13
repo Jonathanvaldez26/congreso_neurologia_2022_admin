@@ -8,8 +8,6 @@
             <a class="navbar-brand m-0" href="/Principal/" target="_blank">
                 <img src="/assets/img/favicon.png" class="navbar-brand-img h-100" alt="main_logo">
                 <span class="ms-1 font-weight-bold">ADMIN NEUROPEDIATRIA</span>
-
-
                 <p style="margin-top: 15px;"><span class="fa fa-user" style="color: #344767"></span> <?php echo $_SESSION['nombre'];?></p>
             </a>
 
@@ -118,14 +116,22 @@
                 </li>
                 <li class="nav-item" <?= $vacunacionHidden; ?>>
                     <hr class="horizontal dark" />
-                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGOS</h6>
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">SALUD</h6>
                 </li>
                 <li class="nav-item" <?= $vacunacionHidden; ?>>
-                    <a href="/PagosEnSitio/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                    <a href="/ComprobantesVacunacion/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <span class="fa fa-dollar" style="color: #344767"></span>
+                            <span class="fa fa-shield-virus" style="color: #344767"></span>
                         </div>
-                        <span class="nav-link-text ms-1">Pagos en Sitio</span>
+                        <span class="nav-link-text ms-1">Comprobante Vacunación</span>
+                    </a>
+                </li>
+                <li class="nav-item" <?= $pruebasHidden; ?>>
+                    <a href="/PruebasCovidUsuarios/" class="nav-link " aria-controls="basicExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <span class="fa fa-virus-slash" style="color: #344767"></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Pruebas Covid Usuarios</span>
                     </a>
                 </li>
 
@@ -175,7 +181,7 @@
         </div>
 
     </aside>
-    <main class="main-content  ">
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky" id="navbarBlur" data-scroll="true">
             <div class="container-fluid py-1 px-3">
@@ -555,15 +561,15 @@
         </div> -->
 
 
-            <div class="row">
+            <div class="row mb-6">
                 <div class="col-lg-12 position-relative z-index-2">
                     <div class="card card-plain">
                         <div class="card-body p-3 text-center">
                             <div class="row text-center ">
                                 <div class="col-lg-12">
                                     <div class="card">
-                                        <div class="d-flex flex-column h-100">
-                                            <h4 class="m-4">¡Bienvenido a tu administrador equipo GRUPO LAHE!<br><strong>Convención Nacional de Ventas 2022</strong></h4>
+                                        <div class="h-100" style="box-shadow: 0 15px 15px 0 rgb(0 0 0 / 30%); border-radius: 15px;">
+                                            <h2 class="m-4">Configuración</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -578,20 +584,20 @@
                     <div class="card card-plain">
                         <div class="card-body p-3">
                             <div class="row">
-                                <div class="col-12">
-                                    <a href="/ComprobantesVacunacion">
+                                <div class="col-12 col-md-8 col-lg-8 m-auto">
+                                    <a href="/Reportes">
                                         <div class="card up-card">
-                                            <div class="row m-4">
-                                                <div class="col-3">
-                                                    <div class="bg-gradient-red avatar avatar-l position-relative">
-                                                        <span class="fas fa-syringe m-3" style="font-size: x-large;"></span>
+                                            <div class="row m-4 text-center">
+                                                <div class="col-12 m-auto mb-3">
+                                                    <div class="bg-gradient-red avatar avatar-xxl position-relative">
+                                                        <span class="fas fa-file-pdf m-3" style="font-size: xxx-large;"></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-9 m-auto">
+                                                <div class="col-12 m-auto">
                                                     <div class="col-auto my-auto">
                                                         <div class="h-100">
                                                             <h5 class="mb-1">
-                                                                Comprobantes de Vacunación
+                                                                Reportes
                                                             </h5>
                                                             <p class="mb-0 font-weight-bold text-sm">
                                                             </p>
@@ -610,20 +616,20 @@
                     <div class="card card-plain">
                         <div class="card-body p-3">
                             <div class="row">
-                                <div class="col-12">
-                                    <a href="/Vuelos">
+                                <div class="col-12 col-md-8 col-lg-8 m-auto">
+                                    <a href="/Notificaciones">
                                         <div class="card up-card">
-                                            <div class="row m-4">
-                                                <div class="col-3">
-                                                    <div class="bg-gradient-red avatar avatar-l position-relative" >
-                                                        <span class="fas fa-plane m-3" style="font-size: x-large;"></span>
+                                            <div class="row m-4 text-center">
+                                                <div class="col-12 m-auto mb-3">
+                                                    <div class="bg-gradient-red avatar avatar-xxl position-relative">
+                                                        <span class="fas fa-bell m-3" style="font-size: xxx-large;"></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-9 m-auto">
+                                                <div class="col-12 m-auto">
                                                     <div class="col-auto my-auto">
                                                         <div class="h-100">
                                                             <h5 class="mb-1">
-                                                                Vuelos
+                                                                Notificaciones
                                                             </h5>
                                                             <p class="mb-0 font-weight-bold text-sm">
                                                             </p>
@@ -638,39 +644,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 col-md-4 position-relative z-index-2">
-                    <div class="card card-plain">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-12">
-                                    <a href="/PruebasCovidUsuarios">
-                                        <div class="card up-card">
-                                            <div class="row m-4">
-                                                <div class="col-3">
-                                                    <div class="bg-gradient-red avatar avatar-l position-relative" >
-                                                        <span class="fas fa-virus-slash m-3" style="font-size: x-large;"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-9 m-auto">
-                                                    <div class="col-auto my-auto">
-                                                        <div class="h-100">
-                                                            <h5 class="mb-1">
-                                                                Pruebas Covid (SARS-CoV-2) Usuarios ASOFARMA
-                                                            </h5>
-                                                            <p class="mb-0 font-weight-bold text-sm">
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             </div>
             <div class="row">
                 <div class="col-12 col-lg-6 col-md-4 position-relative z-index-2">
@@ -678,19 +651,18 @@
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="card">
+                                    <div class="">
                                         <div class="row m-4">
                                             <div class="col-12">
                                                 <div class="col-auto my-auto">
                                                     <div class="h-100">
                                                         <h5 class="mb-1">
-                                                            Soporte
+
                                                         </h5>
                                                         <p class="mb-0 font-weight-bold text-sm">
-                                                            Línea de Soporte
                                                             <br> <br>
                                                             <a href="mailto:jvaldez_2610@hotmail.com">
-                                                                <h6 class="mb-0 text-sm"><span class="fa fa-mail-bulk" style="font-size: 13px"></span> jvaldez_2610@hotmail.com</h6>
+                                                                <h6 class="mb-0 text-sm"><span class="fa fa-mail-bulka" style="font-size: 13px"></span> </h6>
                                                             </a>
                                                         </p>
                                                     </div>
@@ -735,7 +707,7 @@
                 </div>
             </div>
 
-            <div class="fixed-bottom space-wa">
+            <div class="fixed-bottom space-wa" hidden>
                 <div class="m-5">
                     <a href="https://api.whatsapp.com/send?phone=5255 8010 4181&text=Buen%20d%C3%ADa" target="_blank">
                         <span class="fa fa-whatsapp px-3 py-2-5 icon-wa bg-gradient-success"></span>
@@ -744,21 +716,7 @@
             </div>
 
             <br>
-            <!-- <footer class="footer pt-3  ">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            © <script>
-                                document.write(new Date().getFullYear())
-                            </script> - 2022,
-                            made with <i class="fa fa-heart" aria-hidden="true"></i> by
-                            <a href="" class="font-weight-bold" target="_blank">Creative Grupo LAHE</a>.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer> -->
+
         </div>
     </main>
 </body>
